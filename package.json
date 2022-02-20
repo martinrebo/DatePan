@@ -1,0 +1,25 @@
+{
+  "name": "datepan",
+  "version": "0.0.1",
+  "description": "multiplatform MERNN aplication",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd client && npm start", 
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martinrebo/DatePan.git"
+  },
+  "keywords": [
+    "react",
+    "native",
+    "node"
+  ],
+  "author": "martin reboredo",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/martinrebo/DatePan/issues"
+  },
+  "homepage": "https://github.com/martinrebo/DatePan#readme"
+}
