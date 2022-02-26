@@ -53,13 +53,13 @@ app.use((err: Error | CustomError, _: Request, res: Response, __: NextFunction) 
 /************************************************************************************
  *                              Serve front-end REACT CLIENT content
  ***********************************************************************************/
- const appDir = path.join(__dirname, '../../client/web-build');
+ const appDir = path.join(__dirname, '../web-build');
 //  app.set('views', appDir);
 
- const staticDir = path.join(__dirname, '../../client/web-build/static');
- const fontsDir = path.join(__dirname, '../../client/web-build/fonts')
- const pwaDir = path.join(__dirname, '../../client/web-build/fonts')
- const mediaDir = path.join(__dirname, '../../client/web-build/media')
+ const staticDir = path.join(__dirname, '../web-build/static');
+ const fontsDir = path.join(__dirname, './web-build/fonts')
+ const pwaDir = path.join(__dirname, './web-build/fonts')
+ const mediaDir = path.join(__dirname, './web-build/media')
 app.use('/static', express.static(staticDir));
 app.use('/fonts', express.static(fontsDir));
 app.use('/pwa', express.static(pwaDir));
