@@ -6,6 +6,7 @@ import helmet from 'helmet';
 import StatusCodes from 'http-status-codes';
 import { Server as SocketIo } from 'socket.io';
 import express, { NextFunction, Request, Response } from 'express';
+import cors from 'cors';
 
 import 'express-async-errors';
 
@@ -21,7 +22,7 @@ const app = express();
 /************************************************************************************
  *                              Set basic express settings
  ***********************************************************************************/
-
+app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser(cookieProps.secret));

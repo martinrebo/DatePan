@@ -1,5 +1,7 @@
+import { AuthErrorCodes } from 'firebase/auth';
 import { StyleSheet, View } from 'react-native';
 import { Text, useTheme , Button} from 'react-native-elements';
+import Healtcheck from '../components/Healthcheck/Healtcheck';
 import LoginScreen from '../components/Login/Login';
 
 export interface LandingProps {
@@ -38,6 +40,7 @@ export function Landing(props: LandingProps) {
             >
                 🚧 App Under Construction 🚧
             </Text>
+            <Healtcheck />
             <View style={styles.more}>
             {/* <Button
                 title={'Early Bird Registration'}
@@ -56,7 +59,8 @@ const styles = StyleSheet.create({
     view: {
         flex: 1, 
         margin: 10,
-        marginVertical:100
+        marginVertical:100,
+        alignContent: "center",
     },
     text: {
         textAlign: 'center',
