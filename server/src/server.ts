@@ -50,40 +50,63 @@ app.use((err: Error | CustomError, _: Request, res: Response, __: NextFunction) 
 });
 
 
+/************************************************************************************
+ *                              Serve front-end REACT CLIENT content
+ ***********************************************************************************/
+ const appDir = path.join(__dirname, '../../client/web-build');
+//  app.set('views', appDir);
+
+ const staticDir = path.join(__dirname, '../../client/web-build/static');
+ const fontsDir = path.join(__dirname, '../../client/web-build/fonts')
+ const pwaDir = path.join(__dirname, '../../client/web-build/fonts')
+ const mediaDir = path.join(__dirname, '../../client/web-build/media')
+app.use('/static', express.static(staticDir));
+app.use('/fonts', express.static(fontsDir));
+app.use('/pwa', express.static(pwaDir));
+app.use('/media', express.static(mediaDir));
+
+ app.get('/', (req: Request, res: Response) => {
+    return res.sendFile('index.html', {root: appDir});
+});
+app.get('/manifest.json', (req: Request, res: Response) => {
+    return res.sendFile('manifest.json', {root: appDir});
+});
+
+// TODO: refactor to avoid 404 on icons 
 
 /************************************************************************************
  *                              Serve front-end content
  ***********************************************************************************/
 
-const viewsDir = path.join(__dirname, 'views');
-app.set('views', viewsDir);
-const staticDir = path.join(__dirname, 'public');
-app.use(express.static(staticDir));
+// const viewsDir = path.join(__dirname, 'views');
+// app.set('views', viewsDir);
+// const staticDir = path.join(__dirname, 'public');
+// app.use(express.static(staticDir));
 
-// Login page
-app.get('/', (req: Request, res: Response) => {
-    return res.sendFile('login.html', {root: viewsDir});
-});
+// // Login page
+// app.get('/', (req: Request, res: Response) => {
+//     return res.sendFile('login.html', {root: viewsDir});
+// });
 
 // Users page
-app.get('/users', (req: Request, res: Response) => {
-    const jwt = req.signedCookies[cookieProps.key];
-    if (!jwt) {
-        return res.redirect('/');
-    } else {
-        return res.sendFile('users.html', {root: viewsDir});
-    }
-});
+// app.get('/users', (req: Request, res: Response) => {
+//     const jwt = req.signedCookies[cookieProps.key];
+//     if (!jwt) {
+//         return res.redirect('/');
+//     } else {
+//         return res.sendFile('users.html', {root: viewsDir});
+//     }
+// });
 
-// Chat page
-app.get('/chat', (req: Request, res: Response) => {
-    const jwt = req.signedCookies[cookieProps.key];
-    if (!jwt) {
-        return res.redirect('/');
-    } else {
-        return res.sendFile('chat.html', {root: viewsDir});
-    }
-});
+// // Chat page
+// app.get('/chat', (req: Request, res: Response) => {
+//     const jwt = req.signedCookies[cookieProps.key];
+//     if (!jwt) {
+//         return res.redirect('/');
+//     } else {
+//         return res.sendFile('chat.html', {root: viewsDir});
+//     }
+// });
 
 
 
