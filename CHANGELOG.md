@@ -1,5 +1,26 @@
 # Changelog
 
+<a name="0.0.3"></a>
+## 0.0.3 (2022-02-26)
+
+### Added
+
+- ✨ add basic login functionality [[e252c67](https://github.com/martinrebo/DatePan/commit/e252c67ee1bef1e29cfa9123cffdf42e443edd01)]
+
+### Miscellaneous
+
+-  Add gitmoji documentation [[5cc870c](https://github.com/martinrebo/DatePan/commit/5cc870c7b781ab228a5bda3da766a32458397b26)]
+-  Merge pull request [#2](https://github.com/martinrebo/DatePan/issues/2) from martinrebo/feat/landing-screen [[6a95c0b](https://github.com/martinrebo/DatePan/commit/6a95c0be9891458d3ab558d184dce7450e21872d)]
+
+
+<a name="0.0.2"></a>
+## 0.0.2 (2022-02-20)
+
+### Added
+
+- ✨ Add changelog [[8fa99d4](https://github.com/martinrebo/DatePan/commit/8fa99d411c011c8882ca594b43b1cbbd020e2f2e)]
+
+
 <a name="0.0.1"></a>
 ## 0.0.1 (2022-02-20)
 
