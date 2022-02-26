@@ -1,5 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 import { Text, useTheme , Button} from 'react-native-elements';
+import LoginScreen from '../components/Login/Login';
 
 export interface LandingProps {
 }
@@ -42,6 +43,7 @@ export function Landing(props: LandingProps) {
                 title={'Early Bird Registration'}
                 containerStyle={styles.button}
               /> */}
+              <LoginScreen />
 
             </View>
 
