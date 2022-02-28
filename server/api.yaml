@@ -1,0 +1,5 @@
+runtime: nodejs16
+service: api
+
+env_variables:
+  DEPLOY_SCRIPT: 'api.js'

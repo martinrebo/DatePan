@@ -128,4 +128,11 @@ io.sockets.on('connect', () => {
  *                              Export Server
  ***********************************************************************************/
 
+ const serverStartMsg = 'FrontOffice server started on port: ',
+ port = (process.env.PORT || 3000);
+
+ server.listen(port, () => {
+    logger.info(serverStartMsg + port);
+});
+
 export default server;
