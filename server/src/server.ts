@@ -129,7 +129,7 @@ io.sockets.on('connect', () => {
  ***********************************************************************************/
 
  const serverStartMsg = 'FrontOffice server started on port: ',
- port = (process.env.PORT || 3000);
+ port = (process.env.PORT || 3002);
 
  server.listen(port, () => {
     logger.info(serverStartMsg + port);

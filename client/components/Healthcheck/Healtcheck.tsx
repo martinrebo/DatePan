@@ -9,7 +9,7 @@ export default function Healtcheck({ }: Props) {
     const [state, setstate] = useState(404)
 
     const fetchData = () => {
-        const baseURL = "http://localhost:3000/api/";
+        const baseURL = "https://api-dot-datepan-app.ew.r.appspot.com/api";
         axios.get(`${baseURL}/system/ping`).then((response) => { 
             setstate(response.data.status)
             console.log(response.data)
