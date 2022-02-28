@@ -1,1 +1,5 @@
-runtime: nodejs14
+runtime: nodejs16
+service: default
+
+env_variables:
+  DEPLOY_SCRIPT: 'server.js'

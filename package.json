@@ -4,7 +4,10 @@
   "description": "multiplatform MERNN aplication",
   "main": "index.js",
   "scripts": {
-    "start": "cd client && npm start", 
+    "office": "cd office && npm start",
+    "client": "cd client && npm start", 
+    "servers": "cd server && npm run start:dev2",
+    "start": "concurrently \"npm:office\" \"npm:client\"  \"npm:servers\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

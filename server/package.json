@@ -4,12 +4,15 @@
   "scripts": {
     "build": "./node_modules/.bin/ts-node build.ts",
     "lint": "eslint . --ext .ts",
-    "start": "node -r module-alias/register ./dist --env=production",
+    "start": "node -r module-alias/register ./dist/$DEPLOY_SCRIPT --env=production",
     "start:dev": "nodemon",
+    "api": "./node_modules/.bin/ts-node --files -r tsconfig-paths/register ./src/api.ts",
+    "server": "./node_modules/.bin/ts-node --files -r tsconfig-paths/register ./src/server.ts",
+    "start:dev2": "concurrently \"npm:server\" \"npm:api\"",
     "test": "nodemon --config ./spec/nodemon.json",
     "test:no-reloading": "./node_modules/.bin/ts-node --files -r tsconfig-paths/register ./spec",
-    "gcp-build" : "npm run build",
-    "deploy": "gcloud app deploy"
+    "gcp-build": "npm run build",
+    "deploy": "gcloud app deploy app.yaml api.yaml"
   },
   "nodemonConfig": {
     "watch": [
@@ -98,6 +101,7 @@
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^5.10.2",
     "@typescript-eslint/parser": "^5.10.2",
+    "concurrently": "^7.0.0",
     "eslint": "^8.8.0",
     "find": "^0.3.0",
     "fs-extra": "^10.0.0",
