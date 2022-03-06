@@ -2,7 +2,10 @@ import { AuthErrorCodes } from 'firebase/auth';
 import { StyleSheet, View } from 'react-native';
 import { Text, useTheme , Button} from 'react-native-elements';
 import Healtcheck from '../components/Healthcheck/Healtcheck';
+import LanguageButton from '../components/LanguageButton/LanguageButton';
 import LoginScreen from '../components/Login/Login';
+
+import i18n from '../in18n/in18n';
 
 export interface LandingProps {
 }
@@ -17,14 +20,14 @@ export function Landing(props: LandingProps) {
                 h1
                 h1Style={{ color: theme?.colors?.secondary }}
             >
-               💜DatePan💜
+               💜  WudTime  💜
             </Text>
             <Text
                 style={styles.text}
                 h2
                 h2Style={{ color: theme?.colors?.success }}
             >
-                Swipe dates, not people
+               {i18n.t('motto')}
             </Text>
             <Text
                 style={styles.text }
@@ -38,9 +41,10 @@ export function Landing(props: LandingProps) {
                 h4
                 h4Style={{ color: theme?.colors?.warning }}
             >
-                🚧 App Under Construction 🚧
+                🚧 {i18n.t('screens.landing.underConstruction')} 🚧
             </Text>
             <Healtcheck />
+            
             <View style={styles.more}>
             {/* <Button
                 title={'Early Bird Registration'}
@@ -50,7 +54,7 @@ export function Landing(props: LandingProps) {
 
             </View>
 
-
+            <LanguageButton />
         </View>
     );
 }
