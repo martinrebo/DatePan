@@ -25,9 +25,8 @@ const LanguageButton = (props: Props) => {
 
     const handleOnPress = () => {
      console.log(i18n.locale)
-// i18n.locale = "es"
-
     }
+    
     return (
         <View>
             <Text>Language</Text>
