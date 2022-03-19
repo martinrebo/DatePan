@@ -1,8 +1,13 @@
-import { AuthErrorCodes } from 'firebase/auth';
+import { AuthErrorCodes, browserPopupRedirectResolver } from 'firebase/auth';
 import { StyleSheet, View } from 'react-native';
-import { Text, useTheme , Button} from 'react-native-elements';
+import { Text, useTheme, Button, Image } from 'react-native-elements';
+
 import Healtcheck from '../components/Healthcheck/Healtcheck';
+import LanguageButton from '../components/LanguageButton/LanguageButton';
 import LoginScreen from '../components/Login/Login';
+
+import i18n from '../in18n/in18n';
+
 
 export interface LandingProps {
 }
@@ -11,56 +16,50 @@ export function Landing(props: LandingProps) {
     const { theme } = useTheme();
     return (
 
-        <View style={styles.view}>
-            <Text
-                style={styles.title}
-                h1
-                h1Style={{ color: theme?.colors?.secondary }}
-            >
-               💜DatePan💜
-            </Text>
-            <Text
-                style={styles.text}
-                h2
-                h2Style={{ color: theme?.colors?.success }}
-            >
-                Swipe dates, not people
-            </Text>
-            <Text
-                style={styles.text }
-                h3
-                h3Style={{ color: theme?.colors?.primary }}
-            >
-                @datepan
-            </Text>
-            <Text
-                style={styles.text}
-                h4
-                h4Style={{ color: theme?.colors?.warning }}
-            >
-                🚧 App Under Construction 🚧
-            </Text>
-            <Healtcheck />
-            <View style={styles.more}>
-            {/* <Button
-                title={'Early Bird Registration'}
-                containerStyle={styles.button}
-              /> */}
-              <LoginScreen />
+        <View style={styles.container}>
 
+            <View style={styles.item}>
+                <Image source={require('../assets/images/wudLogo.png')} containerStyle={styles.image} />
             </View>
-
-
+            <View style={styles.item}>
+                <Text
+                    style={styles.title}
+                    h1
+                    h1Style={{ color: theme?.colors?.primary }}
+                >
+                    WudTime
+                </Text>
+                <Text
+                    style={styles.text}
+                    h4
+                    h2Style={{ color: theme?.colors?.grey2 }}
+                >
+                    {i18n.t('motto')}
+                </Text>
+            </View>
+            <View style={styles.more}>
+                <LoginScreen />
+            </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    view: {
-        flex: 1, 
+    container: {
+        flex: 1,
         margin: 10,
-        marginVertical:100,
+        marginVertical: 100,
         alignContent: "center",
+        alignItems: 'center'
+    },
+    item: {
+        alignContent: 'center',
+    },
+    image: {
+        width: 100,
+        height: 100,
+        alignContent: 'center',
+
     },
     text: {
         textAlign: 'center',
@@ -73,10 +72,5 @@ const styles = StyleSheet.create({
     },
     more: {
         marginVertical: 100,
-    },
-    button: {
-        width: 200,
-        marginLeft: 'auto',
-        marginRight: 'auto',
     },
 });

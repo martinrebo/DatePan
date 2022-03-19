@@ -1,6 +1,9 @@
 import { useNavigation } from '@react-navigation/core'
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Button } from 'react-native-elements'
+import Healtcheck from '../components/Healthcheck/Healtcheck'
+import LanguageButton from '../components/LanguageButton/LanguageButton'
 import { auth } from '../firebase'
 
 const HomeScreen = () => {
@@ -15,8 +18,17 @@ const HomeScreen = () => {
       .catch(error => alert(error.message))
   }
 
-  return (
+  const handleOnPress = ()=>{
+   navigation.replace('CreateWud')
+  }
+
+  return ( 
     <View style={styles.container}>
+      <View style={styles.item}>
+      <Text> 🚧  WORK IN PROGRESS 🚧 </Text>
+        <Text>  Thanks for joinig the testing program ! </Text>
+      </View>
+      <View style={styles.item}>
       <Text>Email: {auth.currentUser?.email}</Text>
       <TouchableOpacity
         onPress={handleSignOut}
@@ -24,6 +36,19 @@ const HomeScreen = () => {
       >
         <Text style={styles.buttonText}>Sign out</Text>
       </TouchableOpacity>
+      </View>
+      <View style={styles.item}>
+        <Button title="Create a Wudtime" onPress={handleOnPress}/>
+      </View>
+      <View style={styles.item}>
+      <Healtcheck />
+      </View>
+      <View style={styles.item}>
+      <LanguageButton />
+      </View>
+
+ 
+
     </View>
   )
 }
@@ -34,11 +59,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',    
+    alignItems: 'center', 
+    flexDirection: 'column',
+  },
+  item: {
+    backgroundColor: "white",
+    padding: 10,
+    margin: 10,
+    border: 1,
+    textAlign: "center"
   },
    button: {
     backgroundColor: '#0782F9',
-    width: '60%',
+    width: '100%',
     padding: 15,
     borderRadius: 10,
     alignItems: 'center',
