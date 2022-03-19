@@ -2,6 +2,8 @@ import { useNavigation } from '@react-navigation/core'
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { Button } from 'react-native-elements'
+import Healtcheck from '../components/Healthcheck/Healtcheck'
+import LanguageButton from '../components/LanguageButton/LanguageButton'
 import { auth } from '../firebase'
 
 const HomeScreen = () => {
@@ -20,8 +22,12 @@ const HomeScreen = () => {
    navigation.replace('CreateWud')
   }
 
-  return (
+  return ( 
     <View style={styles.container}>
+      <View style={styles.item}>
+      <Text> 🚧  WORK IN PROGRESS 🚧 </Text>
+        <Text>  Thanks for joinig the testing program ! </Text>
+      </View>
       <View style={styles.item}>
       <Text>Email: {auth.currentUser?.email}</Text>
       <TouchableOpacity
@@ -34,6 +40,14 @@ const HomeScreen = () => {
       <View style={styles.item}>
         <Button title="Create a Wudtime" onPress={handleOnPress}/>
       </View>
+      <View style={styles.item}>
+      <Healtcheck />
+      </View>
+      <View style={styles.item}>
+      <LanguageButton />
+      </View>
+
+ 
 
     </View>
   )
@@ -52,7 +66,8 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     padding: 10,
     margin: 10,
-    border: 1
+    border: 1,
+    textAlign: "center"
   },
    button: {
     backgroundColor: '#0782F9',

@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, createContext } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { Button, ThemeProvider } from 'react-native-elements';
+import { ThemeProvider} from 'react-native-elements';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as Localization from 'expo-localization';
@@ -34,6 +34,12 @@ export default function App() {
   // i18n.locale = 'es'
   // i18n.fallbacks = true
 
+const theme = {
+  colors : {
+    primary: '#8139DC',
+    secondary: '#12EDFF'
+  }
+}
   i18n.defaultLocale = 'en'
   i18n.locale = 'en'
   i18n.fallbacks = true
@@ -47,7 +53,7 @@ export default function App() {
         {/* <Navigation colorScheme={colorScheme} />
         <StatusBar /> */}
         <ContextStore.Provider value={{language: "es"}}>
-          <ThemeProvider>
+          <ThemeProvider theme={theme}>
             <NavigationContainer>
               <Stack.Navigator>
                 <Stack.Screen options={{ headerShown: false }} name="Login" component={Landing} />

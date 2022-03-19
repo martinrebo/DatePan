@@ -1,9 +1,12 @@
 import { useNavigation } from '@react-navigation/core'
 import React, { useEffect, useState } from 'react'
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { KeyboardAvoidingView, StyleSheet, TextInput } from 'react-native'
 import { auth, createUser, signIn } from '../../firebase'
+import {Button, useTheme} from 'react-native-elements'
 
-const LoginScreen = () => {
+
+export default function LoginScreen() {
+  const theme = useTheme()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -42,7 +45,6 @@ createUser(auth, email, password)
       style={styles.container}
       behavior="padding"
     >
-      <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"
           value={email}
@@ -56,36 +58,35 @@ createUser(auth, email, password)
           style={styles.input}
           secureTextEntry
         />
-      </View>
 
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
+        <Button
           onPress={handleLogin}
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
+          buttonStyle={styles.button}
+          containerStyle={styles.buttonContainer}
+          title={'Login'}
+          />
+       
+        <Button
           onPress={handleSignUp}
-          style={[styles.button, styles.buttonOutline]}
-        >
-          <Text style={styles.buttonOutlineText}>Register</Text>
-        </TouchableOpacity>
-      </View>
+          buttonStyle={styles.button}
+          containerStyle={styles.buttonContainer}
+          title={'Register'}
+          type='outline'
+        />
+
+
     </KeyboardAvoidingView>
   )
 }
 
-export default LoginScreen
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   inputContainer: {
-    width: '80%'
+    width: '100%'
   },
   input: {
     backgroundColor: 'white',
@@ -95,23 +96,15 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   buttonContainer: {
-    width: '60%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 40,
+    // width: '100%',
+    marginTop: 20,
   },
   button: {
-    backgroundColor: '#0782F9',
+    // backgroundColor: '#0782F9',
     width: '100%',
     padding: 15,
     borderRadius: 10,
     alignItems: 'center',
-  },
-  buttonOutline: {
-    backgroundColor: 'white',
-    marginTop: 5,
-    borderColor: '#0782F9',
-    borderWidth: 2,
   },
   buttonText: {
     color: 'white',
