@@ -1,2 +1,2 @@
 steps:
-  - name: 'node:14'
+  - name: 'node:16'

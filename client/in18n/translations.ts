@@ -1,10 +1,10 @@
 const translations = {
     en: {
-      motto: "enjoy life, create great moments",
+      motto: "Enjoy life, create great moments",
       screens: { landing: { underConstruction: "Under Construction" } },
     },
     es: {
-      motto: "disfruta la vida, crea grandes momentos",
+      motto: "Disfruta la vida, crea grandes momentos",
       screens: { landing: { underConstruction: "En construcción ... " } },
     },
   };

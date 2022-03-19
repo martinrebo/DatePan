@@ -66,13 +66,13 @@ createUser(auth, email, password)
           title={'Login'}
           />
        
-        <Button
+        {/* <Button
           onPress={handleSignUp}
           buttonStyle={styles.button}
           containerStyle={styles.buttonContainer}
           title={'Register'}
           type='outline'
-        />
+        /> */}
 
 
     </KeyboardAvoidingView>
@@ -84,6 +84,7 @@ createUser(auth, email, password)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    maxWidth: 500
   },
   inputContainer: {
     width: '100%'
