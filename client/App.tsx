@@ -15,6 +15,7 @@ import useColorScheme from './hooks/useColorScheme';
 import { Landing } from './screens/Landing';
 import HomeScreen from './screens/Home'
 import CreateWud from './screens/CreateWud'
+import { View } from 'react-native';
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -63,7 +64,6 @@ const theme = {
             </NavigationContainer>
 
           </ThemeProvider>
-
         </ContextStore.Provider>
 
       </SafeAreaProvider>
