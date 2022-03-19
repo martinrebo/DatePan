@@ -14,6 +14,7 @@ import useColorScheme from './hooks/useColorScheme';
 
 import { Landing } from './screens/Landing';
 import HomeScreen from './screens/Home'
+import CreateWud from './screens/CreateWud'
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -51,6 +52,7 @@ export default function App() {
               <Stack.Navigator>
                 <Stack.Screen options={{ headerShown: false }} name="Login" component={Landing} />
                 <Stack.Screen name="Home" component={HomeScreen} />
+                <Stack.Screen name="CreateWud" component={CreateWud} />
               </Stack.Navigator>
             </NavigationContainer>
 
