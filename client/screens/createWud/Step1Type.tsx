@@ -3,16 +3,32 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { Button, Card } from 'react-native-elements'
 
+import { RootState} from '../../redux/store'
+import { useSelector , useDispatch } from 'react-redux'
+import { addType } from '../../redux/wudSlice'
+import { useNavigation } from '@react-navigation/native'
+import { Wudtime } from '../../interfaces/wudtime'
+
 const CreateWud = () => {
+  
+  const navigation: any = useNavigation()
+  const dispatch = useDispatch()
+  const types = useSelector((state: RootState) => state.createWud.type)
+
+  const handleClick = (type: Wudtime['type']) => { 
+    
+    dispatch(addType(type))
+    navigation.navigate('Step2SubType')
+  }
+
 
   return (
     <View style={styles.container}>
       <View style={styles.screen}>
-
-     
       <Card>
         <Text> By creating an WudTime event you commit to help other people to enjoy life</Text>
         <Text> ¿Which kind of Moment do you want to create ?</Text>
+        <Text> Type: { types }</Text>
       </Card>
       <Card>
         <Card.Title>
@@ -24,7 +40,8 @@ const CreateWud = () => {
         <Text> Types of activities: Parties, go for a drink, travel, dating, ... </Text>
         <Button
         title={'GO >'} 
-        containerStyle={styles.button}/>
+        containerStyle={styles.button}
+        onPress={(type) => handleClick('fun')}/>
       </Card>
       <Card>
         <Card.Title>
@@ -36,7 +53,8 @@ const CreateWud = () => {
         <Text> Types of activities: Play intruments, teach a new language, meet people with same interests... </Text>
         <Button
         title={'GO >'}
-        containerStyle={styles.button}/>
+        containerStyle={styles.button}
+        onPress={() => handleClick('skills')}/>
       </Card>
       <Card>
         <Card.Title>
@@ -48,7 +66,8 @@ const CreateWud = () => {
         <Text> Types of activities: NGOs, Random Act of Kindness, Help </Text>
         <Button
         title={'GO >'}
-        containerStyle={styles.button}/>
+        containerStyle={styles.button}
+        onPress={() => handleClick('purpose')}/>
         
       </Card>
 
@@ -65,6 +84,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
+    marginTop: 100,
   },
   screen: {
     maxWidth: 500

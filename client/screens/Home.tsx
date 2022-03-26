@@ -19,7 +19,7 @@ const HomeScreen = () => {
   }
 
   const handleOnPress = ()=>{
-   navigation.replace('CreateWud')
+   navigation.navigate("Step1Type")
   }
 
   return ( 
