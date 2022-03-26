@@ -2,6 +2,7 @@ export const WUDS = [{
     type: 'fun',
     subtypes: [{
         name: 'FoodAndDrinks',
+        emoji: '🍔',
         activities: [{
             name: 'Cocktails',
             description: '',
@@ -14,6 +15,7 @@ export const WUDS = [{
         }]
     },{
         name: 'Entertainment',
+        emoji: '🎉',
         activities: [{
             name: 'Movie',
             description: '',
@@ -26,6 +28,7 @@ export const WUDS = [{
         }]
     },{
         name: 'Travel',
+        emoji: '🚗',
         activities: [{
             name: 'By Plane',
             description: '',
@@ -41,6 +44,7 @@ export const WUDS = [{
     type: 'skills',
     subtypes: [{
         name: 'Sports',
+        emoji: '🏃',
         activities: [{
             name: 'Football',
             description: '',
@@ -53,6 +57,7 @@ export const WUDS = [{
         }]
     },{
         name: 'Arts',
+        emoji: '🎨',
         activities: [{
             name: 'Music',
             description: '',
@@ -65,6 +70,7 @@ export const WUDS = [{
         }]
     },{
         name: 'Language',
+        emoji: '🗣',
         activities: [{
             name: 'English',
             description: '',
@@ -81,6 +87,7 @@ export const WUDS = [{
     type: 'purpose',
     subtypes: [{
         name: 'Environment',
+        emoji: '🌳',
         activities: [{
             name: 'NGO Volunteering',
             description: '',
@@ -93,6 +100,7 @@ export const WUDS = [{
         }]
     },{
         name: 'People',
+        emoji: '👩‍💻',
         activities: [{
             name: 'NGO Volunteering',
             description: '',
@@ -105,6 +113,7 @@ export const WUDS = [{
         }]
     },{
         name: 'Animals',
+        emoji: '🐶',
         activities: [{
             name: 'NGO Volunteering',
             description: '',

@@ -18,7 +18,7 @@ const CreateWud = () => {
   const handleClick = (type: Wudtime['type']) => { 
     
     dispatch(addType(type))
-    navigation.navigate('Step2SubType')
+    navigation.navigate('Step2SubType', {type})
   }
 
 
