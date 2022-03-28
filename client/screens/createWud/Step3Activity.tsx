@@ -23,7 +23,8 @@ const Step3Activity = ({ route }: any) => {
   const handleClick = (activity: any) => {
     console.log(activity)
     dispatch(addActivity(activity))
-    navigation.navigate('Step4Joiners', {type, subType, activity})
+    // navigation.navigate('Step4Joiners', {type, subType, activity})
+    navigation.navigate('Step5Description', {type, subType, activity})
     
   }
   const listOfWuds = WUDS.filter(wud => wud.type === type)

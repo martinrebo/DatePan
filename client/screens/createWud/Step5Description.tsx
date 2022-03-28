@@ -1,9 +1,10 @@
 
-import {useState} from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { Button, Card, Slider } from 'react-native-elements'
+import { SetStateAction, useState } from 'react'
+import { StyleSheet, Text, View , Platform} from 'react-native'
+import { Button, Card, Input, Slider } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
 // import MultiSlider from '@ptomasroos/react-native-multi-slider';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 
 import { RootState } from '../../redux/store'
@@ -11,6 +12,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { addType } from '../../redux/wudSlice'
 import { Wudtime } from '../../interfaces/wudtime'
 import { WUDS } from './WUDS'
+import TimePicker from '../../components/TimePicker/TimePicker';
 
 
 
@@ -24,12 +26,14 @@ const Step3Activity = ({ route }: any) => {
   //   console.log(activity)
   //   dispatch(addType(activity))
   //   navigation.navigate('Step4Joiners', {type, subType, activity})
-    
-  const [value, setValue] = useState(0);
-  
-  const handleChange = (value: number) => {
+
+  const [value, setValue] = useState('');
+
+  const handleChange = ( value: string) => {
     setValue(value)
   }
+
+
 
 
   return (
@@ -41,20 +45,16 @@ const Step3Activity = ({ route }: any) => {
           <Text> subtype {JSON.stringify(subType)}</Text>
           <Text> activity {JSON.stringify(activity)}</Text>
         </Card>
-
-        {/* <Slider value={value}
-        minimumValue={18}
-        maximumValue={100}
-        step={1}
-        thumbTintColor='#8139DC'
-        onValueChange={(value => handleChange(value))}/> */}
-
-{/* <MultiSlider 
-
-/> */}
-
-        <Text>{value}</Text>
+        <Input 
+        label="Description"
+        placeholder="Describe your activity"
+        maxLength={144}
+        onChangeText={value => handleChange(value)} />
       </View>
+      
+
+
+
     </View>
   )
 }
