@@ -1,6 +1,6 @@
 
 import { SetStateAction, useState } from 'react'
-import { StyleSheet, Text, View , Platform} from 'react-native'
+import { StyleSheet, Text, View, Platform } from 'react-native'
 import { Button, Card, Input, Slider } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
 // import MultiSlider from '@ptomasroos/react-native-multi-slider';
@@ -9,7 +9,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 import { RootState } from '../../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
-import { addType } from '../../redux/wudSlice'
+import { addNotes } from '../../redux/wudSlice'
 import { Wudtime } from '../../interfaces/wudtime'
 import { WUDS } from './WUDS'
 import TimePicker from '../../components/TimePicker/TimePicker';
@@ -18,22 +18,25 @@ import TimePicker from '../../components/TimePicker/TimePicker';
 
 const Step3Activity = ({ route }: any) => {
   const navigation: any = useNavigation()
-
   const { type, subType, activity } = route.params;
   const dispatch = useDispatch()
 
-  // const handleClick = (activity: any) => {
-  //   console.log(activity)
-  //   dispatch(addType(activity))
-  //   navigation.navigate('Step4Joiners', {type, subType, activity})
+const createWudState = useSelector((state: RootState) => state.createWud)
 
-  const [value, setValue] = useState('');
 
-  const handleChange = ( value: string) => {
-    setValue(value)
+  const handleSubmit = ( ) => {
+    console.log("send to API" , createWudState)
+
+    // navigation.navigate('Step4Joiners', { type, subType, activity })
   }
 
 
+  const [value, setValue] = useState('');
+
+  const handleChange = (value: string) => {
+    dispatch(addNotes(value))
+    setValue(value)
+  }
 
 
   return (
@@ -45,14 +48,14 @@ const Step3Activity = ({ route }: any) => {
           <Text> subtype {JSON.stringify(subType)}</Text>
           <Text> activity {JSON.stringify(activity)}</Text>
         </Card>
-        <Input 
-        label="Description"
-        placeholder="Describe your activity"
-        maxLength={144}
-        onChangeText={value => handleChange(value)} />
+        <Input
+          label="Description"
+          placeholder="Describe your activity"
+          maxLength={144}
+          onChangeText={value => handleChange(value)} />
       </View>
-      
 
+      <Button title="Submit" onPress={handleSubmit} />
 
 
     </View>

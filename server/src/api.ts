@@ -10,7 +10,7 @@ import cors from 'cors';
 import 'express-async-errors';
 
 import BaseRouter from './routes/api';
-import Healtcheck from './routes/system'
+// import Healtcheck from './routes/system'
 import logger from 'jet-logger';
 import { cookieProps } from '@routes/auth-router';
 import { CustomError } from '@shared/errors';
@@ -41,7 +41,7 @@ if (process.env.NODE_ENV === 'production') {
 
 
 // Add APIs
-app.use('/', Healtcheck)
+// app.use('/', Healtcheck)
 app.use('/api', BaseRouter);
 
 // Error handling
