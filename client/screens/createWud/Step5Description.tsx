@@ -1,5 +1,5 @@
 
-import { SetStateAction, useState } from 'react'
+import { SetStateAction, useState, useEffect } from 'react'
 import { StyleSheet, Text, View, Platform } from 'react-native'
 import { Button, Card, Input, Slider } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
@@ -33,6 +33,11 @@ const Step3Activity = ({ route }: any) => {
     // navigation.navigate('Step4Joiners', { type, subType, activity })
   }
 
+  useEffect(() => {
+    setSkip(true)
+  }, [skip])
+  
+
 
   const [value, setValue] = useState('');
 
@@ -59,7 +64,8 @@ const Step3Activity = ({ route }: any) => {
       </View>
 
       <Button title="Submit" onPress={handleSubmit} />
-
+{isLoading ? <Text>Loading...</Text> : null}
+{error ? <Text>Error! {error}</Text> : null}
 
     </View>
   )
