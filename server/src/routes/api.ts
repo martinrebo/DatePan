@@ -10,8 +10,8 @@ import wudtimeRouter from './wudtime-router';
 const apiRouter = Router();
 
 // Add api routes
-apiRouter.use('/system', sysRouter)
-apiRouter.use('/auth', authRouter);
+apiRouter.use('/', sysRouter)
+// apiRouter.use('/auth', authRouter);
 // apiRouter.use('/users', authMw, userRouter);
 // apiRouter.use('/chat', authMw, chatRouter)
 apiRouter.use('/wuds', wudtimeRouter)

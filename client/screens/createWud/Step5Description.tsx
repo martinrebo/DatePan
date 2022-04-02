@@ -13,6 +13,7 @@ import { addNotes } from '../../redux/wudSlice'
 import { Wudtime } from '../../interfaces/wudtime'
 import { WUDS } from './WUDS'
 import TimePicker from '../../components/TimePicker/TimePicker';
+import { usePingQuery, useCreateWudTimeQuery } from '../../api/api';
 
 
 
@@ -20,13 +21,15 @@ const Step3Activity = ({ route }: any) => {
   const navigation: any = useNavigation()
   const { type, subType, activity } = route.params;
   const dispatch = useDispatch()
+  const [skip, setSkip] = useState(true)
 
-const createWudState = useSelector((state: RootState) => state.createWud)
+  const createWudState = useSelector((state: RootState) => state.createWud)
 
+  const { data, error, isLoading } = useCreateWudTimeQuery(createWudState, { skip })
 
-  const handleSubmit = ( ) => {
-    console.log("send to API" , createWudState)
-
+  const handleSubmit = () => {
+    console.log("send to API", createWudState)
+    setSkip(false)
     // navigation.navigate('Step4Joiners', { type, subType, activity })
   }
 

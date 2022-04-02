@@ -1,9 +1,15 @@
 import {configureStore, ThunkAction, Action} from '@reduxjs/toolkit'
+import { setupListeners } from '@reduxjs/toolkit/query'
+
 import  wudSlice from './wudSlice'
+import {api} from '../api/api'
 
 export const store = configureStore({
     reducer:
-     { createWud: wudSlice}})
+     { createWud: wudSlice,
+       [api.reducerPath]: api.reducer},
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),
+    })
 
 
 
@@ -16,5 +22,5 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   Action<string>
 >;
-
+setupListeners(store.dispatch)
 export default store;

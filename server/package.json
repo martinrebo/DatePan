@@ -8,6 +8,11 @@
     "start:dev": "nodemon",
     "api": "./node_modules/.bin/ts-node --files -r tsconfig-paths/register ./src/api.ts",
     "server": "./node_modules/.bin/ts-node --files -r tsconfig-paths/register ./src/server.ts",
+
+
+    "dev": "./node_modules/nodemon/bin/nodemon.js -e ts  --exec \"npm run api\"",
+
+
     "start:dev2": "concurrently \"npm:server\" \"npm:api\"",
     "test": "nodemon --config ./spec/nodemon.json",
     "test:no-reloading": "./node_modules/.bin/ts-node --files -r tsconfig-paths/register ./spec",

@@ -6,9 +6,6 @@ router.get("/", (req: Request, res: Response) => {
     res.status(200).send({status: 200}).end()
 })
 
-router.get("/ping", (req: Request, res: Response) => {
-    res.status(200).send({status: 200}).end()
-})
 
 
 export default router;
