@@ -21,6 +21,7 @@ import Step2Subtype from './screens/createWud/Step2SubType';
 import Step3Activity from './screens/createWud/Step3Activity';
 import Step4Joiners from './screens/createWud/Step4Joiners';
 import Step5Description from './screens/createWud/Step5Description';
+import MyWuds from './screens/myWuds/MyWuds';
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -65,13 +66,16 @@ export default function App() {
                 <Stack.Navigator>
                   <Stack.Screen options={{ headerShown: false }} name="Login" component={Landing} />
 
-                  <Stack.Screen  options={{ headerShown: false }} name="Home" component={HomeScreen} />
-                  <Stack.Screen options={{ headerShown: false }} name="Step1Type" component={Step1Type} />
-                  <Stack.Screen options={{ headerShown: false }} name="Step2SubType" component={Step2Subtype} />
-                  <Stack.Screen options={{ headerShown: false }} name="Step3Activity" component={Step3Activity} />
-                  <Stack.Screen options={{ headerShown: false }} name="Step4Joiners" component={Step4Joiners} />
-                  <Stack.Screen options={{ headerShown: false }} name="Step5Description" component={Step5Description} />
+                  <Stack.Screen options={{ headerShown: false }} name="Home" component={HomeScreen} />
 
+                  <Stack.Group>
+                    <Stack.Screen options={{ headerShown: false }} name="Step1Type" component={Step1Type} />
+                    <Stack.Screen options={{ headerShown: false }} name="Step2SubType" component={Step2Subtype} />
+                    <Stack.Screen options={{ headerShown: false }} name="Step3Activity" component={Step3Activity} />
+                    <Stack.Screen options={{ headerShown: false }} name="Step4Joiners" component={Step4Joiners} />
+                    <Stack.Screen options={{ headerShown: false }} name="Step5Description" component={Step5Description} />
+                  </Stack.Group>
+                  <Stack.Screen options={{ headerShown: false }} name="MyWuds" component={MyWuds} />
                 </Stack.Navigator>
               </NavigationContainer>
 

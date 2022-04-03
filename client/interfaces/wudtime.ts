@@ -11,5 +11,6 @@ export interface Wudtime {
     duration: string | '' , // '1h'
     location: string | '' , // 'Casa'
     notes: string | '' , // 'Casa'
+    userId: string | '' | undefined  // User firebase ID
 }
 

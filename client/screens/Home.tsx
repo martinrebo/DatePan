@@ -21,6 +21,9 @@ const HomeScreen = () => {
   const handleOnPress = ()=>{
    navigation.navigate("Step1Type")
   }
+  const handleMyWuds = ()=>{
+    navigation.navigate("MyWuds")
+   }
 
   return ( 
     <View style={styles.container}>
@@ -45,6 +48,9 @@ const HomeScreen = () => {
       </View>
       <View style={styles.item}>
       <LanguageButton />
+      </View>
+      <View>
+        <Button title="My Wuds"  onPress={handleMyWuds}/>
       </View>
 
  

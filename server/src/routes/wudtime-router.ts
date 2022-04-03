@@ -46,6 +46,40 @@ router.post("/wud", (req: Request, res: Response) => {
 })
 
 
+router.get("/mywuds/:userId", (req: Request, res: Response) => {
+    logger.info("GET  /api/wuds/mywuds", );
+
+    const data = JSON.stringify({
+        "collection": "events",
+        "database": "wudtimeDB",
+        "dataSource": "clusterWudTime0",
+        "filter": { 
+            "data.userId": req.params.userId,
+        }
+    });
+
+    const config = {
+        method: 'post',
+        url: 'https://data.mongodb-api.com/app/data-ftset/endpoint/data/beta/action/find',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Request-Headers': '*',
+            'api-key': 'C7GoSGjfGKgUUyRed2k0Aw4lvW2xfM9snUOePYFHjwp4bxjVBuac6ccQwyoJ05C8'
+        },
+        data : data
+    } as const;
+
+    axios(config)
+    .then(function (response) {
+        res.status(200).send({status: 200, documents: response.data.documents}).end()
+    })
+    .catch(function (error) {
+        res.status(400).send({status: 400, message: "Error DB"}).end()
+    });
+
+
+})
+
 
 
 

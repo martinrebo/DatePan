@@ -7,14 +7,15 @@ import { useNavigation } from '@react-navigation/native'
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 
+
 import { RootState } from '../../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
-import { addNotes } from '../../redux/wudSlice'
+import { addNotes, addUserId } from '../../redux/wudSlice'
 import { Wudtime } from '../../interfaces/wudtime'
 import { WUDS } from './WUDS'
 import TimePicker from '../../components/TimePicker/TimePicker';
 import { usePingQuery, useCreateWudTimeQuery } from '../../api/api';
-
+import {auth} from '../../firebase'
 
 
 const Step3Activity = ({ route }: any) => {
@@ -23,6 +24,8 @@ const Step3Activity = ({ route }: any) => {
   const dispatch = useDispatch()
   const [skip, setSkip] = useState(true)
 
+  dispatch(addUserId(auth.currentUser?.uid))
+
   const createWudState = useSelector((state: RootState) => state.createWud)
 
   const { data, error, isLoading } = useCreateWudTimeQuery(createWudState, { skip })
@@ -30,11 +33,14 @@ const Step3Activity = ({ route }: any) => {
   const handleSubmit = () => {
     console.log("send to API", createWudState)
     setSkip(false)
-    // navigation.navigate('Step4Joiners', { type, subType, activity })
   }
 
   useEffect(() => {
     setSkip(true)
+    return () => {
+    navigation.navigate('MyWuds')
+    // TODO: ADD ERROR, LOADING AND SUCCESS HANDLING
+    }
   }, [skip])
   
 

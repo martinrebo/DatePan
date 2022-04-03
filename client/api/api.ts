@@ -2,6 +2,16 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import type { Wudtime } from "../interfaces/wudtime";
 
+interface documents {
+    documents: [
+      {data: Wudtime;
+        id: string;}
+    ]}
+
+interface WudtimeList {
+  documents: documents["documents"];
+}
+
 // Define a service using a base URL and expected endpoints
 export const api = createApi({
   reducerPath: "api",
@@ -21,6 +31,9 @@ export const api = createApi({
         };
       },
     }),
+    myWuds: builder.query<WudtimeList, string >({
+      query: (userId) => `/mywuds/${userId}`,
+    }),
 
 
   }),
@@ -28,4 +41,4 @@ export const api = createApi({
 
 // Export hooks for usage in function components, which are
 // auto-generated based on the defined endpoints
-export const { useCreateWudTimeQuery, usePingQuery } = api;
+export const { useCreateWudTimeQuery, usePingQuery, useMyWudsQuery } = api;

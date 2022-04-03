@@ -14,6 +14,7 @@ const initialState: Wudtime = {
   duration: "",
   location: "",
   notes: "",
+  userId: "",
 };
 
 export const wudSlice = createSlice({
@@ -53,6 +54,10 @@ export const wudSlice = createSlice({
     addNotes: (state: Wudtime, action: PayloadAction<Wudtime["notes"]>) => {
       state.notes = action.payload;
     },
+    addUserId: (state: Wudtime, action: PayloadAction<Wudtime["userId"]>) => { 
+
+      state.userId = action.payload;
+    },
     reset: (state: Wudtime) => {
       state = initialState;
     },
@@ -68,6 +73,7 @@ export const {
   addDuration,
   addLocation,
   addNotes,
+  addUserId,
   reset,
 } = wudSlice.actions;
 export const selectWud = (state: RootState) => state;
