@@ -36,6 +36,9 @@ export function Landing(props: LandingProps) {
                 >
                     {i18n.t('motto')}
                 </Text>
+                <Text style={styles.text}>
+                    {i18n.t('welcome')}
+                </Text>
             </View>
             <View style={styles.more}>
                 <LoginScreen />

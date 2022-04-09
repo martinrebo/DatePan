@@ -10,7 +10,7 @@ import cors from 'cors';
 import 'express-async-errors';
 
 import BaseRouter from './routes/api';
-import Healtcheck from './routes/system'
+import Healthcheck from './routes/system'
 import logger from 'jet-logger';
 import { cookieProps } from '@routes/auth-router';
 import { CustomError } from '@shared/errors';
@@ -41,7 +41,7 @@ if (process.env.NODE_ENV === 'production') {
 
 
 // Add APIs
-app.use('/', Healtcheck)
+app.use('/', Healthcheck)
 app.use('/api', BaseRouter);
 
 // Error handling
@@ -61,7 +61,6 @@ port = (process.env.PORT || 3001);
 api.listen(port, () => {
    logger.info(serverStartMsg + port);
 });
-
 
 
 export default api;

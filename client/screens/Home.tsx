@@ -19,8 +19,14 @@ const HomeScreen = () => {
   }
 
   const handleOnPress = ()=>{
-   navigation.replace('CreateWud')
+   navigation.navigate("Step1Type")
   }
+  const handleMyWuds = ()=>{
+    navigation.navigate("MyWuds")
+   }
+   const handleWudTimes = ()=>{
+    navigation.navigate("WudTimes")
+   }
 
   return ( 
     <View style={styles.container}>
@@ -46,7 +52,12 @@ const HomeScreen = () => {
       <View style={styles.item}>
       <LanguageButton />
       </View>
-
+      <View>
+        <Button title="My Wuds"  onPress={handleMyWuds}/>
+      </View>
+      <View>
+        <Button title="WUDTIMES"  onPress={handleWudTimes}/>
+      </View>
  
 
     </View>
