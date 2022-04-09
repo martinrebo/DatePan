@@ -22,6 +22,7 @@ import Step3Activity from './screens/createWud/Step3Activity';
 import Step4Joiners from './screens/createWud/Step4Joiners';
 import Step5Description from './screens/createWud/Step5Description';
 import MyWuds from './screens/myWuds/MyWuds';
+import Wudtimes from './screens/Wudtimes/Wudtimes';
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -76,6 +77,7 @@ export default function App() {
                     <Stack.Screen options={{ headerShown: false }} name="Step5Description" component={Step5Description} />
                   </Stack.Group>
                   <Stack.Screen options={{ headerShown: false }} name="MyWuds" component={MyWuds} />
+                  <Stack.Screen options={{ headerShown: false }} name="WudTimes" component={Wudtimes} />
                 </Stack.Navigator>
               </NavigationContainer>
 
