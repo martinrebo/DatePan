@@ -7,7 +7,7 @@ import LanguageButton from '../components/LanguageButton/LanguageButton'
 import { auth } from '../firebase'
 
 const HomeScreen = () => {
-  const navigation :any = useNavigation()
+  const navigation: any = useNavigation()
 
   const handleSignOut = () => {
     auth
@@ -18,47 +18,53 @@ const HomeScreen = () => {
       .catch(error => alert(error.message))
   }
 
-  const handleOnPress = ()=>{
-   navigation.navigate("Step1Type")
+  const handleOnPress = () => {
+    navigation.navigate("Step1Type")
   }
-  const handleMyWuds = ()=>{
+  const handleMyWuds = () => {
     navigation.navigate("MyWuds")
-   }
-   const handleWudTimes = ()=>{
+  }
+  const handleWudTimes = () => {
     navigation.navigate("WudTimes")
-   }
+  }
+  const handleProfile = () => {
+    navigation.navigate("ProfileView")
+  }
 
-  return ( 
+  return (
     <View style={styles.container}>
       <View style={styles.item}>
-      <Text> 🚧  WORK IN PROGRESS 🚧 </Text>
+        <Text> 🚧  WORK IN PROGRESS 🚧 </Text>
         <Text>  Thanks for joinig the testing program ! </Text>
       </View>
       <View style={styles.item}>
-      <Text>Email: {auth.currentUser?.email}</Text>
-      <TouchableOpacity
-        onPress={handleSignOut}
-        style={styles.button}
-      >
-        <Text style={styles.buttonText}>Sign out</Text>
-      </TouchableOpacity>
+        <Text>Email: {auth.currentUser?.email}</Text>
+        <TouchableOpacity
+          onPress={handleSignOut}
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}>Sign out</Text>
+        </TouchableOpacity>
       </View>
       <View style={styles.item}>
-        <Button title="Create a Wudtime" onPress={handleOnPress}/>
+        <Button title="Create a Wudtime" onPress={handleOnPress} />
       </View>
       <View style={styles.item}>
-      <Healtcheck />
+        <Button title="My Wuds" onPress={handleMyWuds} />
       </View>
       <View style={styles.item}>
-      <LanguageButton />
+        <Button title="WUDTIMES" onPress={handleWudTimes} />
       </View>
-      <View>
-        <Button title="My Wuds"  onPress={handleMyWuds}/>
+      <View style={styles.item}>
+        <Button title="Profile" onPress={handleProfile} />
       </View>
-      <View>
-        <Button title="WUDTIMES"  onPress={handleWudTimes}/>
+      <View style={styles.item}>
+        <Healtcheck />
       </View>
- 
+      <View style={styles.item}>
+        <LanguageButton />
+      </View>
+
 
     </View>
   )
@@ -70,7 +76,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center', 
+    alignItems: 'center',
     flexDirection: 'column',
   },
   item: {
@@ -80,7 +86,7 @@ const styles = StyleSheet.create({
     border: 1,
     textAlign: "center"
   },
-   button: {
+  button: {
     backgroundColor: '#0782F9',
     width: '100%',
     padding: 15,
