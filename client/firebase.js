@@ -1,16 +1,18 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 // import { getAnalytics } from "firebase/analytics";
 import {
-    getAuth,
-    signInWithEmailAndPassword,
-    createUserWithEmailAndPassword,
-    onAuthStateChanged,
-    FacebookAuthProvider,
-    signInWithCredential,
-  } from 'firebase/auth';
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  FacebookAuthProvider,
+  signInWithCredential,
+  updateProfile,
+} from "firebase/auth";
 
-  import * as Facebook from 'expo-facebook';
+import * as Facebook from "expo-facebook";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -24,15 +26,25 @@ const firebaseConfig = {
   storageBucket: "datepan-app.appspot.com",
   messagingSenderId: "505349980528",
   appId: "1:505349980528:web:714b038efdf3ce33a3cfb5",
-  measurementId: "G-7DLDRKG09Q"
+  measurementId: "G-7DLDRKG09Q",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const storage = getStorage(app);
 // const analytics = getAnalytics(app);
 
-const auth = getAuth()
-const signIn = signInWithEmailAndPassword
-const createUser = createUserWithEmailAndPassword
+const auth = getAuth();
+const signIn = signInWithEmailAndPassword;
+const createUser = createUserWithEmailAndPassword;
 
-export {auth, signIn, createUser }
+export {
+  auth,
+  storage,
+  uploadBytes,
+  ref,
+  getDownloadURL,
+  signIn,
+  createUser,
+  updateProfile,
+};

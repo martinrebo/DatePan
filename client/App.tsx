@@ -23,6 +23,8 @@ import Step4Joiners from './screens/createWud/Step4Joiners';
 import Step5Description from './screens/createWud/Step5Description';
 import MyWuds from './screens/myWuds/MyWuds';
 import Wudtimes from './screens/Wudtimes/Wudtimes';
+import ProfileView from './screens/profile/ProfileView';
+import ProfileEdit from './screens/profile/ProfileEdit';
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -78,6 +80,8 @@ export default function App() {
                   </Stack.Group>
                   <Stack.Screen options={{ headerShown: false }} name="MyWuds" component={MyWuds} />
                   <Stack.Screen options={{ headerShown: false }} name="WudTimes" component={Wudtimes} />
+                  <Stack.Screen options={{ headerShown: false }} name="ProfileView" component={ProfileView} />
+                  <Stack.Screen options={{ headerShown: false }} name="ProfileEdit" component={ProfileEdit} />
                 </Stack.Navigator>
               </NavigationContainer>
 
