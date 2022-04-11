@@ -31,6 +31,9 @@ export const api = createApi({
     myWuds: builder.query<WudtimeList, string>({
       query: (userId) => `/mywuds/${userId}`,
     }),
+    myJoinedWuds: builder.query<WudtimeList, string>({
+      query: (userId) => `/myjoinedwuds/${userId}`,
+    }),
 
     getWudTimes: builder.query<WudtimeList, string>({
       query: (city) => `/wuds/${city}`,
@@ -55,4 +58,5 @@ export const {
   useMyWudsQuery,
   useGetWudTimesQuery,
   useJoinWudTimeMutation,
+  useMyJoinedWudsQuery,
 } = api;

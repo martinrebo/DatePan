@@ -132,4 +132,31 @@ router.get("/mywuds/:userId", (req: Request, res: Response) => {
     });
 });
 
+router.get("/myjoinedwuds/:userId", (req: Request, res: Response) => {
+  logger.info("GET  /api/wuds/myjoinedwuds");
+  const myjoinedWudsConfig = {
+    ...config,
+    url: config.url + "find",
+    data: JSON.stringify({
+      ...config.data,
+      filter: {
+        "joiners.id": req.params.userId,
+      },
+    }),
+  };
+
+  axios(myjoinedWudsConfig)
+    .then(function (response) {
+      console.log(response.data);
+      res
+        .status(200)
+        .send({ status: 200, documents: response.data.documents })
+        .end();
+    })
+    .catch(function (error) {
+      console.log(error);
+      res.status(400).send({ status: 400, message: "Error DB" }).end();
+    });
+});
+
 export default router;
