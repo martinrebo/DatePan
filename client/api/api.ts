@@ -35,6 +35,15 @@ export const api = createApi({
     getWudTimes: builder.query<WudtimeList, string>({
       query: (city) => `/wuds/${city}`,
     }),
+    joinWudTime: builder.mutation<any, any>({
+      query: (data) => {
+        return {
+          url: "/wud/join",
+          method: "POST",
+          body: { data },
+        };
+      },
+    }),
   }),
 });
 
@@ -45,4 +54,5 @@ export const {
   usePingQuery,
   useMyWudsQuery,
   useGetWudTimesQuery,
+  useJoinWudTimeMutation,
 } = api;

@@ -4,6 +4,22 @@ import axios from "axios";
 
 // let axios = require('axios').default;
 
+const config = {
+  method: "post",
+  url: "https://data.mongodb-api.com/app/data-ftset/endpoint/data/beta/action/",
+  headers: {
+    "Content-Type": "application/json",
+    "Access-Control-Request-Headers": "*",
+    "api-key":
+      "C7GoSGjfGKgUUyRed2k0Aw4lvW2xfM9snUOePYFHjwp4bxjVBuac6ccQwyoJ05C8",
+  },
+  data: {
+    collection: "events",
+    database: "wudtimeDB",
+    dataSource: "clusterWudTime0",
+  },
+} as const;
+
 const router = Router();
 
 router.get("/", (req: Request, res: Response) => {
@@ -11,31 +27,21 @@ router.get("/", (req: Request, res: Response) => {
 });
 
 router.get("/wuds/:city", (req: Request, res: Response) => {
+  logger.info("GET /wuds/:city");
   const { city } = req.params;
-  const data = JSON.stringify({
-    collection: "events",
-    database: "wudtimeDB",
-    dataSource: "clusterWudTime0",
-    filter: {
-      "data.location": city,
-    },
-  });
+  const wudsCityConfig = {
+    ...config,
+    url: config.url + "find",
+    data: JSON.stringify({
+      ...config.data,
+      filter: {
+        "data.location": city,
+      },
+    }),
+  };
 
-  const config = {
-    method: "post",
-    url: "https://data.mongodb-api.com/app/data-ftset/endpoint/data/beta/action/find",
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Request-Headers": "*",
-      "api-key":
-        "C7GoSGjfGKgUUyRed2k0Aw4lvW2xfM9snUOePYFHjwp4bxjVBuac6ccQwyoJ05C8",
-    },
-    data: data,
-  } as const;
-
-  axios(config)
+  axios(wudsCityConfig)
     .then(function (response) {
-      // console.log(JSON.stringify(response.data));
       res
         .status(200)
         .send({ status: 200, documents: response.data.documents })
@@ -47,29 +53,17 @@ router.get("/wuds/:city", (req: Request, res: Response) => {
 });
 
 router.post("/wud", (req: Request, res: Response) => {
-  logger.info("POST /api/wuds");
-  // console.log(req.body)
+  logger.info("POST /wud");
+  const wudConfig = {
+    ...config,
+    url: config.url + "insertOne",
+    data: JSON.stringify({
+      ...config.data,
+      document: req.body,
+    }),
+  };
 
-  const data = JSON.stringify({
-    collection: "events",
-    database: "wudtimeDB",
-    dataSource: "clusterWudTime0",
-    document: req.body,
-  });
-
-  const config = {
-    method: "post",
-    url: "https://data.mongodb-api.com/app/data-ftset/endpoint/data/beta/action/insertOne",
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Request-Headers": "*",
-      "api-key":
-        "C7GoSGjfGKgUUyRed2k0Aw4lvW2xfM9snUOePYFHjwp4bxjVBuac6ccQwyoJ05C8",
-    },
-    data: data,
-  } as const;
-
-  axios(config)
+  axios(wudConfig)
     .then(function (response) {
       // console.log(JSON.stringify(response.data));
       res.status(200).send({ status: 200, data: response.data }).end();
@@ -79,31 +73,54 @@ router.post("/wud", (req: Request, res: Response) => {
     });
 });
 
+router.post("/wud/join", (req: Request, res: Response) => {
+  logger.info("POST /wud/join");
+  const dataUpdate = {
+    ...config.data,
+    filter: {
+      _id: { $oid: req.body.data.id },
+    },
+    update: {
+      $push: {
+        joiners: req.body.data.user,
+      },
+    },
+  };
+  // console.log(data);
+  const wudJoinConfig = {
+    ...config,
+    url: config.url + "updateOne",
+    data: JSON.stringify(dataUpdate),
+  };
+
+  // console.log(wudJoinConfig);
+
+  axios(wudJoinConfig)
+    .then(function (response) {
+      // console.log(response.data);
+      res.status(200).send({ status: 200, data: response.data }).end();
+    })
+    .catch(function (error) {
+      // console.log(error);
+      res.status(400).send({ status: 400, message: error }).end();
+    });
+  // res.status(200);
+});
+
 router.get("/mywuds/:userId", (req: Request, res: Response) => {
   logger.info("GET  /api/wuds/mywuds");
+  const myWudsConfig = {
+    ...config,
+    url: config.url + "find",
+    data: JSON.stringify({
+      ...config.data,
+      filter: {
+        "data.userId": req.params.userId,
+      },
+    }),
+  };
 
-  const data = JSON.stringify({
-    collection: "events",
-    database: "wudtimeDB",
-    dataSource: "clusterWudTime0",
-    filter: {
-      "data.userId": req.params.userId,
-    },
-  });
-
-  const config = {
-    method: "post",
-    url: "https://data.mongodb-api.com/app/data-ftset/endpoint/data/beta/action/find",
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Request-Headers": "*",
-      "api-key":
-        "C7GoSGjfGKgUUyRed2k0Aw4lvW2xfM9snUOePYFHjwp4bxjVBuac6ccQwyoJ05C8",
-    },
-    data: data,
-  } as const;
-
-  axios(config)
+  axios(myWudsConfig)
     .then(function (response) {
       res
         .status(200)

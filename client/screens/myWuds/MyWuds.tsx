@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View, Text } from 'react-native'
 import { auth } from '../../firebase'
 import { useMyWudsQuery } from '../../api/api'
 import { Wudtime } from '../../interfaces/wudtime'
 import { Button, Card } from 'react-native-elements'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useIsFocused } from '@react-navigation/native'
 
 type Props = {}
 
 export default function MyWuds({ }: Props) {
-
+  const isFocused = useIsFocused()
   const navigation: any = useNavigation()
   let userId = auth.currentUser?.uid ? auth.currentUser?.uid : ''
   const { data, error, isLoading } = useMyWudsQuery(userId)
@@ -17,7 +17,12 @@ export default function MyWuds({ }: Props) {
   const handleGoHome = () => {
     navigation.navigate('Home')
   }
-  console.log("data my wuds", data)
+  // console.log("data my wuds", data)
+  // useEffect(() => {
+  //   if (isFocused) {
+  //     console.log("isFocused")
+  //   }
+  // }, [isFocused])
 
   return (
     <>
