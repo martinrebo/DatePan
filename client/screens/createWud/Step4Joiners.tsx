@@ -1,14 +1,14 @@
 
-import {useState} from 'react'
+import { useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import { Button, Card, Slider } from 'react-native-elements'
+import { Button, Card, Slider, Input } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
 // import MultiSlider from '@ptomasroos/react-native-multi-slider';
 
 
 import { RootState } from '../../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
-import { addType } from '../../redux/wudSlice'
+import { addLocation } from '../../redux/wudSlice'
 import { Wudtime } from '../../interfaces/wudtime'
 import { WUDS } from './WUDS'
 
@@ -24,11 +24,17 @@ const Step3Activity = ({ route }: any) => {
   //   console.log(activity)
   //   dispatch(addType(activity))
   //   navigation.navigate('Step4Joiners', {type, subType, activity})
-    
-  const [value, setValue] = useState(0);
-  
-  const handleChange = (value: number) => {
+
+  const [value, setValue] = useState("Barcelona");
+
+  const handleChange = (value: string) => {
     setValue(value)
+  }
+
+  const handleNext = () => {
+
+    dispatch(addLocation(value))
+    navigation.navigate('Step5Description', { type, subType, activity })
   }
 
 
@@ -41,18 +47,14 @@ const Step3Activity = ({ route }: any) => {
           <Text> subtype {JSON.stringify(subType)}</Text>
           <Text> activity {JSON.stringify(activity)}</Text>
         </Card>
+        <Input
+          label="Location"
+          placeholder="Describe your activity"
+          maxLength={144}
+          onChangeText={value => handleChange(value)} />
 
-        {/* <Slider value={value}
-        minimumValue={18}
-        maximumValue={100}
-        step={1}
-        thumbTintColor='#8139DC'
-        onValueChange={(value => handleChange(value))}/> */}
-
-{/* <MultiSlider 
-
-/> */}
-
+        <Button title="Next"
+          onPress={handleNext} />
         <Text>{value}</Text>
       </View>
     </View>

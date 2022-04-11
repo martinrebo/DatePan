@@ -8,7 +8,7 @@ import { useNavigation } from '@react-navigation/native'
 
 type Props = {}
 
-export default function YourWuds({ }: Props) {
+export default function MyWuds({ }: Props) {
 
   const navigation: any = useNavigation()
   let userId = auth.currentUser?.uid ? auth.currentUser?.uid : ''
@@ -17,12 +17,13 @@ export default function YourWuds({ }: Props) {
   const handleGoHome = () => {
     navigation.navigate('Home')
   }
+  console.log("data my wuds", data)
 
   return (
     <>
       <View>
         <Button title="<" onPress={handleGoHome} />
-        <Text>YourWuds</Text>
+        <Text>MyWuds</Text>
         {data?.documents?.map((wud: any, i) => {
           return (
             <View key={i}>
