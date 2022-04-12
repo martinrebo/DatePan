@@ -3,10 +3,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import type { Wudtime } from "../interfaces/wudtime";
 
 interface documents {
-    documents: [
-      {data: Wudtime;
-        id: string;}
-    ]}
+  documents: [{ data: Wudtime; id: string }];
+}
 
 interface WudtimeList {
   documents: documents["documents"];
@@ -17,7 +15,6 @@ export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3001/api/wuds" }),
   endpoints: (builder) => ({
-
     ping: builder.query<Wudtime, string>({
       query: () => `/`,
     }),
@@ -31,14 +28,35 @@ export const api = createApi({
         };
       },
     }),
-    myWuds: builder.query<WudtimeList, string >({
+    myWuds: builder.query<WudtimeList, string>({
       query: (userId) => `/mywuds/${userId}`,
     }),
+    myJoinedWuds: builder.query<WudtimeList, string>({
+      query: (userId) => `/myjoinedwuds/${userId}`,
+    }),
 
-
+    getWudTimes: builder.query<WudtimeList, string>({
+      query: (city) => `/wuds/${city}`,
+    }),
+    joinWudTime: builder.mutation<any, any>({
+      query: (data) => {
+        return {
+          url: "/wud/join",
+          method: "POST",
+          body: { data },
+        };
+      },
+    }),
   }),
 });
 
 // Export hooks for usage in function components, which are
 // auto-generated based on the defined endpoints
-export const { useCreateWudTimeQuery, usePingQuery, useMyWudsQuery } = api;
+export const {
+  useCreateWudTimeQuery,
+  usePingQuery,
+  useMyWudsQuery,
+  useGetWudTimesQuery,
+  useJoinWudTimeMutation,
+  useMyJoinedWudsQuery,
+} = api;

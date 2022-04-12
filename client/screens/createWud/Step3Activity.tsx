@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native'
 
 import { RootState } from '../../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
-import { addType,  addActivity } from '../../redux/wudSlice'
+import { addType, addActivity } from '../../redux/wudSlice'
 import { Wudtime } from '../../interfaces/wudtime'
 import { WUDS } from './WUDS'
 
@@ -23,15 +23,15 @@ const Step3Activity = ({ route }: any) => {
   const handleClick = (activity: any) => {
     console.log(activity)
     dispatch(addActivity(activity))
-    // navigation.navigate('Step4Joiners', {type, subType, activity})
-    navigation.navigate('Step5Description', {type, subType, activity})
-    
+    navigation.navigate('Step4Joiners', { type, subType, activity })
+
+
   }
   const listOfWuds = WUDS.filter(wud => wud.type === type)
   const listOfSubtypes = listOfWuds.flatMap(wud => wud.subtypes)
   const listOfActivities = listOfSubtypes.filter(wud => wud.name === subType)
   const listOfActivitiesName = listOfActivities.flatMap(wud => wud.activities)
-  console.log("subtypws, " ,listOfSubtypes)
+  console.log("subtypws, ", listOfSubtypes)
   console.log("activityes", listOfActivitiesName)
 
 
@@ -48,10 +48,10 @@ const Step3Activity = ({ route }: any) => {
 
           <Card key={i}>
             <Text> {wud.name}</Text>
-            <Text> Description { wud.description} Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-               Atque quidem dolore maxime exercitationem ducimus quos?
-                Corporis, beatae labore facere consectetur laborum magni ipsum autem natus?
-                 In sint eveniet ad quos?</Text>
+            <Text> Description {wud.description} Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+              Atque quidem dolore maxime exercitationem ducimus quos?
+              Corporis, beatae labore facere consectetur laborum magni ipsum autem natus?
+              In sint eveniet ad quos?</Text>
             <Button title="go" onPress={() => handleClick(wud.name)} />
           </Card>
 

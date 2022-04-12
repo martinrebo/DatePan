@@ -24,6 +24,9 @@ const HomeScreen = () => {
   const handleMyWuds = () => {
     navigation.navigate("MyWuds")
   }
+  const handleMyJoinedWuds = () => {
+    navigation.navigate("MyJoinedWuds")
+  }
   const handleWudTimes = () => {
     navigation.navigate("WudTimes")
   }
@@ -51,6 +54,9 @@ const HomeScreen = () => {
       </View>
       <View style={styles.item}>
         <Button title="My Wuds" onPress={handleMyWuds} />
+      </View>
+      <View style={styles.item}>
+        <Button title="My Joined Wuds" onPress={handleMyJoinedWuds} />
       </View>
       <View style={styles.item}>
         <Button title="WUDTIMES" onPress={handleWudTimes} />
