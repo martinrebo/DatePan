@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/core'
 import React, { useEffect, useState } from 'react'
 import { KeyboardAvoidingView, StyleSheet, TextInput } from 'react-native'
 import { auth, createUser, signIn } from '../../firebase'
-import {Button, useTheme} from 'react-native-elements'
+import { Button, useTheme } from 'react-native-elements'
 
 
 export default function LoginScreen() {
@@ -10,10 +10,10 @@ export default function LoginScreen() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const navigation :any = useNavigation()
+  const navigation: any = useNavigation()
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged( (user: any) => {
+    const unsubscribe = auth.onAuthStateChanged((user: any) => {
       if (user) {
         navigation.replace("Home")
       }
@@ -23,7 +23,7 @@ export default function LoginScreen() {
   }, [])
 
   const handleSignUp = () => {
-createUser(auth, email, password)
+    createUser(auth, email, password)
       .then((userCredentials: { user: any }) => {
         const user = userCredentials.user;
         console.log('Registered with:', user.email);
@@ -45,34 +45,34 @@ createUser(auth, email, password)
       style={styles.container}
       behavior="padding"
     >
-        <TextInput
-          placeholder="Email"
-          value={email}
-          onChangeText={text => setEmail(text)}
-          style={styles.input}
-        />
-        <TextInput
-          placeholder="Password"
-          value={password}
-          onChangeText={text => setPassword(text)}
-          style={styles.input}
-          secureTextEntry
-        />
+      <TextInput
+        placeholder="Email"
+        value={email}
+        onChangeText={text => setEmail(text)}
+        style={styles.input}
+      />
+      <TextInput
+        placeholder="Password"
+        value={password}
+        onChangeText={text => setPassword(text)}
+        style={styles.input}
+        secureTextEntry
+      />
 
-        <Button
-          onPress={handleLogin}
-          buttonStyle={styles.button}
-          containerStyle={styles.buttonContainer}
-          title={'Login'}
-          />
-       
-        {/* <Button
-          onPress={handleSignUp}
-          buttonStyle={styles.button}
-          containerStyle={styles.buttonContainer}
-          title={'Register'}
-          type='outline'
-        /> */}
+      <Button
+        onPress={handleLogin}
+        buttonStyle={styles.button}
+        containerStyle={styles.buttonContainer}
+        title={'Login'}
+      />
+
+      <Button
+        onPress={handleSignUp}
+        buttonStyle={styles.button}
+        containerStyle={styles.buttonContainer}
+        title={'Register'}
+        type='outline'
+      />
 
 
     </KeyboardAvoidingView>

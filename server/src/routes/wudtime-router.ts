@@ -48,7 +48,7 @@ router.get("/wuds/:city", (req: Request, res: Response) => {
         .end();
     })
     .catch(function (error) {
-      res.status(400).send({ status: 400, message: "Error DB" }).end();
+      res.status(400).send({ status: 400, message: error }).end();
     });
 });
 
@@ -65,11 +65,10 @@ router.post("/wud", (req: Request, res: Response) => {
 
   axios(wudConfig)
     .then(function (response) {
-      // console.log(JSON.stringify(response.data));
       res.status(200).send({ status: 200, data: response.data }).end();
     })
     .catch(function (error) {
-      res.status(400).send({ status: 400, message: "Error DB" }).end();
+      res.status(400).send({ status: 400, message: error }).end();
     });
 });
 
@@ -128,7 +127,7 @@ router.get("/mywuds/:userId", (req: Request, res: Response) => {
         .end();
     })
     .catch(function (error) {
-      res.status(400).send({ status: 400, message: "Error DB" }).end();
+      res.status(400).send({ status: 400, message: error }).end();
     });
 });
 
@@ -147,15 +146,13 @@ router.get("/myjoinedwuds/:userId", (req: Request, res: Response) => {
 
   axios(myjoinedWudsConfig)
     .then(function (response) {
-      console.log(response.data);
       res
         .status(200)
         .send({ status: 200, documents: response.data.documents })
         .end();
     })
     .catch(function (error) {
-      console.log(error);
-      res.status(400).send({ status: 400, message: "Error DB" }).end();
+      res.status(400).send({ status: 400, message: error }).end();
     });
 });
 

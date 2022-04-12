@@ -34,6 +34,10 @@ const HomeScreen = () => {
     navigation.navigate("ProfileView")
   }
 
+  if (auth.currentUser?.displayName === null || auth.currentUser?.photoURL === null) {
+    navigation.navigate("ProfileEdit")
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.item}>

@@ -11,10 +11,7 @@ const Wudtimes = (props: Props) => {
   const { data, error, isLoading, isSuccess } = useGetWudTimesQuery("Barcelona")
   const [joinWudTime] = useJoinWudTimeMutation()
 
-  console.log("data wudtimes", data)
-
   const handleJoin = (wudID: string) => {
-    console.log("join", wudID)
     let userId = auth.currentUser?.uid!
     let userName = auth.currentUser?.displayName!
     let userPhotoURL = auth.currentUser?.photoURL!
@@ -28,6 +25,7 @@ const Wudtimes = (props: Props) => {
       }
     }).then(() => {
       console.log("joined")
+      // Go to chat or Individual Wud
     }).catch((e) => {
       console.log("error", e)
     })
