@@ -1,15 +1,13 @@
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import { useIsFocused } from '@react-navigation/core'
-import { useNavigation } from '@react-navigation/native'
-import React, { useEffect } from 'react'
+import React, { useEffect, useLayoutEffect } from 'react'
 import { auth } from '../../firebase'
-import { Button, Image } from 'react-native-elements'
-import downloadImage from '../../helpers/downloadImage'
+import { Button, Image, Avatar } from 'react-native-elements'
 
 type Props = {}
 
-const ProfileView = (props: Props) => {
-    const navigation = useNavigation()
+const ProfileView = ({ navigation }: any) => {
+    // const navigation = useNavigation()
     const isFocused = useIsFocused()
 
     const handleEditProfile = () => {
@@ -21,13 +19,42 @@ const ProfileView = (props: Props) => {
         setName(auth.currentUser?.displayName!)
 
     }, [isFocused])
+
+    const goHome = () => {
+        navigation.navigate('Home')
+    }
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerLeft: () => (
+                <View style={{ marginLeft: 20 }}>
+                    <Avatar
+                        rounded
+                        source={{
+                            uri: auth?.currentUser?.photoURL!,
+                        }}
+                    />
+                </View>
+            ),
+            headerRight: () => (
+                <TouchableOpacity style={{
+                    marginRight: 10
+                }}
+                    onPress={goHome}
+                >
+                    <Text>Go Back</Text>
+                </TouchableOpacity>
+            )
+        })
+    }, [navigation])
+
     return (
         <View>
             <Text>ProfileView</Text>
             <Text> Name: {name}</Text>
             <Text> Email: {auth.currentUser?.email}</Text>
             <Text> photoURL: </Text>
-            <Image source={{ uri: auth.currentUser?.photoURL! }} style={{ width: 100, height: 100 }} />
+            <Image source={{ uri: auth.currentUser?.photoURL! }} style={{ width: 200, height: 200 }} />
             <Button title="Edit Profile" onPress={handleEditProfile} />
         </View>
     )

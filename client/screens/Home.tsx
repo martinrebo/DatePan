@@ -33,8 +33,9 @@ const HomeScreen = () => {
   const handleProfile = () => {
     navigation.navigate("ProfileView")
   }
-  const handleChatOnPress = () => {
-    navigation.navigate("Chat")
+
+  if (auth.currentUser?.displayName === null || auth.currentUser?.photoURL === null) {
+    navigation.navigate("ProfileEdit")
   }
 
   return (

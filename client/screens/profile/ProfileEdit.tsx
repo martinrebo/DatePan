@@ -1,7 +1,5 @@
 import React from 'react'
 import { View, Text, ActivityIndicator } from 'react-native'
-// import { useNavigation } from '@react-navigation/core'
-import { useNavigation } from '@react-navigation/native'
 import * as ImagePicker from 'expo-image-picker';
 import { auth, updateProfile } from '../../firebase'
 import { Button, Input, Image } from 'react-native-elements'
@@ -10,10 +8,7 @@ import downloadImage from '../../helpers/downloadImage'
 
 type Props = {}
 
-const ProfileEdit = (props: Props) => {
-    const navigation = useNavigation()
-
-    console.log(auth.currentUser)
+const ProfileEdit = ({ navigation }: any) => {
 
     const handleEditProfile = () => {
         navigation.navigate("ProfileView")
@@ -67,7 +62,7 @@ const ProfileEdit = (props: Props) => {
         <View>
             <Text>ProfileEdit</Text>
             <Text> Name: {auth.currentUser?.displayName}</Text>
-            <Input value={name} onChangeText={handleName} />
+            <Input value={name} onChangeText={handleName} maxLength={10} />
             <Text> Email: {auth.currentUser?.email}</Text>
             <Text> photo</Text>
             <Image

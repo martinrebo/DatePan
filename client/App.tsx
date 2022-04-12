@@ -82,7 +82,7 @@ export default function App() {
                   </Stack.Group>
                   <Stack.Screen options={{ headerShown: false }} name="MyWuds" component={MyWuds} />
                   <Stack.Screen options={{ headerShown: false }} name="WudTimes" component={Wudtimes} />
-                  <Stack.Screen options={{ headerShown: false }} name="ProfileView" component={ProfileView} />
+                  <Stack.Screen options={{ headerShown: true }} name="ProfileView" component={ProfileView} />
                   <Stack.Screen options={{ headerShown: false }} name="ProfileEdit" component={ProfileEdit} />
                   <Stack.Screen options={{ headerShown: false }} name="MyJoinedWuds" component={MyJoinedWuds} />
                   <Stack.Screen options={{ headerShown: true }} name="Chat" component={Chat} />
