@@ -39,8 +39,9 @@ export default function MyJoinedWuds({ }: Props) {
                 <Text>{wud.data.subtype}</Text>
                 <Text>{wud.data.activity}</Text>
                 <Text>{wud.data.notes}</Text>
-
+                <Text>{wud._id}</Text>
               </Card>
+              <Button title="Group Chat" onPress={() => navigation.navigate('Chat', { wudId: wud._id })} />
 
             </View>
           )

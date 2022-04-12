@@ -33,6 +33,9 @@ const HomeScreen = () => {
   const handleProfile = () => {
     navigation.navigate("ProfileView")
   }
+  const handleChatOnPress = () => {
+    navigation.navigate("Chat")
+  }
 
   return (
     <View style={styles.container}>

@@ -26,6 +26,7 @@ import Wudtimes from './screens/Wudtimes/Wudtimes';
 import ProfileView from './screens/profile/ProfileView';
 import ProfileEdit from './screens/profile/ProfileEdit';
 import MyJoinedWuds from './screens/myJoinedWuds/MyJoinedWuds';
+import Chat from './screens/chat/Chat';
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -84,6 +85,7 @@ export default function App() {
                   <Stack.Screen options={{ headerShown: false }} name="ProfileView" component={ProfileView} />
                   <Stack.Screen options={{ headerShown: false }} name="ProfileEdit" component={ProfileEdit} />
                   <Stack.Screen options={{ headerShown: false }} name="MyJoinedWuds" component={MyJoinedWuds} />
+                  <Stack.Screen options={{ headerShown: true }} name="Chat" component={Chat} />
                 </Stack.Navigator>
               </NavigationContainer>
 
