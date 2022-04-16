@@ -8,6 +8,12 @@ interface IuserData {
   userId: string;
 }
 
+interface IlocationData {
+  city: string;
+  address: string;
+  place: string;
+}
+
 const initialState: Wudtime = {
   category: "",
   wudType: {
@@ -18,7 +24,9 @@ const initialState: Wudtime = {
   date: "",
   time: "",
   duration: "",
-  location: "",
+  city: "",
+  address: "",
+  place: "",
   notes: "",
   userId: "",
   photoURL: "",
@@ -29,10 +37,13 @@ export const wudSlice = createSlice({
   name: "createWud",
   initialState,
   reducers: {
-    addType: (state: Wudtime, action: PayloadAction<Wudtime["category"]>) => {
+    addCategory: (
+      state: Wudtime,
+      action: PayloadAction<Wudtime["category"]>
+    ) => {
       state.category = action.payload;
     },
-    addSubtype: (state: Wudtime, action: PayloadAction<Wudtime["wudType"]>) => {
+    addType: (state: Wudtime, action: PayloadAction<Wudtime["wudType"]>) => {
       state.wudType = action.payload;
     },
     addActivity: (
@@ -53,12 +64,6 @@ export const wudSlice = createSlice({
     ) => {
       state.duration = action.payload;
     },
-    addLocation: (
-      state: Wudtime,
-      action: PayloadAction<Wudtime["location"]>
-    ) => {
-      state.location = action.payload;
-    },
     addNotes: (state: Wudtime, action: PayloadAction<Wudtime["notes"]>) => {
       state.notes = action.payload;
     },
@@ -67,6 +72,11 @@ export const wudSlice = createSlice({
       state.photoURL = action.payload.photoURL!;
       state.displayName = action.payload.displayName;
     },
+    addLocationData: (state: Wudtime, action: PayloadAction<IlocationData>) => {
+      state.city = action.payload.city;
+      state.address = action.payload.address;
+      state.place = action.payload.place;
+    },
     reset: (state: Wudtime) => {
       state = initialState;
     },
@@ -74,13 +84,13 @@ export const wudSlice = createSlice({
 });
 
 export const {
+  addCategory,
   addType,
-  addSubtype,
   addActivity,
   addDate,
   addTime,
   addDuration,
-  addLocation,
+  addLocationData,
   addNotes,
   addUserData,
   reset,

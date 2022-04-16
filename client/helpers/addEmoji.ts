@@ -135,4 +135,19 @@ export const addActivityEmoji = {
     name: "japanese",
     description: "wudActivities.japanese",
   },
+  football: {
+    emoji: "⚽",
+    name: "football",
+    description: "wudActivities.football",
+  },
+  basketball: {
+    emoji: "🏀",
+    name: "basketball",
+    description: "wudActivities.basketball",
+  },
+  tennis: {
+    emoji: "🎾",
+    name: "tennis",
+    description: "wudActivities.tennis",
+  },
 } as const;

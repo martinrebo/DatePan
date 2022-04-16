@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 
 import { RootState } from '../../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
-import { addSubtype } from '../../redux/wudSlice'
+import { addType } from '../../redux/wudSlice'
 import { Wudtime } from '../../interfaces/wudtime'
 import { WUDS } from './WUDS'
 import { addCategoryEmoji } from '../../helpers/addEmoji'
@@ -18,25 +18,24 @@ const Step2Type = ({ route }: any) => {
   const navigation: any = useNavigation()
   const { t } = useTranslation()
 
-  const { type } = route.params as { type: Wudtime['category'] };
+  const { category } = route.params as { category: Wudtime['category'] };
   const dispatch = useDispatch()
   const types = useSelector((state: RootState) => state.createWud.category)
 
   const handleClick = (wudType: any) => {
-    dispatch(addSubtype(wudType))
-    navigation.navigate('Step3Activity', { type, wudType })
+    dispatch(addType(wudType))
+    navigation.navigate('Step3Activity', { category, wudType })
 
   }
-  const listOfWuds = WUDS.filter(wud => wud.type === type)
+  const listOfWuds = WUDS.filter(wud => wud.type === category)
   const listOfSubtypes = listOfWuds.flatMap(wud => wud.wudTypes)
 
-  console.log(type)
 
   return (
     <View style={styles.container}>
       <View style={styles.screen}>
-        <Text h2> {addCategoryEmoji[type as keyof typeof addCategoryEmoji].emoji}</Text>
-        <Text > {addCategoryEmoji[type as keyof typeof addCategoryEmoji].name}</Text>
+        <Text h2> {addCategoryEmoji[category as keyof typeof addCategoryEmoji].emoji}</Text>
+        <Text > {addCategoryEmoji[category as keyof typeof addCategoryEmoji].name}</Text>
         <View style={styles.cardContainer}>
           {listOfSubtypes.map(((wud, i) => (
 

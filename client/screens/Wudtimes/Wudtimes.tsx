@@ -15,11 +15,11 @@ function Wudtimes({ navigation }: Props) {
   const { data, error, isLoading, isSuccess } = useGetWudTimesQuery("Barcelona")
   const [joinWudTime] = useJoinWudTimeMutation()
 
-  const handleJoin = (wudID: string) => {
-    let userId = auth.currentUser?.uid!
-    let userName = auth.currentUser?.displayName!
-    let userPhotoURL = auth.currentUser?.photoURL!
+  let userId = auth.currentUser?.uid!
+  let userName = auth.currentUser?.displayName!
+  let userPhotoURL = auth.currentUser?.photoURL!
 
+  const handleJoin = (wudID: string) => {
     joinWudTime({
       id: wudID,
       user: {
@@ -71,6 +71,15 @@ function Wudtimes({ navigation }: Props) {
     return s.charAt(0).toUpperCase() + s.slice(1)
   }
 
+  function checkJoined(joiners: [] | undefined) {
+    if (joiners === undefined) {
+      return false
+    }
+    if (joiners.some((j: any) => j.id === userId)) {
+      return true
+    }
+  }
+
   return (
     <>
       <LayoutScreen>
@@ -82,9 +91,15 @@ function Wudtimes({ navigation }: Props) {
               <Text h1>
                 {addActivityEmoji[wud.data.activity as keyof typeof addActivityEmoji].emoji}
               </Text>
-              <Text h2>{capitalize(wud.data.activity)}</Text>
+              <Text h4>{capitalize(wud.data.activity)}</Text>
               <Text> From 10: 00  to 11: 00 </Text>
-              <Divider />
+              <Divider style={{ padding: 5 }} />
+
+              <Text> {wud.data.place}</Text>
+              <Text> {wud.data.address}  </Text>
+              <Text> {wud.data.city}  </Text>
+
+              <Divider style={{ padding: 5 }} />
               <Card>
                 <Text> Hosted By: </Text>
                 <ListItem>
@@ -103,8 +118,18 @@ function Wudtimes({ navigation }: Props) {
                 <Text>{wud.data.notes}</Text>
 
               </Card>
-              <Text>  {addCategoryEmoji[wud.data.category as keyof typeof addCategoryEmoji].emoji} </Text>
-              <Button title="Join" onPress={() => handleJoin(wud._id)} />
+              <Card>
+                <Text h4>
+                  {addCategoryEmoji[wud.data.category as keyof typeof addCategoryEmoji].emoji}
+
+                </Text>
+                <Text >  Attendees: {wud.joiners?.length ? wud.joiners.length : 0} </Text>
+                <Button title={checkJoined(wud.joiners) ? "Joined" : "Join"}
+                  disabled={checkJoined(wud.joiners)}
+                  onPress={() => handleJoin(wud._id)}
+                />
+              </Card>
+
             </Card>
           </View>
           )

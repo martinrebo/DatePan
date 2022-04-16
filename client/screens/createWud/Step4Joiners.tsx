@@ -3,41 +3,47 @@ import { useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Button, Card, Text, Input, CheckBox } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
-// import MultiSlider from '@ptomasroos/react-native-multi-slider';
-
-
-import { RootState } from '../../redux/store'
-import { useSelector, useDispatch } from 'react-redux'
-import { addLocation } from '../../redux/wudSlice'
-import { Wudtime } from '../../interfaces/wudtime'
-import { WUDS } from './WUDS'
+import { useDispatch } from 'react-redux'
+import { addLocationData } from '../../redux/wudSlice'
 import { addActivityEmoji } from '../../helpers/addEmoji'
+import LayoutScreen from '../../components/Layout/LayoutScreen'
 
 
-
-const Step3Activity = ({ route }: any) => {
+const Step4Joiners = ({ route }: any) => {
   const navigation: any = useNavigation()
 
-  const { type, wudType, activity } = route.params;
+  const { category, wudType, activity } = route.params;
   const dispatch = useDispatch()
 
-  console.log(activity)
+  // console.log(activity)
 
   // const handleClick = (activity: any) => {
   //   console.log(activity)
   //   dispatch(addType(activity))
   //   navigation.navigate('Step4Joiners', {type, wudType, activity})
 
-  const [value, setValue] = useState("Barcelona");
+  const [valueCity, setValueCity] = useState("Barcelona");
+  const [valueAddress, setValueAddress] = useState("");
+  const [valuePlace, setValuePlace] = useState("");
 
-  const handleChange = (value: string) => {
-    setValue(value)
+  const handleChangeCity = (value: string) => {
+    setValueCity(value)
   }
+
+  const handleChangeAddress = (value: string) => {
+    setValueAddress(value)
+  }
+
+  const handleChangePlace = (value: string) => {
+    setValuePlace(value)
+  }
+
+
 
   const handleNext = () => {
 
-    dispatch(addLocation(value))
-    navigation.navigate('Step5Description', { type, wudType, activity })
+    dispatch(addLocationData({ city: valueCity, address: valueAddress, place: valuePlace }))
+    navigation.navigate('Step5Description', { category, wudType, activity })
   }
 
   const [checkedSpanish, setCheckedSpanish] = useState(true);
@@ -51,52 +57,57 @@ const Step3Activity = ({ route }: any) => {
 
 
   return (
-    <View style={styles.container}>
-      <View style={styles.screen}>
-        <Text h2> {addActivityEmoji[activity as keyof typeof addActivityEmoji].emoji}</Text>
-        <Text > {addActivityEmoji[activity as keyof typeof addActivityEmoji].name}</Text>
-        <Card>
-          <Input
-            label="Location"
-            placeholder={value}
-            maxLength={144}
-            disabled={true}
-            onChangeText={value => handleChange(value)} />
-        </Card>
-        <Card>
-          <Card.Title>
-            <Text> Select Languages Spoken </Text>
-          </Card.Title>
-          <CheckBox
-            center
-            title='Spanish'
-            checked={checkedSpanish}
-            onPress={() => setSpanishLanguages(checkedSpanish)}
-          />
-          <CheckBox
-            center
-            title='English'
-            checked={checkedEnglish}
-            onPress={() => setEnglishLanguages(checkedEnglish)}
-          />
+    <LayoutScreen >
+      <Text h2> {addActivityEmoji[activity as keyof typeof addActivityEmoji].emoji}</Text>
+      <Text > {addActivityEmoji[activity as keyof typeof addActivityEmoji].name}</Text>
+      <Card>
+        <Input
+          label="City"
+          placeholder={valueCity}
+          maxLength={50}
+          disabled={true}
+          onChangeText={value => handleChangeCity(value)} />
+        <Input
+          label="Address"
+          placeholder="e.g. Calle de la Hispanidad, 1"
+          maxLength={144}
+          onChangeText={value => handleChangeAddress(value)} />
+        <Input
+          label="Place"
+          placeholder="e.g. Bar Iberia"
+          maxLength={144}
+          onChangeText={value => handleChangePlace(value)} />
+      </Card>
+      <Card>
+        <Card.Title>
+          <Text> Select Languages Spoken </Text>
+        </Card.Title>
+        <CheckBox
+          center
+          title='Spanish'
+          checked={checkedSpanish}
+          onPress={() => setSpanishLanguages(checkedSpanish)}
+        />
+        <CheckBox
+          center
+          title='English'
+          checked={checkedEnglish}
+          onPress={() => setEnglishLanguages(checkedEnglish)}
+        />
+      </Card>
+
+      <Card>
+        <Button title="Next"
+          onPress={handleNext} />
+      </Card>
 
 
+    </LayoutScreen>
 
-
-        </Card>
-
-        <Card>
-          <Button title="Next"
-            onPress={handleNext} />
-        </Card>
-
-
-      </View>
-    </View>
   )
 }
 
-export default Step3Activity
+export default Step4Joiners
 
 const styles = StyleSheet.create({
   container: {

@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 
 import { RootState } from '../../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
-import { addType } from '../../redux/wudSlice'
+import { addCategory } from '../../redux/wudSlice'
 import { useNavigation } from '@react-navigation/native'
 import { Wudtime } from '../../interfaces/wudtime'
 import { auth } from '../../firebase'
@@ -21,17 +21,16 @@ const CreateWud = () => {
   const dispatch = useDispatch()
   const types = useSelector((state: RootState) => state.createWud.category)
 
-  const handleClick = (type: Wudtime['category']) => {
-
-    dispatch(addType(type))
-    navigation.navigate('Step2Type', { type })
+  const handleClick = (category: Wudtime['category']) => {
+    dispatch(addCategory(category))
+    navigation.navigate('Step2Type', { category })
   }
 
 
   return (
     <View style={styles.container}>
       <View style={styles.screen}>
-        <TouchableOpacity onPress={(type) => handleClick('fun')}>
+        <TouchableOpacity onPress={(category) => handleClick('fun')}>
           <Card>
             <Card.Title>
               <Text h2 > 🎉  </Text>
@@ -42,7 +41,7 @@ const CreateWud = () => {
             <Text> {t('createWudStep1.fun')} </Text>
           </Card>
         </TouchableOpacity>
-        <TouchableOpacity onPress={(type) => handleClick('skills')}>
+        <TouchableOpacity onPress={(category) => handleClick('skills')}>
           <Card>
             <Card.Title>
               <Text h2> 💪   </Text>
@@ -53,7 +52,7 @@ const CreateWud = () => {
             <Text>  {t('createWudStep1.skills')}</Text>
           </Card>
         </TouchableOpacity>
-        <TouchableOpacity onPress={(type) => handleClick('purpose')}>
+        <TouchableOpacity onPress={(category) => handleClick('purpose')}>
           <Card>
             <Card.Title>
               <Text h2> 💡  </Text>

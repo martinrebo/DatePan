@@ -1,11 +1,13 @@
 import React, { useLayoutEffect } from 'react'
 import { useNavigation } from '@react-navigation/core'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { Button, Avatar, Tile, Card } from 'react-native-elements'
+import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Button, Avatar, Tile, Card, Image } from 'react-native-elements'
 import Healtcheck from '../../components/Healthcheck/Healtcheck'
 import LanguageButton from '../../components/LanguageButton/LanguageButton'
 import { auth } from '../../firebase'
 import { useTranslation } from 'react-i18next'
+import LayoutScreen from '../../components/Layout/LayoutScreen'
+import window from '../../constants/Layout'
 
 const HomeScreen = () => {
   const navigation: any = useNavigation()
@@ -65,54 +67,44 @@ const HomeScreen = () => {
   }
 
   return (
-    <>
+
+    <LayoutScreen>
+      <Card>
+        <Image
+          source={require('../../assets/images/photos/daisies.jpg')}
+          style={{ height: 100 }}
+          PlaceholderContent={<ActivityIndicator />}
+        />
+        <Button title={t('home.discover')} onPress={handleWudTimes} type="outline" />
+      </Card>
+
       <View style={styles.container}>
-        <View style={styles.screen}>
+        <View style={styles.item}>
           <Card>
-            <Tile
-              imageSrc={require('../../assets/images/photos/daisies.jpg')}
-              title="😀 "
-              onPress={handleWudTimes}
-              containerStyle={{ height: 300, maxWidth: 400 }}
-              contentContainerStyle={{ height: 100, alignContent: "center" }}
-              titleStyle={{ fontSize: 25, fontWeight: 'bold', textAlign: "center" }}
-              captionStyle={{ fontSize: 25, textAlign: "center" }}
-              activeOpacity={10}
-
-            >
-              <Button title={t('home.discover')} onPress={handleWudTimes} type="outline" />
-            </Tile>
-
+            <Button title={t('home.newWud')}
+              onPress={handleOnPress} type="outline" />
           </Card>
-        </View>
-        {/* <Text style={styles.emojiText}> 😀 </Text>
-        <Button title="DISCOVER WUDTIMES" onPress={handleWudTimes} /> */}
-        <View style={styles.container2}>
-          <View style={styles.item}>
-            <Card>
-              <Button title={t('home.newWud')}
-                onPress={handleOnPress} type="outline" />
-            </Card>
 
-          </View>
-          <View style={styles.item}>
-            <Card>
-              <Button title={t('home.joinedWuds')}
-                onPress={handleMyJoinedWuds} type="outline" />
-            </Card>
-            <Card>
-              <Button title={t('home.createdWuds')}
-                onPress={handleMyWuds} type="outline" />
-            </Card>
-
-          </View>
         </View>
-        <View >
-          <LanguageButton />
-          <Healtcheck />
+        <View style={styles.item}>
+          <Card>
+            <Button title={t('home.joinedWuds')}
+              onPress={handleMyJoinedWuds} type="outline" />
+          </Card>
+          <Card>
+            <Button title={t('home.createdWuds')}
+              onPress={handleMyWuds} type="outline" />
+          </Card>
+
         </View>
       </View>
-    </>
+      <View >
+        <LanguageButton />
+        <Healtcheck />
+      </View>
+
+    </LayoutScreen>
+
   )
 }
 
@@ -123,21 +115,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'column',
-
-  },
-  container2: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     flexDirection: 'row',
 
   },
-  screen: {
-    maxWidth: 500,
-  },
-  header: {
-    maxHeight: 200,
+  tile: {
+    maxWidth: 375,
   },
   item: {
     textAlign: "center",

@@ -6,6 +6,7 @@ import { Wudtime } from '../../interfaces/wudtime'
 import { Button, Card, Text } from 'react-native-elements'
 import { useNavigation, useIsFocused } from '@react-navigation/native'
 import { addActivityEmoji } from '../../helpers/addEmoji'
+import LayoutScreen from '../../components/Layout/LayoutScreen'
 
 type Props = {}
 
@@ -27,33 +28,25 @@ export default function MyJoinedWuds({ }: Props) {
   // console.log(data)
 
   return (
-    <>
-      <View>
-        <Text>My Joined Wuds</Text>
-        <Text>{isLoading ? "...Loading" : null}</Text>
-        {data?.documents?.map((wud: any, i) => {
-          return (
-            <View key={i}>
-              <Card>
-                <Text h2>{addActivityEmoji[wud.data.activity].emoji}</Text>
-                <Text>{wud.data.type}</Text>
-                <Text>{wud.data.wudType}</Text>
-                <Text>{wud.data.activity}</Text>
-                <Text>{wud.data.notes}</Text>
-                <Text>{wud._id}</Text>
-                <Button title="Group Chat"
-                  onPress={() => navigation.navigate('Chat', { wudId: wud._id })} />
-              </Card>
+    <LayoutScreen>
+      <Text>{isLoading ? "...Loading" : null}</Text>
+      {data?.documents?.map((wud: any, i) => {
+        return (
+          <View key={i}>
+            <Card >
+              <Text>Friday 2 december </Text>
+              <Text h2>{addActivityEmoji[wud.data.activity as keyof typeof addActivityEmoji].emoji}</Text>
+              <Text>{wud.data.type}</Text>
+              <Text>{wud.data.wudType}</Text>
+              <Text>{wud.data.activity}</Text>
+              <Text>Joiners: {wud.joiners.length ? wud.joiners.length : 0}</Text>
+              <Button title="Group Chat"
+                onPress={() => navigation.navigate('Chat', { wudId: wud._id })} />
+            </Card>
+          </View>
+        )
+      })}
 
-
-
-            </View>
-          )
-        })}
-
-      </View>
-
-
-    </>
+    </LayoutScreen>
   )
 }

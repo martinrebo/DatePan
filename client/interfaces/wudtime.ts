@@ -8,8 +8,10 @@ export interface Wudtime {
   date: string | ""; // '2020-01-01'
   time: string | ""; // '12:00'
   duration: string | ""; // '1h'
-  location: string | ""; // 'Casa'
-  notes: string | ""; // 'Casa'
+  city: string | ""; // 'Madrid'
+  address: string | ""; // 'Calle de la Hispanidad, 1'
+  place: string | ""; // 'Bar Iberia '
+  notes: string | ""; // 'Description of the event here'
   userId: string | "" | undefined; // User firebase ID
   photoURL: string | ""; // User photo URL
   displayName: string | ""; // User display name

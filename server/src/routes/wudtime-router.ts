@@ -28,6 +28,7 @@ router.get("/", (req: Request, res: Response) => {
 
 router.get("/wuds/:city", (req: Request, res: Response) => {
   logger.info("GET /wuds/:city");
+
   const { city } = req.params;
   const wudsCityConfig = {
     ...config,
@@ -35,7 +36,7 @@ router.get("/wuds/:city", (req: Request, res: Response) => {
     data: JSON.stringify({
       ...config.data,
       filter: {
-        "data.location": city,
+        "data.city": city,
       },
     }),
   };

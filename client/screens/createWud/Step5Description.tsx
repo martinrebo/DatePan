@@ -20,7 +20,7 @@ import { auth } from '../../firebase'
 
 const Step3Activity = ({ route }: any) => {
   const navigation: any = useNavigation()
-  const { type, wudType, activity } = route.params;
+  const { category, wudType, activity } = route.params;
   const dispatch = useDispatch()
   const [skip, setSkip] = useState(true)
 
@@ -63,7 +63,7 @@ const Step3Activity = ({ route }: any) => {
       <View style={styles.screen}>
 
         <Card>
-          <Text> type {JSON.stringify(type)}</Text>
+          <Text> type {JSON.stringify(category)}</Text>
           <Text> wudType {JSON.stringify(wudType)}</Text>
           <Text> activity {JSON.stringify(activity)}</Text>
         </Card>

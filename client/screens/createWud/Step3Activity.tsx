@@ -9,15 +9,16 @@ import { useSelector, useDispatch } from 'react-redux'
 import { addType, addActivity } from '../../redux/wudSlice'
 import { Wudtime } from '../../interfaces/wudtime'
 import { WUDS } from './WUDS'
-import { addEmoji, addTypeEmoji } from '../../helpers/addEmoji'
+import { addTypeEmoji } from '../../helpers/addEmoji'
 import { textAlign } from '@mui/system'
+import LayoutScreen from '../../components/Layout/LayoutScreen'
 
 
 
 const Step3Activity = ({ route }: any) => {
   const navigation: any = useNavigation()
 
-  const { type, wudType } = route.params;
+  const { category, wudType } = route.params;
   const dispatch = useDispatch()
   // const types = useSelector((state: RootState) => state.createWud.type)
   // const wudTypes = useSelector((state: RootState) => state.createWud.wudType)
@@ -25,44 +26,36 @@ const Step3Activity = ({ route }: any) => {
   const handleClick = (activity: any) => {
     console.log(activity)
     dispatch(addActivity(activity))
-    navigation.navigate('Step4Joiners', { type, wudType, activity })
-
-
+    navigation.navigate('Step4Joiners', { category, wudType, activity })
   }
-  const listOfWuds = WUDS.filter(wud => wud.type === type)
+
+  const listOfWuds = WUDS.filter(wud => wud.type === category)
   const listOfSubtypes = listOfWuds.flatMap(wud => wud.wudTypes)
   const listOfActivities = listOfSubtypes.filter(wud => wud.accessor === wudType)
   const listOfActivitiesName = listOfActivities.flatMap(wud => wud.activities)
-  console.log("subtypws, ", listOfSubtypes)
-  console.log("activityes", listOfActivitiesName)
-
 
   return (
-    <View style={styles.container}>
-      <View style={styles.screen}>
-        <Text h2> {addTypeEmoji[wudType].emoji} </Text>
-        <Text> {addTypeEmoji[wudType].name}</Text>
+    <LayoutScreen>
+      <Text h2> {addTypeEmoji[wudType as keyof typeof addTypeEmoji].emoji} </Text>
+      <Text> {addTypeEmoji[wudType as keyof typeof addTypeEmoji].name}</Text>
+      <View style={styles.cardContainer}>
 
-        <View style={styles.cardContainer}>
+        {listOfActivitiesName.map(((wud, i) => (
 
+          <TouchableOpacity
+            key={i}
+            style={styles.cards}
+            onPress={() => handleClick(wud.accessor)}>
+            <Card >
+              <Text h4>{wud.emoji}</Text>
+              <Text> {wud.name}</Text>
+            </Card>
+          </TouchableOpacity>
 
-          {listOfActivitiesName.map(((wud, i) => (
-            <TouchableOpacity
-              style={styles.cards}
-              onPress={() => handleClick(wud.accessor)}>
-              <Card key={i} >
+        )))}
 
-                <Text h4>{wud.emoji}</Text>
-                <Text> {wud.name}</Text>
-
-              </Card>
-            </TouchableOpacity>
-
-          )))}
-
-        </View>
       </View>
-    </View>
+    </LayoutScreen>
   )
 }
 

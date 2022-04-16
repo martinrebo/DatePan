@@ -24,9 +24,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
+
     },
     screen: {
         maxWidth: 500,
         textAlign: 'center',
+        padding: 5,
     },
 })
