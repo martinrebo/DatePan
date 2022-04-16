@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import { auth } from '../../firebase'
 import { useMyWudsQuery } from '../../api/api'
 import { Wudtime } from '../../interfaces/wudtime'
-import { Button, Card, Image } from 'react-native-elements'
+import { Button, Card, Image, Text } from 'react-native-elements'
 import { useNavigation, useIsFocused } from '@react-navigation/native'
+import { addActivityEmoji } from '../../helpers/addEmoji'
 
 type Props = {}
 
@@ -17,7 +18,7 @@ export default function MyWuds({ }: Props) {
   const handleGoHome = () => {
     navigation.navigate('Home')
   }
-  console.log("data my wuds", data)
+
   useEffect(() => {
     if (isFocused) {
       refetch()
@@ -27,15 +28,15 @@ export default function MyWuds({ }: Props) {
   return (
     <>
       <View>
-        <Button title="<" onPress={handleGoHome} />
-        <Text>MyWuds</Text>
+        <Text>{isLoading ? "...Loading" : null}</Text>
         {data?.documents?.map((wud: any, i) => {
           return (
             <View key={i}>
-              <Text>{isLoading ? "...Loading" : null}</Text>
+
               <Card>
+                <Text h2>{addActivityEmoji[wud.data.activity].emoji}</Text>
                 <Text>{wud.data.type}</Text>
-                <Text>{wud.data.subtype}</Text>
+                <Text>{wud.data.wudType}</Text>
                 <Text>{wud.data.activity}</Text>
                 <Text>{wud.data.notes}</Text>
                 <Card>

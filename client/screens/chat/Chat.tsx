@@ -13,7 +13,7 @@ const Chat = ({ navigation, route }: any) => {
     const { wudId } = route.params;
 
 
-    const signOutNow = () => {
+    const goHome = () => {
         navigation.replace('Home');
     }
 
@@ -33,7 +33,7 @@ const Chat = ({ navigation, route }: any) => {
                 <TouchableOpacity style={{
                     marginRight: 10
                 }}
-                    onPress={signOutNow}
+                    onPress={goHome}
                 >
                     <Text>Go Back</Text>
                 </TouchableOpacity>

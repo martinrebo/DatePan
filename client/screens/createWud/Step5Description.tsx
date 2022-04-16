@@ -10,21 +10,26 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 import { RootState } from '../../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
-import { addNotes, addUserId } from '../../redux/wudSlice'
+import { addNotes, addUserData } from '../../redux/wudSlice'
 import { Wudtime } from '../../interfaces/wudtime'
 import { WUDS } from './WUDS'
 import TimePicker from '../../components/TimePicker/TimePicker';
 import { usePingQuery, useCreateWudTimeQuery } from '../../api/api';
-import {auth} from '../../firebase'
+import { auth } from '../../firebase'
 
 
 const Step3Activity = ({ route }: any) => {
   const navigation: any = useNavigation()
-  const { type, subType, activity } = route.params;
+  const { type, wudType, activity } = route.params;
   const dispatch = useDispatch()
   const [skip, setSkip] = useState(true)
 
-  dispatch(addUserId(auth.currentUser?.uid))
+  dispatch(addUserData({
+    userId: auth.currentUser?.uid!,
+    displayName: auth.currentUser?.displayName!,
+    photoURL: auth.currentUser?.photoURL!
+
+  }))
 
   const createWudState = useSelector((state: RootState) => state.createWud)
 
@@ -38,11 +43,11 @@ const Step3Activity = ({ route }: any) => {
   useEffect(() => {
     setSkip(true)
     return () => {
-    navigation.navigate('MyWuds')
-    // TODO: ADD ERROR, LOADING AND SUCCESS HANDLING
+      navigation.navigate('Home')
+      // TODO: ADD ERROR, LOADING AND SUCCESS HANDLING
     }
   }, [skip])
-  
+
 
 
   const [value, setValue] = useState('');
@@ -59,19 +64,23 @@ const Step3Activity = ({ route }: any) => {
 
         <Card>
           <Text> type {JSON.stringify(type)}</Text>
-          <Text> subtype {JSON.stringify(subType)}</Text>
+          <Text> wudType {JSON.stringify(wudType)}</Text>
           <Text> activity {JSON.stringify(activity)}</Text>
         </Card>
-        <Input
-          label="Description"
-          placeholder="Describe your activity"
-          maxLength={144}
-          onChangeText={value => handleChange(value)} />
+        <Card>
+          <Input
+            label="Description"
+            placeholder="Describe your activity"
+            maxLength={144}
+            multiline={true}
+            onChangeText={value => handleChange(value)} />
+        </Card>
+
       </View>
 
       <Button title="Submit" onPress={handleSubmit} />
-{isLoading ? <Text>Loading...</Text> : null}
-{error ? <Text>Error! {error}</Text> : null}
+      {isLoading ? <Text>Loading...</Text> : null}
+      {error ? <Text>Error! {error}</Text> : null}
 
     </View>
   )

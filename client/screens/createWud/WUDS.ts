@@ -1,128 +1,296 @@
-export const WUDS = [{
-    type: 'fun',
-    subtypes: [{
-        name: 'FoodAndDrinks',
-        emoji: '🍔',
-        activities: [{
-            name: 'Cocktails',
-            description: '',
-        },{
-            name: 'Birthday',
-            description: '',
-        },{
-            name: 'Picnic',
-            description: '',
-        }]
-    },{
-        name: 'Entertainment',
-        emoji: '🎉',
-        activities: [{
-            name: 'Movie',
-            description: '',
-        },{
-            name: 'Museum',
-            description: '',
-        },{
-            name: 'City tour',
-            description: '',
-        }]
-    },{
-        name: 'Travel',
-        emoji: '🚗',
-        activities: [{
-            name: 'By Plane',
-            description: '',
-        },{
-            name: 'By Train',
-            description: '',
-        },{
-            name: 'By Bus',
-            description: '',
-        }]
-    }]
-}, {
-    type: 'skills',
-    subtypes: [{
-        name: 'Sports',
-        emoji: '🏃',
-        activities: [{
-            name: 'Football',
-            description: '',
-        },{
-            name: 'Basketball',
-            description: '',
-        },{
-            name: 'Volleyball',
-            description: '',
-        }]
-    },{
-        name: 'Arts',
-        emoji: '🎨',
-        activities: [{
-            name: 'Music',
-            description: '',
-        },{
-            name: 'Dance',
-            description: '',
-        },{
-            name: 'Photography',
-            description: '',
-        }]
-    },{
-        name: 'Language',
-        emoji: '🗣',
-        activities: [{
-            name: 'English',
-            description: '',
-        },{
-            name: 'Spanish',
-            description: '',
-        },{
-            name: 'Japanese',
-            description: '',
-        }]
-
-    }]
-}, {
-    type: 'purpose',
-    subtypes: [{
-        name: 'Environment',
-        emoji: '🌳',
-        activities: [{
-            name: 'NGO Volunteering',
-            description: '',
-        },{
-            name: 'Rally',
-            description: '',
-        },{
-            name: 'Fundraising',
-            description: '',
-        }]
-    },{
-        name: 'People',
-        emoji: '👩‍💻',
-        activities: [{
-            name: 'NGO Volunteering',
-            description: '',
-        },{
-            name: 'Rally',
-            description: '',
-        },{
-            name: 'Fundraising',
-            description: '',
-        }]
-    },{
-        name: 'Animals',
-        emoji: '🐶',
-        activities: [{
-            name: 'NGO Volunteering',
-            description: '',
-        },{
-            name: 'Rally',
-            description: '',
-        },{
-            name: 'Fundraising',
-            description: '',
-        }]
-    }]
-}]
+export const WUDS = [
+  {
+    type: "fun",
+    wudTypes: [
+      {
+        name: "wudTypes.foodAndDrinks",
+        accessor: "foodAndDrinks",
+        emoji: "🍔",
+        activities: [
+          {
+            name: "Brunch",
+            accessor: "brunch",
+            emoji: "🥪",
+            description: "",
+          },
+          {
+            name: "Lunch",
+            accessor: "lunch",
+            emoji: "🍔",
+            description: "",
+          },
+          {
+            name: "Cañas y Tapas",
+            accessor: "tapas",
+            emoji: "🍺",
+            description: "",
+          },
+          {
+            name: "Picnic",
+            accessor: "picnic",
+            emoji: "🧺",
+            description: "",
+          },
+          {
+            name: "Dinner",
+            accessor: "dinner",
+            emoji: "🍽️",
+            description: "",
+          },
+        ],
+      },
+      {
+        name: "wudTypes.entertaiment",
+        accessor: "entertainment",
+        emoji: "🎉",
+        activities: [
+          {
+            name: "Movie",
+            accessor: "movie",
+            emoji: "🎬",
+            description: "",
+          },
+          {
+            name: "Party",
+            accessor: "party",
+            emoji: "🎉",
+            description: "",
+          },
+          {
+            name: "City tour",
+            accessor: "cityTour",
+            emoji: "⛪",
+            description: "",
+          },
+          {
+            name: "Birthday",
+            accessor: "birthday",
+            emoji: "🎂",
+            description: "",
+          },
+        ],
+      },
+      {
+        name: "wudTypes.travel",
+        accessor: "travel",
+        emoji: "🚗",
+        activities: [
+          {
+            name: "By Plane",
+            accessor: "byPlane",
+            emoji: "✈️",
+            description: "",
+          },
+          {
+            name: "By Train",
+            accessor: "byTrain",
+            emoji: "🚂",
+            description: "",
+          },
+          {
+            name: "By Bus",
+            accessor: "byBus",
+            emoji: "🚌",
+            description: "",
+          },
+          {
+            name: "Hiking",
+            accessor: "hiking",
+            emoji: "⛰️",
+            description: "",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    type: "skills",
+    wudTypes: [
+      {
+        name: "wudTypes.sports",
+        accessor: "sports",
+        emoji: "🏃",
+        activities: [
+          {
+            name: "Football",
+            accessor: "football",
+            emoji: "⚽️",
+            description: "",
+          },
+          {
+            name: "Basketball",
+            accessor: "basketball",
+            emoji: "🏀",
+            description: "",
+          },
+          {
+            name: "Volleyball",
+            accessor: "volleyball",
+            emoji: "🏐",
+            description: "",
+          },
+          {
+            name: "Climbing",
+            accessor: "climbing",
+            emoji: "🧗‍♂️",
+            description: "",
+          },
+          {
+            name: "Tennis",
+            accessor: "tennis",
+            emoji: "🎾",
+            description: "",
+          },
+          {
+            name: "Surf",
+            accessor: "Surf",
+            emoji: "🏄",
+            description: "",
+          },
+          {
+            name: "Skateboard",
+            accessor: "skateboard",
+            emoji: "🛹",
+            description: "",
+          },
+          {
+            name: "Rollerblading",
+            accessor: "rollerblading",
+            emoji: "🛼",
+            description: "",
+          },
+        ],
+      },
+      {
+        name: "wudTypes.arts",
+        accessor: "arts",
+        emoji: "🎨",
+        activities: [
+          {
+            name: "Music",
+            accessor: "music",
+            emoji: "🎵",
+            description: "",
+          },
+          {
+            name: "Dance",
+            accessor: "dance",
+            emoji: "🕺",
+            description: "",
+          },
+          {
+            name: "Photography",
+            accessor: "photography",
+            emoji: "📷",
+            description: "",
+          },
+        ],
+      },
+      {
+        name: "wudTypes.language",
+        accessor: "language",
+        emoji: "🗣",
+        activities: [
+          {
+            name: "English",
+            accessor: "english",
+            emoji: "🇬🇧",
+            description: "",
+          },
+          {
+            name: "Spanish",
+            accessor: "spanish",
+            emoji: "🇪🇸",
+            description: "",
+          },
+          {
+            name: "Japanese",
+            accessor: "japanese",
+            emoji: "🇯🇵",
+            description: "",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    type: "purpose",
+    wudTypes: [
+      {
+        name: "wudTypes.environment",
+        accessor: "environment",
+        emoji: "🌳",
+        activities: [
+          {
+            name: "NGO Volunteering",
+            accessor: "ngoVolunteering",
+            emoji: "💪",
+            description: "",
+          },
+          {
+            name: "Rally",
+            accessor: "rally",
+            emoji: "🏃",
+            description: "",
+          },
+          {
+            name: "Fundraising",
+            accessor: "fundraising",
+            emoji: "💰",
+            description: "",
+          },
+        ],
+      },
+      {
+        name: "wudTypes.people",
+        accessor: "people",
+        emoji: "👩‍💻",
+        activities: [
+          {
+            name: "NGO Volunteering",
+            accessor: "ngoVolunteering",
+            emoji: "💪",
+            description: "",
+          },
+          {
+            name: "Rally",
+            accessor: "rally",
+            emoji: "🏃",
+            description: "",
+          },
+          {
+            name: "Fundraising",
+            accessor: "fundraising",
+            emoji: "💰",
+            description: "",
+          },
+        ],
+      },
+      {
+        name: "wudTypes.animals",
+        accessor: "animals",
+        emoji: "🐶",
+        activities: [
+          {
+            name: "NGO Volunteering",
+            accessor: "ngoVolunteering",
+            emoji: "💪",
+            description: "",
+          },
+          {
+            name: "Rally",
+            accessor: "rally",
+            emoji: "🏃",
+            description: "",
+          },
+          {
+            name: "Fundraising",
+            accessor: "fundraising",
+            emoji: "💰",
+            description: "",
+          },
+        ],
+      },
+    ],
+  },
+];

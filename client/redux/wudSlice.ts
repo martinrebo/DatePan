@@ -2,9 +2,15 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 import { Wudtime } from "../interfaces/wudtime";
 
+interface IuserData {
+  photoURL: string;
+  displayName: string;
+  userId: string;
+}
+
 const initialState: Wudtime = {
-  type: "",
-  subtype: {
+  category: "",
+  wudType: {
     name: "",
     activities: [],
   },
@@ -15,17 +21,19 @@ const initialState: Wudtime = {
   location: "",
   notes: "",
   userId: "",
+  photoURL: "",
+  displayName: "",
 };
 
 export const wudSlice = createSlice({
   name: "createWud",
   initialState,
   reducers: {
-    addType: (state: Wudtime, action: PayloadAction<Wudtime["type"]>) => {
-      state.type = action.payload;
+    addType: (state: Wudtime, action: PayloadAction<Wudtime["category"]>) => {
+      state.category = action.payload;
     },
-    addSubtype: (state: Wudtime, action: PayloadAction<Wudtime["subtype"]>) => {
-      state.subtype = action.payload;
+    addSubtype: (state: Wudtime, action: PayloadAction<Wudtime["wudType"]>) => {
+      state.wudType = action.payload;
     },
     addActivity: (
       state: Wudtime,
@@ -54,9 +62,10 @@ export const wudSlice = createSlice({
     addNotes: (state: Wudtime, action: PayloadAction<Wudtime["notes"]>) => {
       state.notes = action.payload;
     },
-    addUserId: (state: Wudtime, action: PayloadAction<Wudtime["userId"]>) => { 
-
-      state.userId = action.payload;
+    addUserData: (state: Wudtime, action: PayloadAction<IuserData>) => {
+      state.userId = action.payload.userId!;
+      state.photoURL = action.payload.photoURL!;
+      state.displayName = action.payload.displayName;
     },
     reset: (state: Wudtime) => {
       state = initialState;
@@ -73,7 +82,7 @@ export const {
   addDuration,
   addLocation,
   addNotes,
-  addUserId,
+  addUserData,
   reset,
 } = wudSlice.actions;
 export const selectWud = (state: RootState) => state;

@@ -1,13 +1,17 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, TouchableOpacity, StyleSheet } from 'react-native'
+import React, { useLayoutEffect } from 'react'
 import { useGetWudTimesQuery } from '../../api/api'
-import { Button, Card } from 'react-native-elements'
+import { Button, Card, Avatar, Text, Divider, ListItem } from 'react-native-elements'
 import { auth } from '../../firebase'
 import { useJoinWudTimeMutation } from '../../api/api'
+import { addActivityEmoji, addCategoryEmoji } from '../../helpers/addEmoji'
+import LayoutScreen from '../../components/Layout/LayoutScreen'
 
-type Props = {}
+type Props = {
+  navigation: any
+}
 
-const Wudtimes = (props: Props) => {
+function Wudtimes({ navigation }: Props) {
   const { data, error, isLoading, isSuccess } = useGetWudTimesQuery("Barcelona")
   const [joinWudTime] = useJoinWudTimeMutation()
 
@@ -31,34 +35,92 @@ const Wudtimes = (props: Props) => {
     })
   }
 
-  return (
-    <View>
-      <Text>Wudtimes</Text>
-      <Text>{isLoading ? "...Loading" : null}</Text>
-      {isSuccess ?
-        data?.documents?.map((wud: any, i) =>
+  const goHome = () => {
+    navigation.navigate('Home')
+  }
 
-          <View key={i}>
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <View style={{ marginLeft: 20 }}>
+          <Avatar
+            rounded
+            source={{
+              uri: auth?.currentUser?.photoURL!,
+            }}
+            onPress={() => navigation.navigate('ProfileView')} />
+        </View>
+      ),
+      headerRight: () => (
+        <TouchableOpacity style={{
+          marginRight: 10
+        }}
+          onPress={goHome}
+        >
+          <Text>Back</Text>
+        </TouchableOpacity>
+      )
+    })
+  }, [navigation])
+  console.log(data)
+
+
+  function capitalize(s: string) {
+    if (typeof s !== 'string')
+      return ''
+    return s.charAt(0).toUpperCase() + s.slice(1)
+  }
+
+  return (
+    <>
+      <LayoutScreen>
+        <Text>{isLoading ? "...Loading" : null}</Text>
+        {isSuccess ?
+          data?.documents?.map((wud: any, i) => <View key={i}>
             <Card>
-              <Text>{wud.data.type}</Text>
-              <Text>{wud.data.subtype}</Text>
-              <Text>{wud.data.activity}</Text>
-              <Text>{wud.data.notes}</Text>
-              {/* <Text>{wud.data.location}</Text>
-              <Text>{wud.data.date}</Text>
-              <Text>{wud.data.time}</Text>
-              <Text>{wud.data.duration}</Text> */}
-              <Text>USERID: {wud.data.userId}</Text>
-              <Text>WUDID: {wud._id}</Text>
+              <Text> Friday 2 June </Text>
+              <Text h1>
+                {addActivityEmoji[wud.data.activity as keyof typeof addActivityEmoji].emoji}
+              </Text>
+              <Text h2>{capitalize(wud.data.activity)}</Text>
+              <Text> From 10: 00  to 11: 00 </Text>
+              <Divider />
+              <Card>
+                <Text> Hosted By: </Text>
+                <ListItem>
+                  <Avatar
+                    size="medium"
+                    source={wud.data.photoURL} />
+                  <ListItem.Content>
+                    <Text> {wud.data.displayName}</Text>
+                  </ListItem.Content>
+
+                </ListItem>
+
+
+              </Card>
+              <Card>
+                <Text>{wud.data.notes}</Text>
+
+              </Card>
+              <Text>  {addCategoryEmoji[wud.data.category as keyof typeof addCategoryEmoji].emoji} </Text>
               <Button title="Join" onPress={() => handleJoin(wud._id)} />
             </Card>
           </View>
-        )
-        : <Text> No Data </Text>}
+          )
+          : <Text> No Data </Text>}
 
-    </View>
+
+      </LayoutScreen>
+    </>
   )
 }
 
 
 export default Wudtimes
+
+const sytles = StyleSheet.create({
+  container: {
+    maxWidth: 500,
+  }
+})

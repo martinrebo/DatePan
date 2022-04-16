@@ -3,8 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { Text, useTheme, Button, Image } from 'react-native-elements';
 
 import LoginScreen from '../components/Login/Login';
-
-import i18n from '../in18n/in18n';
+import { useTranslation } from 'react-i18next';
 
 
 export interface LandingProps {
@@ -12,6 +11,7 @@ export interface LandingProps {
 
 export function Landing(props: LandingProps) {
     const { theme } = useTheme();
+    const { t } = useTranslation();
     return (
 
         <View style={styles.container}>
@@ -32,10 +32,10 @@ export function Landing(props: LandingProps) {
                     h4
                     h2Style={{ color: theme?.colors?.grey2 }}
                 >
-                    {i18n.t('motto')}
+                    {t('motto')}
                 </Text>
                 <Text style={styles.text}>
-                    {i18n.t('welcome')}
+                    {t('welcome')}
                 </Text>
             </View>
             <View style={styles.more}>
