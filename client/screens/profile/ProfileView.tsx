@@ -1,8 +1,9 @@
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity } from 'react-native'
 import { useIsFocused } from '@react-navigation/core'
 import React, { useEffect, useLayoutEffect } from 'react'
 import { auth } from '../../firebase'
-import { Button, Image, Avatar } from 'react-native-elements'
+import { Button, Image, Avatar, Card, Text, Icon, ListItem } from 'react-native-elements'
+import LayoutScreen from '../../components/Layout/LayoutScreen'
 
 type Props = {}
 
@@ -17,46 +18,33 @@ const ProfileView = ({ navigation }: any) => {
 
     useEffect(() => {
         setName(auth.currentUser?.displayName!)
-
     }, [isFocused])
 
-    const goHome = () => {
-        navigation.navigate('Home')
-    }
-
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            headerLeft: () => (
-                <View style={{ marginLeft: 20 }}>
-                    <Avatar
-                        rounded
-                        source={{
-                            uri: auth?.currentUser?.photoURL!,
-                        }}
-                    />
-                </View>
-            ),
-            headerRight: () => (
-                <TouchableOpacity style={{
-                    marginRight: 10
-                }}
-                    onPress={goHome}
-                >
-                    <Text>Go Back</Text>
-                </TouchableOpacity>
-            )
-        })
-    }, [navigation])
-
     return (
-        <View>
-            <Text>ProfileView</Text>
-            <Text> Name: {name}</Text>
-            <Text> Email: {auth.currentUser?.email}</Text>
-            <Text> photoURL: </Text>
-            <Image source={{ uri: auth.currentUser?.photoURL! }} style={{ width: 200, height: 200 }} />
-            <Button title="Edit Profile" onPress={handleEditProfile} />
-        </View>
+
+        <LayoutScreen>
+            <Card>
+                <ListItem>
+                    <Icon name="user" type='evilicon' />
+                    <ListItem.Content>
+                        <Text>{name}</Text>
+                    </ListItem.Content>
+                </ListItem>
+                <ListItem>
+                    <Icon name="mail" />
+                    <ListItem.Content>
+                        <Text>{auth.currentUser?.email}</Text>
+                    </ListItem.Content>
+                </ListItem>
+                <Image source={{ uri: auth.currentUser?.photoURL! }} style={{ width: 200, height: 200 }} />
+                <Button
+                    title="Edit Profile"
+                    icon={{ name: 'edit' }}
+                    type="outline"
+                    onPress={handleEditProfile}
+                />
+            </Card>
+        </LayoutScreen>
     )
 }
 

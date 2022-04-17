@@ -64,6 +64,9 @@ const translations = {
       wudTimes: {
         title: "WudTimes",
       },
+      profileView: {
+        title: "Profile",
+      },
     },
   },
   es: {
@@ -97,9 +100,7 @@ const translations = {
         museum: "Museo",
         cityTour: "City tour",
       },
-      screens: {
-        landing: { underConstruction: "En construcción ... " },
-      },
+      landing: { underConstruction: "En construcción ... " },
       home: {
         discover: "👉 DESCUBRE WudTimes 👈",
         newWud: "Crea un NUEVO Wud",
