@@ -12,7 +12,7 @@ import { RootState } from '../../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
 import { addNotes, addUserData } from '../../redux/wudSlice'
 import { Wudtime } from '../../interfaces/wudtime'
-import { WUDS } from './WUDS'
+import { WUDS } from '../../constants/WUDS'
 import TimePicker from '../../components/TimePicker/TimePicker';
 import { usePingQuery, useCreateWudTimeQuery } from '../../api/api';
 import { auth } from '../../firebase'

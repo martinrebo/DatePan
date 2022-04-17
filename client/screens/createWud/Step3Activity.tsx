@@ -8,7 +8,7 @@ import { RootState } from '../../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
 import { addType, addActivity } from '../../redux/wudSlice'
 import { Wudtime } from '../../interfaces/wudtime'
-import { WUDS } from './WUDS'
+import { WUDS } from '../../constants/WUDS'
 import { addTypeEmoji } from '../../helpers/addEmoji'
 import { textAlign } from '@mui/system'
 import LayoutScreen from '../../components/Layout/LayoutScreen'
@@ -29,7 +29,7 @@ const Step3Activity = ({ route }: any) => {
     navigation.navigate('Step4Joiners', { category, wudType, activity })
   }
 
-  const listOfWuds = WUDS.filter(wud => wud.type === category)
+  const listOfWuds = WUDS.filter(wud => wud.category === category)
   const listOfSubtypes = listOfWuds.flatMap(wud => wud.wudTypes)
   const listOfActivities = listOfSubtypes.filter(wud => wud.accessor === wudType)
   const listOfActivitiesName = listOfActivities.flatMap(wud => wud.activities)

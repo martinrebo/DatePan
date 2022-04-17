@@ -9,7 +9,7 @@ import { RootState } from '../../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
 import { addType } from '../../redux/wudSlice'
 import { Wudtime } from '../../interfaces/wudtime'
-import { WUDS } from './WUDS'
+import { WUDS } from '../../constants/WUDS'
 import { addCategoryEmoji } from '../../helpers/addEmoji'
 
 
@@ -27,7 +27,7 @@ const Step2Type = ({ route }: any) => {
     navigation.navigate('Step3Activity', { category, wudType })
 
   }
-  const listOfWuds = WUDS.filter(wud => wud.type === category)
+  const listOfWuds = WUDS.filter(wud => wud.category === category)
   const listOfSubtypes = listOfWuds.flatMap(wud => wud.wudTypes)
 
 

@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 type Props = {
     children: React.ReactNode
@@ -7,12 +8,14 @@ type Props = {
 
 const LayoutScreen = ({ children }: Props) => {
     return (
-        <View style={styles.container}>
-            <View style={styles.screen}>
-                {children}
-            </View>
+        <SafeAreaView>
+            <View style={styles.container}>
+                <View style={styles.screen}>
+                    {children}
+                </View>
 
-        </View>
+            </View>
+        </SafeAreaView>
     )
 }
 

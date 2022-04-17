@@ -30,9 +30,8 @@ const translations = {
         museum: "Museum",
         cityTour: "City tour",
       },
-
-      screens: {
-        landing: { underConstruction: "Under Construction" },
+      landing: {
+        underConstruction: "Under Construction",
       },
       home: {
         discover: "👉 DISCOVER WudTimes 👈",
@@ -40,6 +39,7 @@ const translations = {
         joinedWuds: "My JOINED Wuds",
         createdWuds: "My CREATED Wuds",
       },
+
       createWudStep1: {
         title: "Choose Category",
         fun: "Share your happines with others",
@@ -60,6 +60,9 @@ const translations = {
       },
       myJoinedWuds: {
         title: "My Joined Wuds",
+      },
+      wudTimes: {
+        title: "WudTimes",
       },
     },
   },
@@ -123,6 +126,9 @@ const translations = {
       },
       myJoinedWuds: {
         title: "Wuds a los que estoy UNIDO",
+      },
+      wudTimes: {
+        title: "WudTimes",
       },
     },
   },

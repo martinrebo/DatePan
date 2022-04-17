@@ -1,6 +1,6 @@
 export const WUDS = [
   {
-    type: "fun",
+    category: "fun",
     wudTypes: [
       {
         name: "wudTypes.foodAndDrinks",
@@ -104,7 +104,7 @@ export const WUDS = [
     ],
   },
   {
-    type: "skills",
+    category: "skills",
     wudTypes: [
       {
         name: "wudTypes.sports",
@@ -214,7 +214,7 @@ export const WUDS = [
     ],
   },
   {
-    type: "purpose",
+    category: "purpose",
     wudTypes: [
       {
         name: "wudTypes.environment",

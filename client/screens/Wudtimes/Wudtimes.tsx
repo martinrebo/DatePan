@@ -1,4 +1,4 @@
-import { View, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, TouchableOpacity, StyleSheet, ScrollView, FlatList } from 'react-native'
 import React, { useLayoutEffect } from 'react'
 import { useGetWudTimesQuery } from '../../api/api'
 import { Button, Card, Avatar, Text, Divider, ListItem } from 'react-native-elements'
@@ -6,7 +6,9 @@ import { auth } from '../../firebase'
 import { useJoinWudTimeMutation } from '../../api/api'
 import { addActivityEmoji, addCategoryEmoji } from '../../helpers/addEmoji'
 import LayoutScreen from '../../components/Layout/LayoutScreen'
-
+import { WUDS } from '../../constants/WUDS'
+import wudSlice from '../../redux/wudSlice'
+import { Wudtime } from '../../interfaces/wudtime'
 type Props = {
   navigation: any
 }
@@ -85,8 +87,9 @@ function Wudtimes({ navigation }: Props) {
       <LayoutScreen>
         <Text>{isLoading ? "...Loading" : null}</Text>
         {isSuccess ?
-          data?.documents?.map((wud: any, i) => <View key={i}>
-            <Card>
+          data?.documents?.map((wud: any, i) =>
+
+            <Card key={i}>
               <Text> Friday 2 June </Text>
               <Text h1>
                 {addActivityEmoji[wud.data.activity as keyof typeof addActivityEmoji].emoji}
@@ -98,7 +101,6 @@ function Wudtimes({ navigation }: Props) {
               <Text> {wud.data.place}</Text>
               <Text> {wud.data.address}  </Text>
               <Text> {wud.data.city}  </Text>
-
               <Divider style={{ padding: 5 }} />
               <Card>
                 <Text> Hosted By: </Text>
@@ -109,10 +111,7 @@ function Wudtimes({ navigation }: Props) {
                   <ListItem.Content>
                     <Text> {wud.data.displayName}</Text>
                   </ListItem.Content>
-
                 </ListItem>
-
-
               </Card>
               <Card>
                 <Text>{wud.data.notes}</Text>
@@ -123,6 +122,7 @@ function Wudtimes({ navigation }: Props) {
                   {addCategoryEmoji[wud.data.category as keyof typeof addCategoryEmoji].emoji}
 
                 </Text>
+
                 <Text >  Attendees: {wud.joiners?.length ? wud.joiners.length : 0} </Text>
                 <Button title={checkJoined(wud.joiners) ? "Joined" : "Join"}
                   disabled={checkJoined(wud.joiners)}
@@ -131,10 +131,9 @@ function Wudtimes({ navigation }: Props) {
               </Card>
 
             </Card>
-          </View>
+
           )
           : <Text> No Data </Text>}
-
 
       </LayoutScreen>
     </>
@@ -144,8 +143,8 @@ function Wudtimes({ navigation }: Props) {
 
 export default Wudtimes
 
-const sytles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
-    maxWidth: 500,
+    padding: 10,
   }
 })
