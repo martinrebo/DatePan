@@ -21,6 +21,7 @@
     "@expo/vector-icons": "^12.0.0",
     "@mui/lab": "^5.0.0-alpha.74",
     "@mui/material": "^5.5.2",
+    "@mui/x-date-pickers": "^5.0.0-alpha.1",
     "@ptomasroos/react-native-multi-slider": "^2.2.2",
     "@react-native-community/datetimepicker": "4.0.0",
     "@react-navigation/bottom-tabs": "^6.0.5",
