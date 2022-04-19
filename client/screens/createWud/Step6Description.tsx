@@ -1,20 +1,14 @@
 
-import { SetStateAction, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, Platform } from 'react-native'
 import { Button, Card, Input, Slider } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
-// import MultiSlider from '@ptomasroos/react-native-multi-slider';
-import DateTimePicker from '@react-native-community/datetimepicker';
-
-
 
 import { RootState } from '../../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
 import { addNotes, addUserData } from '../../redux/wudSlice'
-import { Wudtime } from '../../interfaces/wudtime'
-import { WUDS } from '../../constants/WUDS'
-import TimePicker from '../../components/TimePicker/TimePicker';
-import { usePingQuery, useCreateWudTimeQuery } from '../../api/api';
+// import { Wudtime } from '../../interfaces/wudtime'
+import { useCreateWudTimeQuery } from '../../api/api';
 import { auth } from '../../firebase'
 
 
@@ -79,8 +73,8 @@ const Step3Activity = ({ route }: any) => {
       </View>
 
       <Button title="Submit" onPress={handleSubmit} />
-      {isLoading ? <Text>Loading...</Text> : null}
-      {error ? <Text>Error! {error}</Text> : null}
+      {/* {isLoading ? <Text>Loading...</Text> : null}
+      {error ? <Text>Error! {error}</Text> : null} */}
 
     </View>
   )

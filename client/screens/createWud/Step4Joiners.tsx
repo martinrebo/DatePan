@@ -43,7 +43,7 @@ const Step4Joiners = ({ route }: any) => {
   const handleNext = () => {
 
     dispatch(addLocationData({ city: valueCity, address: valueAddress, place: valuePlace }))
-    navigation.navigate('Step5Description', { category, wudType, activity })
+    navigation.navigate('Step5TimeAndPlace', { category, wudType, activity })
   }
 
   const [checkedSpanish, setCheckedSpanish] = useState(true);
