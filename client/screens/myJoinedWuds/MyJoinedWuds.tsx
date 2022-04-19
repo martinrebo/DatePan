@@ -2,11 +2,10 @@ import React, { useEffect } from 'react'
 import { View } from 'react-native'
 import { auth } from '../../firebase'
 import { useMyJoinedWudsQuery } from '../../api/api'
-import { Wudtime } from '../../interfaces/wudtime'
 import { Button, Card, Text } from 'react-native-elements'
 import { useNavigation, useIsFocused } from '@react-navigation/native'
-import { addActivityEmoji } from '../../helpers/addEmoji'
 import LayoutScreen from '../../components/Layout/LayoutScreen'
+import Wud from '../../components/Wud/Wud'
 
 type Props = {}
 
@@ -16,16 +15,12 @@ export default function MyJoinedWuds({ }: Props) {
   let userId = auth.currentUser?.uid ? auth.currentUser?.uid : ''
   const { data, error, isLoading, refetch } = useMyJoinedWudsQuery(userId)
 
-  const handleGoHome = () => {
-    navigation.navigate('Home')
-  }
-  // console.log("data my wuds", data)
   useEffect(() => {
     if (isFocused) {
       refetch()
     }
   }, [isFocused])
-  // console.log(data)
+
 
   return (
     <LayoutScreen>
@@ -34,11 +29,7 @@ export default function MyJoinedWuds({ }: Props) {
         return (
           <View key={i}>
             <Card >
-              <Text>Friday 2 december </Text>
-              <Text h2>{addActivityEmoji[wud.data.activity as keyof typeof addActivityEmoji].emoji}</Text>
-              <Text>{wud.data.type}</Text>
-              <Text>{wud.data.wudType}</Text>
-              <Text>{wud.data.activity}</Text>
+              <Wud data={wud.data} />
               <Text>Joiners: {wud.joiners.length ? wud.joiners.length : 0}</Text>
               <Button title="Group Chat"
                 onPress={() => navigation.navigate('Chat', { wudId: wud._id })} />

@@ -8,14 +8,18 @@ import { addActivityEmoji, addCategoryEmoji } from '../../helpers/addEmoji'
 import LayoutScreen from '../../components/Layout/LayoutScreen'
 import { WUDS } from '../../constants/WUDS'
 import wudSlice from '../../redux/wudSlice'
-import { Wudtime } from '../../interfaces/wudtime'
+import { IWudtime } from '../../interfaces/wudtime'
+import Wud from '../../components/Wud/Wud'
+import { checkJoined } from '../../helpers'
+import { useNavigation } from '@react-navigation/core'
 type Props = {
   navigation: any
 }
 
-function Wudtimes({ navigation }: Props) {
+function Wudtimes({ }: Props) {
   const { data, error, isLoading, isSuccess } = useGetWudTimesQuery("Barcelona")
   const [joinWudTime] = useJoinWudTimeMutation()
+  const navigation: any = useNavigation()
 
   let userId = auth.currentUser?.uid!
   let userName = auth.currentUser?.displayName!
@@ -30,57 +34,19 @@ function Wudtimes({ navigation }: Props) {
         photoURL: userPhotoURL
       }
     }).then(() => {
-      console.log("joined")
-      // Go to chat or Individual Wud
+      navigation.navigate("myWuds")
     }).catch((e) => {
       console.log("error", e)
     })
   }
 
-  const goHome = () => {
-    navigation.navigate('Home')
+
+
+  const handleJoined = (joiners: any) => {
+    let joined = checkJoined(joiners, userId)
+    return joined
   }
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerLeft: () => (
-        <View style={{ marginLeft: 20 }}>
-          <Avatar
-            rounded
-            source={{
-              uri: auth?.currentUser?.photoURL!,
-            }}
-            onPress={() => navigation.navigate('ProfileView')} />
-        </View>
-      ),
-      headerRight: () => (
-        <TouchableOpacity style={{
-          marginRight: 10
-        }}
-          onPress={goHome}
-        >
-          <Text>Back</Text>
-        </TouchableOpacity>
-      )
-    })
-  }, [navigation])
-  console.log(data)
-
-
-  function capitalize(s: string) {
-    if (typeof s !== 'string')
-      return ''
-    return s.charAt(0).toUpperCase() + s.slice(1)
-  }
-
-  function checkJoined(joiners: [] | undefined) {
-    if (joiners === undefined) {
-      return false
-    }
-    if (joiners.some((j: any) => j.id === userId)) {
-      return true
-    }
-  }
 
   return (
     <>
@@ -90,42 +56,11 @@ function Wudtimes({ navigation }: Props) {
           data?.documents?.map((wud: any, i) =>
 
             <Card key={i}>
-              <Text> Friday 2 June </Text>
-              <Text h1>
-                {addActivityEmoji[wud.data.activity as keyof typeof addActivityEmoji].emoji}
-              </Text>
-              <Text h4>{capitalize(wud.data.activity)}</Text>
-              <Text> From 10: 00  to 11: 00 </Text>
-              <Divider style={{ padding: 5 }} />
-
-              <Text> {wud.data.place}</Text>
-              <Text> {wud.data.address}  </Text>
-              <Text> {wud.data.city}  </Text>
-              <Divider style={{ padding: 5 }} />
+              <Wud data={wud.data} />
               <Card>
-                <Text> Hosted By: </Text>
-                <ListItem>
-                  <Avatar
-                    size="medium"
-                    source={wud.data.photoURL} />
-                  <ListItem.Content>
-                    <Text> {wud.data.displayName}</Text>
-                  </ListItem.Content>
-                </ListItem>
-              </Card>
-              <Card>
-                <Text>{wud.data.notes}</Text>
-
-              </Card>
-              <Card>
-                <Text h4>
-                  {addCategoryEmoji[wud.data.category as keyof typeof addCategoryEmoji].emoji}
-
-                </Text>
-
                 <Text >  Attendees: {wud.joiners?.length ? wud.joiners.length : 0} </Text>
-                <Button title={checkJoined(wud.joiners) ? "Joined" : "Join"}
-                  disabled={checkJoined(wud.joiners)}
+                <Button title={checkJoined(wud.joiners, userId) ? "Joined" : "Join"}
+                  disabled={handleJoined(wud.joiners)}
                   onPress={() => handleJoin(wud._id)}
                 />
               </Card>

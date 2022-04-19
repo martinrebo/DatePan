@@ -1,4 +1,6 @@
-export interface Wudtime {
+import { ImageSourcePropType } from "react-native";
+
+export interface IWudtime {
   category: "fun" | "skills" | "purpose" | "";
   wudType: {
     name: string;
@@ -13,6 +15,6 @@ export interface Wudtime {
   place: string | ""; // 'Bar Iberia '
   notes: string | ""; // 'Description of the event here'
   userId: string | "" | undefined; // User firebase ID
-  photoURL: string | ""; // User photo URL
+  photoURL: ImageSourcePropType | undefined; // User photo URL
   displayName: string | ""; // User display name
 }
