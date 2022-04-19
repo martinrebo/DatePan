@@ -7,8 +7,9 @@ export interface IWudtime {
     activities: Array<{}>;
   };
   activity: string | ""; // cañas y tapas, picnic,
-  date: string | ""; // '2020-01-01'
-  time: string | ""; // '12:00'
+  date: Date;
+  startTime: Date;
+  endTime: Date;
   duration: string | ""; // '1h'
   city: string | ""; // 'Madrid'
   address: string | ""; // 'Calle de la Hispanidad, 1'
