@@ -7,15 +7,14 @@ export interface IWudtime {
     activities: Array<{}>;
   };
   activity: string | ""; // cañas y tapas, picnic,
-  date: Date;
-  startTime: Date;
-  endTime: Date;
-  duration: string | ""; // '1h'
+  date: Date | null;
+  startTime: Date | null;
+  endTime: Date | null;
   city: string | ""; // 'Madrid'
   address: string | ""; // 'Calle de la Hispanidad, 1'
   place: string | ""; // 'Bar Iberia '
   notes: string | ""; // 'Description of the event here'
-  userId: string | "" | undefined; // User firebase ID
-  photoURL: ImageSourcePropType | undefined; // User photo URL
+  userId: string | "" | null; // User firebase ID
+  photoURL: ImageSourcePropType | null; // User photo URL
   displayName: string | ""; // User display name
 }

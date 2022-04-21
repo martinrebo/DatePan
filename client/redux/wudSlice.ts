@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
-import { Wudtime } from "../interfaces/wudtime";
+import { IWudtime } from "../interfaces/wudtime";
+import { ImageSourcePropType } from "react-native";
 
 interface IuserData {
-  photoURL: string;
+  photoURL: ImageSourcePropType | undefined;
   displayName: string;
   userId: string;
 }
@@ -14,22 +15,22 @@ interface IlocationData {
   place: string;
 }
 
-const initialState: Wudtime = {
+const initialState: IWudtime = {
   category: "",
   wudType: {
     name: "",
     activities: [],
   },
   activity: "",
-  date: "",
-  time: "",
-  duration: "",
+  date: null,
+  startTime: null,
+  endTime: null,
   city: "",
   address: "",
   place: "",
   notes: "",
   userId: "",
-  photoURL: "",
+  photoURL: null,
   displayName: "",
 };
 
@@ -38,46 +39,52 @@ export const wudSlice = createSlice({
   initialState,
   reducers: {
     addCategory: (
-      state: Wudtime,
-      action: PayloadAction<Wudtime["category"]>
+      state: IWudtime,
+      action: PayloadAction<IWudtime["category"]>
     ) => {
       state.category = action.payload;
     },
-    addType: (state: Wudtime, action: PayloadAction<Wudtime["wudType"]>) => {
+    addType: (state: IWudtime, action: PayloadAction<IWudtime["wudType"]>) => {
       state.wudType = action.payload;
     },
     addActivity: (
-      state: Wudtime,
-      action: PayloadAction<Wudtime["activity"]>
+      state: IWudtime,
+      action: PayloadAction<IWudtime["activity"]>
     ) => {
       state.activity = action.payload;
     },
-    addDate: (state: Wudtime, action: PayloadAction<Wudtime["date"]>) => {
+    addDate: (state: IWudtime, action: PayloadAction<IWudtime["date"]>) => {
       state.date = action.payload;
     },
-    addTime: (state: Wudtime, action: PayloadAction<Wudtime["time"]>) => {
-      state.time = action.payload;
-    },
-    addDuration: (
-      state: Wudtime,
-      action: PayloadAction<Wudtime["duration"]>
+    addStartTime: (
+      state: IWudtime,
+      action: PayloadAction<IWudtime["startTime"]>
     ) => {
-      state.duration = action.payload;
+      state.startTime = action.payload;
     },
-    addNotes: (state: Wudtime, action: PayloadAction<Wudtime["notes"]>) => {
+    addEndTime: (
+      state: IWudtime,
+      action: PayloadAction<IWudtime["endTime"]>
+    ) => {
+      state.startTime = action.payload;
+    },
+    addNotes: (state: IWudtime, action: PayloadAction<IWudtime["notes"]>) => {
       state.notes = action.payload;
     },
-    addUserData: (state: Wudtime, action: PayloadAction<IuserData>) => {
+    addUserData: (state: IWudtime, action: PayloadAction<IuserData>) => {
       state.userId = action.payload.userId!;
       state.photoURL = action.payload.photoURL!;
       state.displayName = action.payload.displayName;
     },
-    addLocationData: (state: Wudtime, action: PayloadAction<IlocationData>) => {
+    addLocationData: (
+      state: IWudtime,
+      action: PayloadAction<IlocationData>
+    ) => {
       state.city = action.payload.city;
       state.address = action.payload.address;
       state.place = action.payload.place;
     },
-    reset: (state: Wudtime) => {
+    reset: (state: IWudtime) => {
       state = initialState;
     },
   },
@@ -88,8 +95,8 @@ export const {
   addType,
   addActivity,
   addDate,
-  addTime,
-  addDuration,
+  addStartTime,
+  addEndTime,
   addLocationData,
   addNotes,
   addUserData,
