@@ -1,7 +1,7 @@
 const translations = {
   en: {
     translation: {
-      motto: "Find the purpose of life, and enjoy the journey.",
+      motto: "Make the world a happier place.",
       welcome:
         " Help people to pursuit happiness and find the meaning of life. With WudTimes you can create great moments of life, and share them with others.",
       emojis: {
@@ -71,7 +71,7 @@ const translations = {
   },
   es: {
     translation: {
-      motto: "Encuentra el propósito de la vida, y disfruta de la aventura.",
+      motto: "Haz que el mundo sea un lugar mas feliz",
       welcome:
         "Ayuda a las personas a alcanzar la felicidad y encontrar el sentido de la vida. Con WudTimes puedes crear momentos inolvidables de la vida, y compartirlos con otros.",
       emojis: {

@@ -8,6 +8,8 @@ import { auth } from '../../firebase'
 import { useTranslation } from 'react-i18next'
 import LayoutScreen from '../../components/Layout/LayoutScreen'
 import window from '../../constants/Layout'
+import Place from '../../components/Place/Place'
+import PlaceWeb from '../../components/Place/PlaceWeb'
 
 const HomeScreen = () => {
   const navigation: any = useNavigation()

@@ -9,6 +9,7 @@ import { addActivityEmoji } from '../../helpers/addEmoji'
 import LayoutScreen from '../../components/Layout/LayoutScreen'
 import TimePickerWeb from '../../components/TimePicker/TimePickerWeb'
 import React from 'react'
+import PlaceWeb from '../../components/Place/PlaceWeb'
 
 
 const Step4Joiners = ({ route }: any) => {
@@ -29,6 +30,9 @@ const Step4Joiners = ({ route }: any) => {
       <Text > {addActivityEmoji[activity as keyof typeof addActivityEmoji].name}</Text>
       <Card>
         <TimePickerWeb />
+      </Card>
+      <Card>
+        <PlaceWeb />
       </Card>
     </LayoutScreen>
 

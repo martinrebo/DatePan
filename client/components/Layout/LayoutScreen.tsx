@@ -28,10 +28,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'column',
 
+
     },
     screen: {
         maxWidth: 500,
         textAlign: 'center',
         padding: 5,
+        backgroundColor: '#ccc',
     },
 })
