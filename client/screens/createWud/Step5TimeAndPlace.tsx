@@ -18,9 +18,7 @@ const Step4Joiners = ({ route }: any) => {
   const { category, wudType, activity } = route.params;
   const dispatch = useDispatch()
 
-
   const handleNext = () => {
-
     navigation.navigate('Step6Description', { category, wudType, activity })
   }
 
@@ -33,6 +31,10 @@ const Step4Joiners = ({ route }: any) => {
       </Card>
       <Card>
         <PlaceWeb />
+      </Card>
+      <Card>
+        <Button title="Next"
+          onPress={handleNext} />
       </Card>
     </LayoutScreen>
 

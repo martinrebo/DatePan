@@ -24,16 +24,14 @@ const Wud = ({ data }: Props) => {
             <Text> From 10: 00  to 11: 00 </Text>
             <Divider style={{ padding: 5 }} />
 
-            <Text> {data.place}</Text>
-            <Text> {data.address}  </Text>
-            <Text> {data.city}  </Text>
+            <Text> {data.place?.value.description}</Text>
             <Divider style={{ padding: 5 }} />
             <Card>
                 <Text> Hosted By: </Text>
                 <ListItem>
                     <Avatar
                         size="medium"
-                        source={data.photoURL} />
+                        source={data.photoURL!} />
                     <ListItem.Content>
                         <Text> {data.displayName}</Text>
                     </ListItem.Content>

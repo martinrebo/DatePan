@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
-import { IWudtime } from "../interfaces/wudtime";
+import { IGooglePlace, IWudtime } from "../interfaces/wudtime";
 import { ImageSourcePropType } from "react-native";
 
 interface IuserData {
@@ -25,9 +25,14 @@ const initialState: IWudtime = {
   date: null,
   startTime: null,
   endTime: null,
-  city: "",
-  address: "",
-  place: "",
+  city: "Barcelona",
+  place: {
+    label: "Barceloneta",
+    value: {
+      description: "Barceloneta description and map",
+      place_id: "",
+    },
+  },
   notes: "",
   userId: "",
   photoURL: null,
@@ -76,13 +81,8 @@ export const wudSlice = createSlice({
       state.photoURL = action.payload.photoURL!;
       state.displayName = action.payload.displayName;
     },
-    addLocationData: (
-      state: IWudtime,
-      action: PayloadAction<IlocationData>
-    ) => {
-      state.city = action.payload.city;
-      state.address = action.payload.address;
-      state.place = action.payload.place;
+    addLocationData: (state: IWudtime, action: PayloadAction<IGooglePlace>) => {
+      state.place = action.payload;
     },
     reset: (state: IWudtime) => {
       state = initialState;
