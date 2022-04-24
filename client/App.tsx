@@ -9,6 +9,8 @@ import { Provider } from 'react-redux';
 import { store } from './redux/store'
 import "./i18n/i18n"
 
+import * as Linking from 'expo-linking';
+
 
 
 import useCachedResources from './hooks/useCachedResources';
@@ -25,6 +27,7 @@ import Step5TimeAndPlace from './screens/createWud/Step5TimeAndPlace';
 import Step6Description from './screens/createWud/Step6Description';
 import MyWuds from './screens/myWuds/MyWuds';
 import Wudtimes from './screens/Wudtimes/Wudtimes';
+import WudTimeID from './screens/WudTimeID/WudTimeID';
 import ProfileView from './screens/profile/ProfileView';
 import ProfileEdit from './screens/profile/ProfileEdit';
 import MyJoinedWuds from './screens/myJoinedWuds/MyJoinedWuds';
@@ -32,6 +35,7 @@ import Chat from './screens/chat/Chat';
 import AvatarHead from './components/AvatarHead/AvatarHead';
 import GoBackHead from './components/GoBackHead/GoBackHead';
 import { useTranslation } from 'react-i18next';
+import { useNavigation } from '@react-navigation/core';
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -40,12 +44,15 @@ export default function App() {
   const ContextStore = createContext({ language: "es" })
   const { t } = useTranslation()
 
+
   const theme = {
     colors: {
       primary: '#8139DC',
       secondary: '#12EDFF'
     }
   }
+
+
 
   if (!isLoadingComplete) {
     return null;
@@ -100,6 +107,11 @@ export default function App() {
                         title: t('wudTimes.title')
                       }}
                       name="WudTimes" component={Wudtimes} />
+                    <Stack.Screen
+                      options={{
+                        title: t('wudTimes.title')
+                      }}
+                      name="WudTimeID" component={WudTimeID} />
                     <Stack.Screen
                       options={{ title: t('profileView.title') }}
                       name="ProfileView" component={ProfileView} />

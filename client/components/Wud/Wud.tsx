@@ -2,7 +2,7 @@ import { Button, StyleSheet, View } from 'react-native'
 import React from 'react'
 
 import { Card, Divider, ListItem, Avatar, Text } from 'react-native-elements'
-import { addActivityEmoji, addCategoryEmoji } from '../../helpers/addEmoji'
+import { addActivityEmoji } from '../../helpers/addEmoji'
 import { IWudtime } from '../../interfaces/wudtime'
 import { capitalize } from '../../helpers'
 

@@ -9,7 +9,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { addType, addActivity } from '../../redux/wudSlice'
 import { WUDS } from '../../constants/WUDS'
 import { addTypeEmoji } from '../../helpers/addEmoji'
-import { textAlign } from '@mui/system'
 import LayoutScreen from '../../components/Layout/LayoutScreen'
 
 

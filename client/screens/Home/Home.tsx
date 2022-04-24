@@ -7,9 +7,7 @@ import LanguageButton from '../../components/LanguageButton/LanguageButton'
 import { auth } from '../../firebase'
 import { useTranslation } from 'react-i18next'
 import LayoutScreen from '../../components/Layout/LayoutScreen'
-import window from '../../constants/Layout'
-import Place from '../../components/Place/Place'
-import PlaceWeb from '../../components/Place/PlaceWeb'
+import * as Linking from 'expo-linking'
 
 const HomeScreen = () => {
   const navigation: any = useNavigation()
@@ -49,6 +47,24 @@ const HomeScreen = () => {
     })
   }, [navigation])
 
+  // Linking.addEventListener('url', (event) => {
+  //   console.log("event listener", event.url);
+  //   let url = event.url;
+  //   if (url.includes("wud")) {
+  //     let id = url.split("/")[4];
+  //     console.log("id", id);
+  //     navigation.navigate("WudTimeID", { id: id })
+  //   }
+  // });
+
+  Linking.getInitialURL().then((url) => {
+    // console.log("initial url", url);
+    if (url?.includes("wud")) {
+      let id = url.split("/")[4];
+      // console.log("id initial", id);
+      navigation.navigate("WudTimeID", { id: id })
+    }
+  });
 
 
   const handleOnPress = () => {
