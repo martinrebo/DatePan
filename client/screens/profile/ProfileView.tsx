@@ -20,18 +20,27 @@ const ProfileView = ({ navigation }: any) => {
         setName(auth.currentUser?.displayName!)
     }, [isFocused])
 
+    const handleSignOut = () => {
+        auth
+            .signOut()
+            .then(() => {
+                navigation.replace("Login")
+            })
+            .catch(error => alert(error.message))
+    }
+
     return (
 
         <LayoutScreen>
             <Card>
                 <ListItem>
-                    <Icon name="user" type='evilicon' />
+                    <Icon name="user" type='evilicon' tvParallaxProperties={undefined} />
                     <ListItem.Content>
                         <Text>{name}</Text>
                     </ListItem.Content>
                 </ListItem>
                 <ListItem>
-                    <Icon name="mail" />
+                    <Icon name="mail" tvParallaxProperties={undefined} />
                     <ListItem.Content>
                         <Text>{auth.currentUser?.email}</Text>
                     </ListItem.Content>
@@ -42,6 +51,14 @@ const ProfileView = ({ navigation }: any) => {
                     icon={{ name: 'edit' }}
                     type="outline"
                     onPress={handleEditProfile}
+                />
+            </Card>
+            <Card>
+                <Button
+                    title="Logout"
+                    icon={{ name: 'logout' }}
+                    type="outline"
+                    onPress={() => auth.signOut()}
                 />
             </Card>
         </LayoutScreen>

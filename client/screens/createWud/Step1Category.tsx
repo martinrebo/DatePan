@@ -8,9 +8,8 @@ import { RootState } from '../../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
 import { addCategory } from '../../redux/wudSlice'
 import { useNavigation } from '@react-navigation/native'
-import { Wudtime } from '../../interfaces/wudtime'
-import { auth } from '../../firebase'
-import { style } from '@mui/system'
+import { IWudtime } from '../../interfaces/wudtime'
+import LayoutScreen from '../../components/Layout/LayoutScreen'
 
 
 
@@ -21,51 +20,53 @@ const CreateWud = () => {
   const dispatch = useDispatch()
   const types = useSelector((state: RootState) => state.createWud.category)
 
-  const handleClick = (category: Wudtime['category']) => {
+  const handleClick = (category: IWudtime['category']) => {
     dispatch(addCategory(category))
     navigation.navigate('Step2Type', { category })
   }
 
 
   return (
-    <View style={styles.container}>
-      <View style={styles.screen}>
-        <TouchableOpacity onPress={(category) => handleClick('fun')}>
-          <Card>
-            <Card.Title>
-              <Text h2 > 🎉  </Text>
-              <Text> {t('emojis.fun')}</Text>
-            </Card.Title>
-            <Card.Divider />
-            {/* <Card.Image source={require('../assets/images/wudLogo.png')} /> */}
-            <Text> {t('createWudStep1.fun')} </Text>
-          </Card>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={(category) => handleClick('skills')}>
-          <Card>
-            <Card.Title>
-              <Text h2> 💪   </Text>
-              <Text> {t('emojis.skills')} </Text>
-            </Card.Title>
-            <Card.Divider />
-            {/* <Card.Image source={require('../assets/images/wudLogo.png')} /> */}
-            <Text>  {t('createWudStep1.skills')}</Text>
-          </Card>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={(category) => handleClick('purpose')}>
-          <Card>
-            <Card.Title>
-              <Text h2> 💡  </Text>
-              <Text> {t('emojis.purpose')} </Text>
-            </Card.Title>
-            <Card.Divider />
-            {/* <Card.Image source={require('../assets/images/wudLogo.png')} /> */}
-            <Text> {t('createWudStep1.purpose')} </Text>
-          </Card>
-        </TouchableOpacity>
+    <LayoutScreen>
+      <View style={styles.container}>
+        <View style={styles.screen}>
+          <TouchableOpacity onPress={(category) => handleClick('fun')}>
+            <Card>
+              <Card.Title>
+                <Text h2 > 🎉  </Text>
+                <Text> {t('emojis.fun')}</Text>
+              </Card.Title>
+              <Card.Divider />
+              {/* <Card.Image source={require('../assets/images/wudLogo.png')} /> */}
+              <Text> {t('createWudStep1.fun')} </Text>
+            </Card>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={(category) => handleClick('skills')}>
+            <Card>
+              <Card.Title>
+                <Text h2> 💪   </Text>
+                <Text> {t('emojis.skills')} </Text>
+              </Card.Title>
+              <Card.Divider />
+              {/* <Card.Image source={require('../assets/images/wudLogo.png')} /> */}
+              <Text>  {t('createWudStep1.skills')}</Text>
+            </Card>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={(category) => handleClick('purpose')}>
+            <Card>
+              <Card.Title>
+                <Text h2> 💡  </Text>
+                <Text> {t('emojis.purpose')} </Text>
+              </Card.Title>
+              <Card.Divider />
+              {/* <Card.Image source={require('../assets/images/wudLogo.png')} /> */}
+              <Text> {t('createWudStep1.purpose')} </Text>
+            </Card>
+          </TouchableOpacity>
 
+        </View>
       </View>
-    </View>
+    </LayoutScreen>
   )
 }
 

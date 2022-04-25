@@ -70,8 +70,9 @@ export default function LoginScreen() {
         onPress={handleSignUp}
         buttonStyle={styles.button}
         containerStyle={styles.buttonContainer}
-        title={'Register'}
+        title={'Register (Invited only)'}
         type='outline'
+        disabled={true}
       />
 
 

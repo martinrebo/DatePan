@@ -4,7 +4,6 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import { Button, Card, Text } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
 
-import { RootState } from '../../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
 import { addType, addActivity } from '../../redux/wudSlice'
 import { WUDS } from '../../constants/WUDS'

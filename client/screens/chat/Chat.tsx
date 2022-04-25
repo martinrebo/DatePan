@@ -2,9 +2,9 @@ import React, { useCallback, useState, useLayoutEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import { auth, db } from '../../firebase';
-import { signOut } from 'firebase/auth';
 import { collection, addDoc, getDocs, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { GiftedChat } from 'react-native-gifted-chat';
+
 
 const Chat = ({ navigation, route }: any) => {
 
@@ -13,32 +13,7 @@ const Chat = ({ navigation, route }: any) => {
     const { wudId } = route.params;
 
 
-    const goHome = () => {
-        navigation.replace('Home');
-    }
-
     useLayoutEffect(() => {
-        navigation.setOptions({
-            headerLeft: () => (
-                <View style={{ marginLeft: 20 }}>
-                    <Avatar
-                        rounded
-                        source={{
-                            uri: auth?.currentUser?.photoURL!,
-                        }}
-                    />
-                </View>
-            ),
-            headerRight: () => (
-                <TouchableOpacity style={{
-                    marginRight: 10
-                }}
-                    onPress={goHome}
-                >
-                    <Text>Go Back</Text>
-                </TouchableOpacity>
-            )
-        })
 
         const q = query(collection(db, `${wudId}`), orderBy('createdAt', 'desc'));
         const unsubscribe = onSnapshot(q, (snapshot) => setMessages(
@@ -63,6 +38,7 @@ const Chat = ({ navigation, route }: any) => {
     }, []);
 
     return (
+
         <GiftedChat
             messages={messages}
             showAvatarForEveryMessage={true}
@@ -73,6 +49,8 @@ const Chat = ({ navigation, route }: any) => {
                 avatar: auth?.currentUser?.photoURL!
             }}
         />
+
+
     );
 }
 

@@ -34,6 +34,6 @@ const styles = StyleSheet.create({
         maxWidth: 500,
         textAlign: 'center',
         padding: 5,
-        backgroundColor: '#ccc',
+        backgroundColor: '#edf',
     },
 })

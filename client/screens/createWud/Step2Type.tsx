@@ -8,9 +8,10 @@ import { useTranslation } from 'react-i18next'
 import { RootState } from '../../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
 import { addType } from '../../redux/wudSlice'
-import { Wudtime } from '../../interfaces/wudtime'
+import { IWudtime } from '../../interfaces/wudtime'
 import { WUDS } from '../../constants/WUDS'
 import { addCategoryEmoji } from '../../helpers/addEmoji'
+import LayoutScreen from '../../components/Layout/LayoutScreen'
 
 
 
@@ -18,7 +19,7 @@ const Step2Type = ({ route }: any) => {
   const navigation: any = useNavigation()
   const { t } = useTranslation()
 
-  const { category } = route.params as { category: Wudtime['category'] };
+  const { category } = route.params as { category: IWudtime['category'] };
   const dispatch = useDispatch()
   const types = useSelector((state: RootState) => state.createWud.category)
 
@@ -32,27 +33,29 @@ const Step2Type = ({ route }: any) => {
 
 
   return (
-    <View style={styles.container}>
-      <View style={styles.screen}>
-        <Text h2> {addCategoryEmoji[category as keyof typeof addCategoryEmoji].emoji}</Text>
-        <Text > {addCategoryEmoji[category as keyof typeof addCategoryEmoji].name}</Text>
-        <View style={styles.cardContainer}>
-          {listOfSubtypes.map(((wud, i) => (
+    <LayoutScreen>
+      <View style={styles.container}>
+        <View style={styles.screen}>
+          <Text h2> {addCategoryEmoji[category as keyof typeof addCategoryEmoji].emoji}</Text>
+          <Text > {addCategoryEmoji[category as keyof typeof addCategoryEmoji].name}</Text>
+          <View style={styles.cardContainer}>
+            {listOfSubtypes.map(((wud, i) => (
 
-            <TouchableOpacity key={i}
-              style={styles.cards}
-              onPress={() => handleClick(wud.accessor)}
-            >
-              <Card >
-                <Text style={styles.emoji}> {wud.emoji} </Text>
-                <Text style={styles.text}>  {t(wud.name)}</Text>
-              </Card>
-            </TouchableOpacity>
+              <TouchableOpacity key={i}
+                style={styles.cards}
+                onPress={() => handleClick(wud.accessor)}
+              >
+                <Card >
+                  <Text style={styles.emoji}> {wud.emoji} </Text>
+                  <Text style={styles.text}>  {t(wud.name)}</Text>
+                </Card>
+              </TouchableOpacity>
 
-          )))}
+            )))}
+          </View>
         </View>
       </View>
-    </View>
+    </LayoutScreen>
   )
 }
 

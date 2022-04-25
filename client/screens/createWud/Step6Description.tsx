@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, Platform } from 'react-native'
+import { StyleSheet, Text, View, Platform, ImageSourcePropType } from 'react-native'
 import { Button, Card, Input, Slider } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
 
@@ -10,6 +10,7 @@ import { addNotes, addUserData } from '../../redux/wudSlice'
 // import { Wudtime } from '../../interfaces/wudtime'
 import { useCreateWudTimeQuery } from '../../api/api';
 import { auth } from '../../firebase'
+import LayoutScreen from '../../components/Layout/LayoutScreen'
 
 
 const Step3Activity = ({ route }: any) => {
@@ -21,7 +22,7 @@ const Step3Activity = ({ route }: any) => {
   dispatch(addUserData({
     userId: auth.currentUser?.uid!,
     displayName: auth.currentUser?.displayName!,
-    photoURL: auth.currentUser?.photoURL!
+    photoURL: auth.currentUser?.photoURL! as ImageSourcePropType
 
   }))
 
@@ -53,30 +54,32 @@ const Step3Activity = ({ route }: any) => {
 
 
   return (
-    <View style={styles.container}>
-      <View style={styles.screen}>
+    <LayoutScreen>
+      <View style={styles.container}>
+        <View style={styles.screen}>
 
-        <Card>
-          <Text> type {JSON.stringify(category)}</Text>
-          <Text> wudType {JSON.stringify(wudType)}</Text>
-          <Text> activity {JSON.stringify(activity)}</Text>
-        </Card>
-        <Card>
-          <Input
-            label="Description"
-            placeholder="Describe your activity"
-            maxLength={144}
-            multiline={true}
-            onChangeText={value => handleChange(value)} />
-        </Card>
+          <Card>
+            <Text> type {JSON.stringify(category)}</Text>
+            <Text> wudType {JSON.stringify(wudType)}</Text>
+            <Text> activity {JSON.stringify(activity)}</Text>
+          </Card>
+          <Card>
+            <Input
+              label="Description"
+              placeholder="Describe your activity"
+              maxLength={144}
+              multiline={true}
+              onChangeText={value => handleChange(value)} />
+          </Card>
 
-      </View>
+        </View>
 
-      <Button title="Submit" onPress={handleSubmit} />
-      {/* {isLoading ? <Text>Loading...</Text> : null}
+        <Button title="Submit" onPress={handleSubmit} />
+        {/* {isLoading ? <Text>Loading...</Text> : null}
       {error ? <Text>Error! {error}</Text> : null} */}
 
-    </View>
+      </View>
+    </LayoutScreen>
   )
 }
 

@@ -13,39 +13,39 @@ const HomeScreen = () => {
   const navigation: any = useNavigation()
   const { t } = useTranslation()
 
-  const handleSignOut = () => {
-    auth
-      .signOut()
-      .then(() => {
-        navigation.replace("Login")
-      })
-      .catch(error => alert(error.message))
-  }
+  // const handleSignOut = () => {
+  //   auth
+  //     .signOut()
+  //     .then(() => {
+  //       navigation.replace("Login")
+  //     })
+  //     .catch(error => alert(error.message))
+  // }
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerLeft: () => (
-        <View style={{ marginLeft: 20 }} >
-          <Avatar
-            rounded
-            source={{
-              uri: auth?.currentUser?.photoURL!,
-            }}
-            onPress={() => navigation.navigate('ProfileView')}
-          />
-        </View>
-      ),
-      headerRight: () => (
-        <TouchableOpacity style={{
-          marginRight: 10
-        }}
-          onPress={handleSignOut}
-        >
-          <Text>Sign Out</Text>
-        </TouchableOpacity>
-      )
-    })
-  }, [navigation])
+  // useLayoutEffect(() => {
+  //   navigation.setOptions({
+  //     headerLeft: () => (
+  //       <View style={{ marginLeft: 20 }} >
+  //         <Avatar
+  //           rounded
+  //           source={{
+  //             uri: auth?.currentUser?.photoURL!,
+  //           }}
+  //           onPress={() => navigation.navigate('ProfileView')}
+  //         />
+  //       </View>
+  //     ),
+  //     headerRight: () => (
+  //       <TouchableOpacity style={{
+  //         marginRight: 10
+  //       }}
+  //         onPress={handleSignOut}
+  //       >
+  //         <Text>Sign Out</Text>
+  //       </TouchableOpacity>
+  //     )
+  //   })
+  // }, [navigation])
 
   // Linking.addEventListener('url', (event) => {
   //   console.log("event listener", event.url);

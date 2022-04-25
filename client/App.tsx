@@ -9,10 +9,6 @@ import { Provider } from 'react-redux';
 import { store } from './redux/store'
 import "./i18n/i18n"
 
-import * as Linking from 'expo-linking';
-
-
-
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 // import Navigation from './navigation';
@@ -36,6 +32,7 @@ import AvatarHead from './components/AvatarHead/AvatarHead';
 import GoBackHead from './components/GoBackHead/GoBackHead';
 import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/core';
+import GoHomeHead from './components/GoHomeHead/GoHomeHead';
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -69,7 +66,7 @@ export default function App() {
               <NavigationContainer>
                 <Stack.Navigator>
                   <Stack.Screen options={{ headerShown: false }} name="Login" component={Landing} />
-                  <Stack.Screen options={{ headerShown: true }} name="Home" component={HomeScreen} />
+
                   <Stack.Group
                     screenOptions={({ navigation }) => ({
                       headerLeft: () => (<AvatarHead />),
@@ -99,19 +96,13 @@ export default function App() {
                       options={{ headerShown: false }}
                       name="Step6Description" component={Step6Description} />
 
-                    <Stack.Screen
-                      options={{ title: t('myWuds.title') }}
-                      name="MyWuds" component={MyWuds} />
+
                     <Stack.Screen
                       options={{
                         title: t('wudTimes.title')
                       }}
                       name="WudTimes" component={Wudtimes} />
-                    <Stack.Screen
-                      options={{
-                        title: t('wudTimes.title')
-                      }}
-                      name="WudTimeID" component={WudTimeID} />
+
                     <Stack.Screen
                       options={{ title: t('profileView.title') }}
                       name="ProfileView" component={ProfileView} />
@@ -123,6 +114,26 @@ export default function App() {
                       name="MyJoinedWuds" component={MyJoinedWuds} />
 
                     <Stack.Screen options={{ title: t('chat.title') }} name="Chat" component={Chat} />
+                  </Stack.Group>
+                  <Stack.Group
+                    screenOptions={({ navigation }) => ({
+                      headerLeft: () => (<AvatarHead />),
+                      headerRight: () => <GoHomeHead onPress={() => navigation.navigate("Home")} />,
+                    })}
+
+                  >
+
+                    <Stack.Screen
+                      options={{
+                        title: t('wudTimes.title')
+                      }}
+                      name="WudTimeID" component={WudTimeID} />
+
+                    <Stack.Screen
+                      options={{ title: t('myWuds.title') }}
+                      name="MyWuds" component={MyWuds} />
+                    <Stack.Screen options={{ title: t('wudTimes.title') }} name="Home" component={HomeScreen} />
+
                   </Stack.Group>
 
                 </Stack.Navigator>
