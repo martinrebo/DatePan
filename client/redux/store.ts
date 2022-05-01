@@ -8,7 +8,7 @@ export const store = configureStore({
   reducer: { createWud: wudSlice, [api.reducerPath]: api.reducer },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false,
+      serializableCheck: false, // let Date objects pass through
     }).concat(api.middleware),
 });
 
