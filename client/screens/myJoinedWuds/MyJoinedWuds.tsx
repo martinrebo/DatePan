@@ -21,20 +21,22 @@ export default function MyJoinedWuds({ }: Props) {
     }
   }, [isFocused])
 
-
+  console.log("joineed", data)
   return (
     <LayoutScreen>
+      {error ? <Text>Error</Text> : null}
       <Text>{isLoading ? "...Loading" : null}</Text>
       {data?.documents?.map((wud: any, i) => {
         return (
           <View key={i}>
             <Card >
-              <Wud data={wud.data} />
+              <Wud data={wud.data} joiners={wud.joiners} />
               <Text>Joiners: {wud.joiners.length ? wud.joiners.length : 0}</Text>
               <Button title="Group Chat"
                 onPress={() => navigation.navigate('Chat', { wudId: wud._id })} />
             </Card>
           </View>
+
         )
       })}
 

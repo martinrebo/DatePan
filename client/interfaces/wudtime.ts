@@ -1,6 +1,7 @@
 import { ImageSourcePropType } from "react-native";
 
 export interface IWudtime {
+  _id: string;
   category: "fun" | "skills" | "purpose" | "";
   wudType: {
     name: string;
@@ -24,4 +25,10 @@ export interface IGooglePlace {
     description: string;
     place_id: string;
   };
+}
+
+export interface IWudtimeResponse {
+  _id: string;
+  data: IWudtime;
+  joiners?: Array<{}>;
 }

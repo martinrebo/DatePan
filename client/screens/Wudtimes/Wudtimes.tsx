@@ -12,6 +12,7 @@ import { IWudtime } from '../../interfaces/wudtime'
 import Wud from '../../components/Wud/Wud'
 import { checkJoined } from '../../helpers'
 import { useNavigation } from '@react-navigation/core'
+import WudCompact from '../../components/Wud/WudCompact'
 type Props = {
   navigation: any
 }
@@ -21,32 +22,7 @@ function Wudtimes({ }: Props) {
   const [joinWudTime] = useJoinWudTimeMutation()
   const navigation: any = useNavigation()
 
-  let userId = auth.currentUser?.uid!
-  let userName = auth.currentUser?.displayName!
-  let userPhotoURL = auth.currentUser?.photoURL!
-
-  const handleJoin = (wudID: string) => {
-    joinWudTime({
-      id: wudID,
-      user: {
-        id: userId,
-        displayName: userName,
-        photoURL: userPhotoURL
-      }
-    }).then(() => {
-      navigation.navigate("myWuds")
-    }).catch((e) => {
-      console.log("error", e)
-    })
-  }
-
-
-
-  const handleJoined = (joiners: any) => {
-    let joined = checkJoined(joiners, userId)
-    return joined
-  }
-
+  console.log(data)
 
   return (
     <>
@@ -56,15 +32,7 @@ function Wudtimes({ }: Props) {
           data?.documents?.map((wud: any, i) =>
 
             <Card key={i}>
-              <Wud data={wud.data} />
-              <Card>
-                <Text >  Attendees: {wud.joiners?.length ? wud.joiners.length : 0} </Text>
-                <Button title={checkJoined(wud.joiners, userId) ? "Joined" : "Join"}
-                  disabled={handleJoined(wud.joiners)}
-                  onPress={() => handleJoin(wud._id)}
-                />
-              </Card>
-
+              <WudCompact data={wud.data} id={wud._id} />
             </Card>
 
           )

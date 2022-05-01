@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import type { IWudtime } from "../interfaces/wudtime";
 
 interface documents {
-  documents: [{ data: IWudtime; id: string }];
+  documents: [{ data: IWudtime; id: string; joiners: Array<{}> }];
 }
 
 interface WudtimeList {

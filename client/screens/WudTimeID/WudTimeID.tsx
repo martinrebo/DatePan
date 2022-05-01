@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import * as Linking from 'expo-linking'
-import { useNavigation } from '@react-navigation/core'
+import { useNavigation } from '@react-navigation/native'
 import { useGetWudTimebyIdQuery, useJoinWudTimeMutation, } from '../../api/api'
 import Wud from '../../components/Wud/Wud'
 import { Button, Card } from 'react-native-elements'
@@ -16,14 +16,13 @@ const WudTimeID = ({ route }: any) => {
     const { id } = route.params
     const { data, isLoading, error, isSuccess } = useGetWudTimebyIdQuery(id)
 
-    console.log("data", data?.documents)
-
     const [joinWudTime] = useJoinWudTimeMutation()
     const navigation: any = useNavigation()
 
     let userId = auth.currentUser?.uid!
     let userName = auth.currentUser?.displayName!
     let userPhotoURL = auth.currentUser?.photoURL!
+
 
     const handleJoin = (wudID: string) => {
         joinWudTime({
@@ -34,7 +33,7 @@ const WudTimeID = ({ route }: any) => {
                 photoURL: userPhotoURL
             }
         }).then(() => {
-            navigation.navigate("myWuds")
+            navigation.navigate("MyWuds")
         }).catch((e) => {
             console.log("error", e)
         })
@@ -51,10 +50,10 @@ const WudTimeID = ({ route }: any) => {
                 isSuccess ?
 
                     <Card>
-                        <Wud data={data?.documents[0].data} />
-                        <Button title={checkJoined(data?.documents[0].joiners, userId) ? "Joined" : "Join"}
-                            disabled={handleJoined(data?.documents[0].joiners.joiners)}
-                            onPress={() => handleJoin(data?.documents[0].joiners._id)}
+                        <Wud data={data?.documents[0].data} joiners={data.documents[0].joiners} />
+                        <Button title={checkJoined(data?.documents[0]?.joiners, userId) ? "Joined" : "Join"}
+                            disabled={handleJoined(data?.documents[0]?.joiners?.joiners)}
+                            onPress={() => handleJoin(data?.documents[0]?.joiners?._id)}
                         />
                     </Card>
 

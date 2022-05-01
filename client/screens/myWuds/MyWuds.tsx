@@ -17,9 +17,9 @@ export default function MyWuds({ }: Props) {
   let userId = auth.currentUser?.uid ? auth.currentUser?.uid : ''
   const { data, error, isLoading, refetch } = useMyWudsQuery(userId)
 
-  const handleGoHome = () => {
-    navigation.navigate('Home')
-  }
+  // const handleGoHome = () => {
+  //   navigation.navigate('Home')
+  // }
 
   useEffect(() => {
     if (isFocused) {
@@ -34,7 +34,7 @@ export default function MyWuds({ }: Props) {
         data?.documents?.map((wud: any, i) => {
           return (
             <Card key={i}>
-              <Wud data={wud.data} />
+              <Wud data={wud.data} joiners={wud.joiners} />
               <Card>
                 <Text> {wud.joiners?.length ? wud.joiners?.length : 0} Attendees : </Text>
                 {wud?.joiners?.map((j: any, i: number) => {

@@ -6,6 +6,7 @@ import { ThemeProvider } from 'react-native-elements';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Provider } from 'react-redux';
+import * as Linking from 'expo-linking';
 import { store } from './redux/store'
 import "./i18n/i18n"
 
@@ -31,7 +32,6 @@ import Chat from './screens/chat/Chat';
 import AvatarHead from './components/AvatarHead/AvatarHead';
 import GoBackHead from './components/GoBackHead/GoBackHead';
 import { useTranslation } from 'react-i18next';
-import { useNavigation } from '@react-navigation/core';
 import GoHomeHead from './components/GoHomeHead/GoHomeHead';
 
 export default function App() {
@@ -49,6 +49,12 @@ export default function App() {
     }
   }
 
+  const prefix = Linking.createURL('/');
+
+
+  const linking = {
+    prefixes: [prefix],
+  };
 
 
   if (!isLoadingComplete) {
@@ -63,7 +69,7 @@ export default function App() {
           <ContextStore.Provider value={{ language: "es" }}>
             <ThemeProvider theme={theme}>
 
-              <NavigationContainer>
+              <NavigationContainer linking={linking} fallback={Landing}>
                 <Stack.Navigator>
                   <Stack.Screen options={{ headerShown: false }} name="Login" component={Landing} />
 
@@ -132,6 +138,7 @@ export default function App() {
                     <Stack.Screen
                       options={{ title: t('myWuds.title') }}
                       name="MyWuds" component={MyWuds} />
+
                     <Stack.Screen options={{ title: t('wudTimes.title') }} name="Home" component={HomeScreen} />
 
                   </Stack.Group>

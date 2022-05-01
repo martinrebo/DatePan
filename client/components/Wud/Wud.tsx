@@ -7,10 +7,11 @@ import { IWudtime } from '../../interfaces/wudtime'
 import { capitalize } from '../../helpers'
 
 type Props = {
-    data: IWudtime
+    data: IWudtime,
+    joiners: any,
 }
 
-const Wud = ({ data }: Props) => {
+const Wud = ({ data, joiners }: Props) => {
     console.log(data)
     return (
 
@@ -39,6 +40,9 @@ const Wud = ({ data }: Props) => {
             </Card>
             <Card>
                 <Text>{data.notes}</Text>
+            </Card>
+            <Card>
+
             </Card>
 
         </>

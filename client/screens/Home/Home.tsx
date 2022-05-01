@@ -62,7 +62,7 @@ const HomeScreen = () => {
     if (url?.includes("wud")) {
       let id = url.split("/")[4];
       // console.log("id initial", id);
-      navigation.navigate("WudTimeID", { id: id })
+      navigation.navigate("WudTimeID", { id })
     }
   });
 
