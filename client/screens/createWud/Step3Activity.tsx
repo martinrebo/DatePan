@@ -17,14 +17,13 @@ const Step3Activity = ({ route }: any) => {
 
   const { category, wudType } = route.params;
   const dispatch = useDispatch()
-  // const types = useSelector((state: RootState) => state.createWud.type)
-  // const wudTypes = useSelector((state: RootState) => state.createWud.wudType)
 
   const handleClick = (activity: any) => {
-    console.log(activity)
+
     dispatch(addActivity(activity))
     navigation.navigate('Step4Joiners', { category, wudType, activity })
   }
+  console.log(wudType)
 
   const listOfWuds = WUDS.filter(wud => wud.category === category)
   const listOfSubtypes = listOfWuds.flatMap(wud => wud.wudTypes)
@@ -35,8 +34,8 @@ const Step3Activity = ({ route }: any) => {
     <LayoutScreen>
       <Text h2> {addTypeEmoji[wudType as keyof typeof addTypeEmoji].emoji} </Text>
       <Text> {addTypeEmoji[wudType as keyof typeof addTypeEmoji].name}</Text>
-      <View style={styles.cardContainer}>
 
+      <View style={styles.cardContainer}>
         {listOfActivitiesName.map(((wud, i) => (
 
           <TouchableOpacity

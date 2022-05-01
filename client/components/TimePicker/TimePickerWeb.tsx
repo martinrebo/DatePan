@@ -11,11 +11,13 @@ import DateTimePicker from '@mui/lab/DateTimePicker';
 // import MobileDatePicker from '@mui/lab/MobileDatePicker';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
-import { Text } from 'react-native-elements';
+import { Button, Text } from 'react-native-elements';
 import { addEndTime, addDate, addStartTime } from '../../redux/wudSlice';
+import { useDispatch } from 'react-redux'
 
 
 export default function TimePickerWeb() {
+  const dispatch = useDispatch()
 
   const [day, setDay] = React.useState<Date | null>(
     new Date(),
@@ -23,7 +25,8 @@ export default function TimePickerWeb() {
 
   const handleDay = (newValue: Date | null) => {
     setDay(newValue);
-    addDate(newValue);
+    dispatch(addDate(newValue))
+
   };
 
   const [start, setStart] = React.useState<Date | null>(
@@ -32,7 +35,7 @@ export default function TimePickerWeb() {
 
   const handleStart = (newValue: Date | null) => {
     setStart(newValue);
-    addStartTime(newValue);
+    dispatch(addStartTime(newValue));
   };
 
   const [finish, setFinish] = React.useState<Date | null>(
@@ -41,17 +44,15 @@ export default function TimePickerWeb() {
 
   const handleFinish = (newValue: Date | null) => {
     setFinish(newValue);
-    addEndTime(newValue);
+    dispatch(addEndTime(newValue));
   };
 
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <Stack spacing={3}>
-
-
-
           <MobileDatePicker
+
             label="Day"
             inputFormat="dddd, DD-MM-YYYY"
             value={day}
@@ -64,6 +65,7 @@ export default function TimePickerWeb() {
             value={start}
             onChange={handleStart}
             renderInput={(params) => <TextField {...params} />}
+            onAccept={() => addStartTime(start)}
           />
 
           <MobileTimePicker
@@ -71,13 +73,11 @@ export default function TimePickerWeb() {
             value={finish}
             onChange={handleFinish}
             renderInput={(params) => <TextField {...params} />}
+            onAccept={() => addEndTime(finish)}
           />
         </Stack>
-
 
       </LocalizationProvider>
     </>
   );
 }
-
-type Props = {}

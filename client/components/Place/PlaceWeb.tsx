@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete'
 import { addLocationData } from '../../redux/wudSlice'
 import { IGooglePlace } from '../../interfaces/wudtime'
+import { useDispatch } from 'react-redux'
 
 type Props = {}
 
@@ -10,6 +11,8 @@ type Props = {}
 
 
 const PlaceWeb = (props: Props) => {
+    const dispatch = useDispatch()
+
     const [value, setValue] = React.useState<IGooglePlace>();
 
     const handleChange = (value: any) => {
@@ -19,14 +22,15 @@ const PlaceWeb = (props: Props) => {
     }
 
     useEffect(() => {
-        addLocationData({
+        dispatch(addLocationData({
             label: value?.label!,
             value: {
                 description: value?.value.description!,
                 place_id: value?.value.place_id!,
             }
 
-        })
+        }))
+
     }, [value])
 
 

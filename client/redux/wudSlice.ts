@@ -58,7 +58,8 @@ export const wudSlice = createSlice({
     ) => {
       state.activity = action.payload;
     },
-    addDate: (state: IWudtime, action: PayloadAction<IWudtime["date"]>) => {
+    addDate: (state: IWudtime, action: PayloadAction<Date | null>) => {
+      console.log("addDate slice", action.payload);
       state.date = action.payload;
     },
     addStartTime: (

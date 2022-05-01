@@ -19,47 +19,47 @@ export const addCategoryEmoji = {
 export const addTypeEmoji = {
   foodAndDrinks: {
     emoji: "🍔",
-    name: "FoodAndDrinks",
+    name: "foodAndDrinks",
     description: "wudTypes.foodAndDrinks",
   },
-  entertaiment: {
+  entertainment: {
     emoji: "🎉",
-    name: "Entertaiment",
+    name: "entertainment",
     description: "wudTypes.entertaiment",
   },
   travel: {
     emoji: "🚗",
-    name: "Travel",
+    name: "travel",
     description: "wudTypes.travel",
   },
   sports: {
     emoji: "🏃",
-    name: "Sports",
+    name: "sports",
     description: "wudTypes.sports",
   },
   arts: {
     emoji: "🎨",
-    name: "Arts",
+    name: "arts",
     description: "wudTypes.arts",
   },
   language: {
     emoji: "🗣",
-    name: "Language",
+    name: "language",
     description: "wudTypes.language",
   },
   environment: {
     emoji: "🌎",
-    name: "Environment",
+    name: "environment",
     description: "wudTypes.environment",
   },
   people: {
     emoji: "👩‍💻",
-    name: "People",
+    name: "people",
     description: "wudTypes.people",
   },
   animals: {
     emoji: "🐶",
-    name: "Animals",
+    name: "animals",
     description: "wudTypes.animals",
   },
 } as const;
