@@ -119,6 +119,7 @@ const HomeScreen = () => {
       <View >
         <LanguageButton />
         <Healtcheck />
+        <View>v.0.4</View>
       </View>
 
     </LayoutScreen>

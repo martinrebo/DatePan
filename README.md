@@ -1,5 +1,18 @@
 ## Documentation
 
+TODO: RUN THE APPLICATION FIRST TIME
+
+TODO: STRUCTURE
+
+TODO: Deploy the app
+1) Build client for Web
+2) Move build-web to the server
+3) build server
+4) deploy gcp
+
+
+
+
 UI KITS
 https://undraw.co/illustrations
 https://www.opendoodles.com/compositions
