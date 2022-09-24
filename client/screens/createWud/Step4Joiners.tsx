@@ -1,67 +1,69 @@
 
 import { useState } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { Button, Card, Slider, Input } from 'react-native-elements'
+import { StyleSheet, View } from 'react-native'
+import { Button, Card, Text, Input, CheckBox } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
-// import MultiSlider from '@ptomasroos/react-native-multi-slider';
+import { useDispatch } from 'react-redux'
+import { addLocationData } from '../../redux/wudSlice'
+import { addActivityEmoji } from '../../helpers/addEmoji'
+import LayoutScreen from '../../components/Layout/LayoutScreen'
 
 
-import { RootState } from '../../redux/store'
-import { useSelector, useDispatch } from 'react-redux'
-import { addLocation } from '../../redux/wudSlice'
-import { Wudtime } from '../../interfaces/wudtime'
-import { WUDS } from './WUDS'
-
-
-
-const Step3Activity = ({ route }: any) => {
+const Step4Joiners = ({ route }: any) => {
   const navigation: any = useNavigation()
 
-  const { type, subType, activity } = route.params;
+  const { category, wudType, activity } = route.params;
   const dispatch = useDispatch()
 
-  // const handleClick = (activity: any) => {
-  //   console.log(activity)
-  //   dispatch(addType(activity))
-  //   navigation.navigate('Step4Joiners', {type, subType, activity})
-
-  const [value, setValue] = useState("Barcelona");
-
-  const handleChange = (value: string) => {
-    setValue(value)
+  const handleNext = () => {
+    navigation.navigate('Step5TimeAndPlace', { category, wudType, activity })
   }
 
-  const handleNext = () => {
-
-    dispatch(addLocation(value))
-    navigation.navigate('Step5Description', { type, subType, activity })
+  const [checkedSpanish, setCheckedSpanish] = useState(true);
+  const setSpanishLanguages = (value: boolean) => {
+    setCheckedSpanish(!value)
+  }
+  const [checkedEnglish, setCheckedEnglish] = useState(true);
+  const setEnglishLanguages = (value: boolean) => {
+    setCheckedEnglish(!value)
   }
 
 
   return (
-    <View style={styles.container}>
-      <View style={styles.screen}>
+    <LayoutScreen >
+      <Text h2> {addActivityEmoji[activity as keyof typeof addActivityEmoji].emoji}</Text>
+      <Text > {addActivityEmoji[activity as keyof typeof addActivityEmoji].name}</Text>
 
-        <Card>
-          <Text> type {JSON.stringify(type)}</Text>
-          <Text> subtype {JSON.stringify(subType)}</Text>
-          <Text> activity {JSON.stringify(activity)}</Text>
-        </Card>
-        <Input
-          label="Location"
-          placeholder="Describe your activity"
-          maxLength={144}
-          onChangeText={value => handleChange(value)} />
+      <Card>
+        <Card.Title>
+          <Text> Select Languages Spoken </Text>
+        </Card.Title>
+        <CheckBox
+          center
+          title='Spanish'
+          checked={checkedSpanish}
+          onPress={() => setSpanishLanguages(checkedSpanish)}
+        />
+        <CheckBox
+          center
+          title='English'
+          checked={checkedEnglish}
+          onPress={() => setEnglishLanguages(checkedEnglish)}
+        />
+      </Card>
 
+      <Card>
         <Button title="Next"
           onPress={handleNext} />
-        <Text>{value}</Text>
-      </View>
-    </View>
+      </Card>
+
+
+    </LayoutScreen>
+
   )
 }
 
-export default Step3Activity
+export default Step4Joiners
 
 const styles = StyleSheet.create({
   container: {
@@ -72,7 +74,8 @@ const styles = StyleSheet.create({
     marginTop: 100,
   },
   screen: {
-    maxWidth: 500
+    maxWidth: 500,
+    textAlign: 'center',
   },
   button: {
     marginTop: 10

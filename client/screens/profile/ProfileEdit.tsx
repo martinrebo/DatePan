@@ -2,17 +2,14 @@ import React from 'react'
 import { View, Text, ActivityIndicator } from 'react-native'
 import * as ImagePicker from 'expo-image-picker';
 import { auth, updateProfile } from '../../firebase'
-import { Button, Input, Image } from 'react-native-elements'
+import { Button, Input, Image, ListItem, Card, Icon } from 'react-native-elements'
 import uploadImage from '../../helpers/uploadImage'
 import downloadImage from '../../helpers/downloadImage'
+import LayoutScreen from '../../components/Layout/LayoutScreen';
 
 type Props = {}
 
 const ProfileEdit = ({ navigation }: any) => {
-
-    const handleEditProfile = () => {
-        navigation.navigate("ProfileView")
-    }
 
     const [name, setName] = React.useState(auth.currentUser?.displayName!)
 
@@ -40,9 +37,7 @@ const ProfileEdit = ({ navigation }: any) => {
     }
 
     const handleSave = async () => {
-        //    await  uploadImage(image, auth.currentUser?.uid!)
         let photoResizeURL = await downloadImage(auth.currentUser?.uid!)
-
         await updateProfile(auth.currentUser!, {
             displayName: name,
             photoURL: photoResizeURL!
@@ -59,23 +54,37 @@ const ProfileEdit = ({ navigation }: any) => {
 
 
     return (
-        <View>
-            <Text>ProfileEdit</Text>
-            <Text> Name: {auth.currentUser?.displayName}</Text>
-            <Input value={name} onChangeText={handleName} maxLength={10} />
-            <Text> Email: {auth.currentUser?.email}</Text>
-            <Text> photo</Text>
-            <Image
-                source={{ uri: image }}
-                style={{ width: 200, height: 200 }}
-                PlaceholderContent={<ActivityIndicator />}
-            />
-            <Button title="Pick an image" onPress={pickImage} />
+        <LayoutScreen>
+            <Card>
+                <ListItem>
+                    <Icon name="user" type='evilicon' />
+                    <ListItem.Content>
+                        <Input placeholder="Name" value={name} onChangeText={handleName} />
+                    </ListItem.Content>
+                </ListItem>
+            </Card>
 
-            <Button title="Profile View" onPress={handleEditProfile} />
+            <Card>
+                <ListItem>
+                    <Icon name="mail" />
+                    <ListItem.Content>
+                        <Text>{auth.currentUser?.email}</Text>
+                    </ListItem.Content>
+                </ListItem>
+            </Card>
+
+            <Card>
+                <Image
+                    source={{ uri: image }}
+                    style={{ width: 200, height: 200 }}
+                    PlaceholderContent={<ActivityIndicator />}
+                />
+                <Button title="Pick an image" type='outline' onPress={pickImage} />
+            </Card>
+
             <Button title="Save" onPress={handleSave} />
 
-        </View>
+        </LayoutScreen>
     )
 }
 

@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "office": "cd office && npm start",
-    "client": "cd client && npm start", 
-    "servers": "cd server && npm run start:dev2",
+    "client": "cd client && npm start",
+    "servers": "cd server && npm run start:dev",
     "start": "concurrently \"npm:office\" \"npm:client\"  \"npm:servers\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "echo \"TODO: Build project \" "
   },
   "repository": {
     "type": "git",

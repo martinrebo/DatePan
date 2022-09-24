@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import { auth } from '../../firebase'
 import { useMyJoinedWudsQuery } from '../../api/api'
-import { Wudtime } from '../../interfaces/wudtime'
-import { Button, Card } from 'react-native-elements'
+import { Button, Card, Text } from 'react-native-elements'
 import { useNavigation, useIsFocused } from '@react-navigation/native'
+import LayoutScreen from '../../components/Layout/LayoutScreen'
+import Wud from '../../components/Wud/Wud'
 
 type Props = {}
 
@@ -14,42 +15,31 @@ export default function MyJoinedWuds({ }: Props) {
   let userId = auth.currentUser?.uid ? auth.currentUser?.uid : ''
   const { data, error, isLoading, refetch } = useMyJoinedWudsQuery(userId)
 
-  const handleGoHome = () => {
-    navigation.navigate('Home')
-  }
-  console.log("data my wuds", data)
   useEffect(() => {
     if (isFocused) {
       refetch()
     }
   }, [isFocused])
-  // console.log(data)
 
+  console.log("joineed", data)
   return (
-    <>
-      <View>
-        <Button title="<" onPress={handleGoHome} />
-        <Text>My Joined Wuds</Text>
-        {data?.documents?.map((wud: any, i) => {
-          return (
-            <View key={i}>
-              <Text>{isLoading ? "...Loading" : null}</Text>
-              <Card>
-                <Text>{wud.data.type}</Text>
-                <Text>{wud.data.subtype}</Text>
-                <Text>{wud.data.activity}</Text>
-                <Text>{wud.data.notes}</Text>
-                <Text>{wud._id}</Text>
-              </Card>
-              <Button title="Group Chat" onPress={() => navigation.navigate('Chat', { wudId: wud._id })} />
+    <LayoutScreen>
+      {error ? <Text>Error</Text> : null}
+      <Text>{isLoading ? "...Loading" : null}</Text>
+      {data?.documents?.map((wud: any, i) => {
+        return (
+          <View key={i}>
+            <Card >
+              <Wud data={wud.data} joiners={wud.joiners} />
+              <Text>Joiners: {wud.joiners.length ? wud.joiners.length : 0}</Text>
+              <Button title="Group Chat"
+                onPress={() => navigation.navigate('Chat', { wudId: wud._id })} />
+            </Card>
+          </View>
 
-            </View>
-          )
-        })}
+        )
+      })}
 
-      </View>
-
-
-    </>
+    </LayoutScreen>
   )
 }

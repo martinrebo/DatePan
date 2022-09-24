@@ -1,9 +1,9 @@
 //
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import type { Wudtime } from "../interfaces/wudtime";
+import type { IWudtime } from "../interfaces/wudtime";
 
 interface documents {
-  documents: [{ data: Wudtime; id: string }];
+  documents: [{ data: IWudtime; id: string; joiners: Array<{}> }];
 }
 
 interface WudtimeList {
@@ -11,15 +11,17 @@ interface WudtimeList {
 }
 
 // Define a service using a base URL and expected endpoints
+// https://api-dot-datepan-app.ew.r.appspot.com//api/wuds
+// baseUrl: "http://localhost:3001/api/wuds
 export const api = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3001/api/wuds" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "https://api-dot-datepan-app.ew.r.appspot.com//api/wuds" }),
   endpoints: (builder) => ({
-    ping: builder.query<Wudtime, string>({
+    ping: builder.query<IWudtime, string>({
       query: () => `/`,
     }),
 
-    createWudTime: builder.query<Wudtime, Wudtime>({
+    createWudTime: builder.query<IWudtime, IWudtime>({
       query: (data) => {
         return {
           url: "/wud",
@@ -37,6 +39,9 @@ export const api = createApi({
 
     getWudTimes: builder.query<WudtimeList, string>({
       query: (city) => `/wuds/${city}`,
+    }),
+    getWudTimebyId: builder.query<WudtimeList, string>({
+      query: (id) => `/wud/${id}`,
     }),
     joinWudTime: builder.mutation<any, any>({
       query: (data) => {
@@ -59,4 +64,5 @@ export const {
   useGetWudTimesQuery,
   useJoinWudTimeMutation,
   useMyJoinedWudsQuery,
+  useGetWudTimebyIdQuery,
 } = api;

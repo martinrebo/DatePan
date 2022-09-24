@@ -3,8 +3,8 @@ import { StyleSheet, View } from 'react-native';
 import { Text, useTheme, Button, Image } from 'react-native-elements';
 
 import LoginScreen from '../components/Login/Login';
-
-import i18n from '../in18n/in18n';
+import { useTranslation } from 'react-i18next';
+import LayoutScreen from '../components/Layout/LayoutScreen';
 
 
 export interface LandingProps {
@@ -12,36 +12,40 @@ export interface LandingProps {
 
 export function Landing(props: LandingProps) {
     const { theme } = useTheme();
+    const { t } = useTranslation();
     return (
+        <LayoutScreen>
 
-        <View style={styles.container}>
 
-            <View style={styles.item}>
-                <Image source={require('../assets/images/wudLogo.png')} containerStyle={styles.image} />
+            <View style={styles.container}>
+
+                <View style={styles.item}>
+                    <Image source={require('../assets/images/wudLogo.png')} containerStyle={styles.image} />
+                </View>
+                <View style={styles.item}>
+                    <Text
+                        style={styles.title}
+                        h1
+                        h1Style={{ color: theme?.colors?.primary }}
+                    >
+                        WudTime
+                    </Text>
+                    <Text
+                        style={styles.text}
+                        h4
+                        h2Style={{ color: theme?.colors?.grey2 }}
+                    >
+                        {t('motto')}
+                    </Text>
+                    <Text style={styles.text}>
+                        {t('welcome')}
+                    </Text>
+                </View>
+                <View style={styles.more}>
+                    <LoginScreen />
+                </View>
             </View>
-            <View style={styles.item}>
-                <Text
-                    style={styles.title}
-                    h1
-                    h1Style={{ color: theme?.colors?.primary }}
-                >
-                    WudTime
-                </Text>
-                <Text
-                    style={styles.text}
-                    h4
-                    h2Style={{ color: theme?.colors?.grey2 }}
-                >
-                    {i18n.t('motto')}
-                </Text>
-                <Text style={styles.text}>
-                    {i18n.t('welcome')}
-                </Text>
-            </View>
-            <View style={styles.more}>
-                <LoginScreen />
-            </View>
-        </View>
+        </LayoutScreen>
     );
 }
 
