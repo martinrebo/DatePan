@@ -7,7 +7,6 @@ type Props = {
 }
 
 const Attendees = (props: Props) => {
-    console.log('Attendees', props)
     const [isVisible, setIsVisible] = useState(false)
     const toggleOverlay = ()=> {
         setIsVisible(!isVisible)

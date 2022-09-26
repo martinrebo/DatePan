@@ -18,9 +18,10 @@ export default function MyWuds({ }: Props) {
   let userId = auth.currentUser?.uid ? auth.currentUser?.uid : ''
   const { data, error, isLoading, refetch } = useMyWudsQuery(userId)
 
-  const handleGoToAttendees = () => {
-    navigation.navigate('Attendees')
-  }
+  // TODO: Delete Route to Attendees
+// const handleGoToAttendees = () => {
+  //   navigation.navigate('Attendees')
+  // }
 
   useEffect(() => {
     if (isFocused) {
@@ -34,7 +35,6 @@ export default function MyWuds({ }: Props) {
       {
         data?.documents?.map((wud: any, i) => {
           return (
-            <>
             <Card key={i} containerStyle={{borderColor: 'blue'}}>
               <Wud data={wud.data} joiners={wud.joiners} hideHostedBy={true} />
                 {/* <Button title="Attendees" onPress={handleGoToAttendees}/> */}
@@ -42,7 +42,6 @@ export default function MyWuds({ }: Props) {
                 <Button title="Group Chat"
                 onPress={() => navigation.navigate('Chat', { wudId: wud._id })} />
             </Card>
-            </>
           )
         })
       }
