@@ -9,10 +9,11 @@ import { capitalize } from '../../helpers'
 type Props = {
     data: IWudtime,
     joiners: any,
+    hideHostedBy?: boolean
 }
 
-const Wud = ({ data, joiners }: Props) => {
-    console.log(data)
+const Wud = ({ data, joiners, hideHostedBy }: Props) => {
+    // console.log(data)
     return (
 
         <>
@@ -27,17 +28,19 @@ const Wud = ({ data, joiners }: Props) => {
 
             <Text> {data.place?.value.description}</Text>
             <Divider style={{ padding: 5 }} />
-            <Card>
-                <Text> Hosted By: </Text>
-                <ListItem>
-                    <Avatar
-                        size="medium"
-                        source={data.photoURL!} />
-                    <ListItem.Content>
-                        <Text> {data.displayName}</Text>
-                    </ListItem.Content>
-                </ListItem>
-            </Card>
+            { !hideHostedBy ?
+                <Card >
+                    <Text> Hosted By: </Text>
+                    <ListItem>
+                        <Avatar
+                            size="medium"
+                            source={data.photoURL!} />
+                        <ListItem.Content>
+                            <Text> {data.displayName}</Text>
+                        </ListItem.Content>
+                    </ListItem>
+                </Card>
+            : null }
             <Card>
                 <Text>{data.notes}</Text>
             </Card>

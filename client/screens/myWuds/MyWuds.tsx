@@ -8,6 +8,7 @@ import { useNavigation, useIsFocused } from '@react-navigation/native'
 import { addActivityEmoji } from '../../helpers/addEmoji'
 import LayoutScreen from '../../components/Layout/LayoutScreen'
 import Wud from '../../components/Wud/Wud'
+import Attendees from './Attendees'
 
 type Props = {}
 
@@ -17,9 +18,9 @@ export default function MyWuds({ }: Props) {
   let userId = auth.currentUser?.uid ? auth.currentUser?.uid : ''
   const { data, error, isLoading, refetch } = useMyWudsQuery(userId)
 
-  // const handleGoHome = () => {
-  //   navigation.navigate('Home')
-  // }
+  const handleGoToAttendees = () => {
+    navigation.navigate('Attendees')
+  }
 
   useEffect(() => {
     if (isFocused) {
@@ -33,23 +34,15 @@ export default function MyWuds({ }: Props) {
       {
         data?.documents?.map((wud: any, i) => {
           return (
-            <Card key={i}>
-              <Wud data={wud.data} joiners={wud.joiners} />
-              <Card>
-                <Text> {wud.joiners?.length ? wud.joiners?.length : 0} Attendees : </Text>
-                {wud?.joiners?.map((j: any, i: number) => {
-                  return (
-                    <View key={i}>
-                      <Text>{j.displayName}</Text>
-                      <Image source={{ uri: j.photoURL }}
-                        style={{ width: 25, height: 25 }} />
-                    </View>
-                  )
-                })}
-              </Card>
-              <Button title="Group Chat"
+            <>
+            <Card key={i} containerStyle={{borderColor: 'blue'}}>
+              <Wud data={wud.data} joiners={wud.joiners} hideHostedBy={true} />
+                {/* <Button title="Attendees" onPress={handleGoToAttendees}/> */}
+                <Attendees joiners={wud.joiners} />
+                <Button title="Group Chat"
                 onPress={() => navigation.navigate('Chat', { wudId: wud._id })} />
             </Card>
+            </>
           )
         })
       }

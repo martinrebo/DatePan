@@ -23,6 +23,7 @@ import Step4Joiners from './screens/createWud/Step4Joiners';
 import Step5TimeAndPlace from './screens/createWud/Step5TimeAndPlace';
 import Step6Description from './screens/createWud/Step6Description';
 import MyWuds from './screens/myWuds/MyWuds';
+import Attendees from './screens/myWuds/Attendees';
 import Wudtimes from './screens/Wudtimes/Wudtimes';
 import WudTimeID from './screens/WudTimeID/WudTimeID';
 import ProfileView from './screens/profile/ProfileView';
@@ -138,6 +139,10 @@ export default function App() {
                     <Stack.Screen
                       options={{ title: t('myWuds.title') }}
                       name="MyWuds" component={MyWuds} />
+                    
+                    <Stack.Screen
+                      options={{ title: t('myWuds.listOfAttendees') }}
+                      name="Attendees" component={Attendees} />
 
                     <Stack.Screen options={{ title: t('wudTimes.title') }} name="Home" component={HomeScreen} />
 

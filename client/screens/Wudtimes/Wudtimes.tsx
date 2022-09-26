@@ -19,10 +19,6 @@ type Props = {
 
 function Wudtimes({ }: Props) {
   const { data, error, isLoading, isSuccess } = useGetWudTimesQuery("Barcelona")
-  const [joinWudTime] = useJoinWudTimeMutation()
-  const navigation: any = useNavigation()
-
-  console.log(data)
 
   return (
     <>

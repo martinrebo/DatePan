@@ -23,7 +23,7 @@ const WudTimeID = ({ route }: any) => {
     let userName = auth.currentUser?.displayName!
     let userPhotoURL = auth.currentUser?.photoURL!
 
-
+console.log("WudtimeID Data", data)
     const handleJoin = (wudID: string) => {
         joinWudTime({
             id: wudID,
@@ -52,8 +52,8 @@ const WudTimeID = ({ route }: any) => {
                     <Card>
                         <Wud data={data?.documents[0].data} joiners={data.documents[0].joiners} />
                         <Button title={checkJoined(data?.documents[0]?.joiners, userId) ? "Joined" : "Join"}
-                            disabled={handleJoined(data?.documents[0]?.joiners?.joiners)}
-                            onPress={() => handleJoin(data?.documents[0]?.joiners?._id)}
+                            disabled={handleJoined(data?.documents[0]?.joiners)}
+                            onPress={() => handleJoin(data?.documents[0]?._id)}
                         />
                     </Card>
 
