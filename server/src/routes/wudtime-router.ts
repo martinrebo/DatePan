@@ -1,9 +1,10 @@
-import { Request, Response, Router } from "express";
+import { NextFunction, Request, Response, Router } from "express";
 import logger from "jet-logger";
 import axios from "axios";
+import ash from 'express-async-handler';
 
 // let axios = require('axios').default;
-
+// DOCS: https://www.mongodb.com/docs/atlas/api/data-api-resources/#std-label-data-api-resources
 const config = {
   method: "post",
   url: "https://data.mongodb-api.com/app/data-ftset/endpoint/data/beta/action/",
@@ -132,6 +133,49 @@ router.post("/wud/join", (req: Request, res: Response) => {
     });
   // res.status(200);
 });
+
+router.post("/wud/join/:id", ash(async (req: Request, res: Response) => {
+  logger.imp("POST - UPDATE joiner checked status /wud/:id ");
+  const dataUpdate = {
+    ...config.data,
+    filter: {
+      _id: { $oid: req.params.id},
+      'joiners.id': req.body.data.joinerId
+    },
+    update: {
+      $set: {"joiners.$.checked": req.body.data.checked}
+    }
+  }
+
+  const wudConfig = {
+    ...config,
+    url: config.url + "updateOne",
+    data: JSON.stringify(dataUpdate),
+  };
+
+  try {
+    const response = await axios(wudConfig)
+    logger.info('OK - Update joiner checked status /wud/join/:id')
+    res.status(200).send(response.data).end()
+  }
+  catch (error) {
+    logger.err(error, true)
+    res.status(400).send(error).end()
+  }
+
+
+  // axios(wudConfig)
+  //   .then(function (response) {
+  //     logger.info('OK - Update joiner checked status /wud/join/:id')
+  //     res.status(200).send({ status: 200, response }).end();
+  //   })
+  //   .catch(function (error) {
+  //     logger.err(error)
+  //     res.status(400).send({ status: 400, message: error }).end();
+  //   });
+}));
+
+
 
 router.get("/mywuds/:userId", (req: Request, res: Response) => {
   logger.info("GET  /api/wuds/mywuds");

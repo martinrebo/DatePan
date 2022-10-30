@@ -2,6 +2,10 @@
 
 TODO: RUN THE APPLICATION FIRST TIME
 
+start app: 
+- client folder: `npm start`
+- server folder: `npm start:devApi`
+
 TODO: STRUCTURE
 
 TODO: Deploy the app

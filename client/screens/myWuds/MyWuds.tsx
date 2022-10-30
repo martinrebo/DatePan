@@ -34,11 +34,12 @@ export default function MyWuds({ }: Props) {
       <Text>{isLoading ? "...Loading" : null}</Text>
       {
         data?.documents?.map((wud: any, i) => {
+          console.log('Wud', wud)
           return (
             <Card key={i} containerStyle={{borderColor: 'blue'}}>
               <Wud data={wud.data} joiners={wud.joiners} hideHostedBy={true} />
                 {/* <Button title="Attendees" onPress={handleGoToAttendees}/> */}
-                <Attendees joiners={wud.joiners} />
+                <Attendees joiners={wud.joiners} eventId={wud._id} />
                 <Button title="Group Chat"
                 onPress={() => navigation.navigate('Chat', { wudId: wud._id })} />
             </Card>

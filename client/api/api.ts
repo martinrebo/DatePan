@@ -1,7 +1,8 @@
 //
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import type { IWudtime } from "../interfaces/wudtime";
-
+import {auth} from '../firebase'
+let userId = auth.currentUser?.uid ? auth.currentUser?.uid : ''
 interface documents {
   documents: [{ data: IWudtime; id: string; joiners: Array<{}> }];
 }
@@ -16,6 +17,7 @@ interface WudtimeList {
 export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3001/api/wuds" }),
+  tagTypes: ['wud'],
   endpoints: (builder) => ({
     ping: builder.query<IWudtime, string>({
       query: () => `/`,
@@ -42,9 +44,11 @@ export const api = createApi({
     }),
     getWudTimebyId: builder.query<WudtimeList, string>({
       query: (id) => `/wud/${id}`,
+      providesTags: (result, error, id) => [{ type: 'wud', id }]
     }),
     joinWudTime: builder.mutation<any, any>({
       query: (data) => {
+        console.log('query', data)
         return {
           url: "/wud/join",
           method: "POST",
@@ -52,6 +56,17 @@ export const api = createApi({
         };
       },
     }),
+    checkJoiner: builder.mutation<any, any>({
+      // When event Admin checkin attendees
+      query: (data) => {
+        return {
+          url: `/wud/join/${data.eventId}`,
+          method: 'POST',
+          body: {data}
+        }
+      },
+      invalidatesTags: (result, error, { id }) => [{ type: 'wud', id }],
+    })
   }),
 });
 
@@ -65,4 +80,5 @@ export const {
   useJoinWudTimeMutation,
   useMyJoinedWudsQuery,
   useGetWudTimebyIdQuery,
+  useCheckJoinerMutation
 } = api;

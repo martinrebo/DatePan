@@ -1,15 +1,28 @@
-import { View } from 'react-native'
+import { GestureResponderEvent, View } from 'react-native'
 import React, { useState } from 'react'
 import { Avatar, Button, Card, Image, ListItem, Overlay, Text } from 'react-native-elements'
-
+import { useCheckJoinerMutation } from '../../api/api'
 type Props = {
-    joiners: any
+    joiners: any,
+    eventId: string
 }
 
 const Attendees = (props: Props) => {
     const [isVisible, setIsVisible] = useState(false)
     const toggleOverlay = ()=> {
         setIsVisible(!isVisible)
+    }
+    // const [joiner, setJoiner] = useState()
+    const [checkJoiner, result] = useCheckJoinerMutation()
+
+    // When AdminUser Click on Checkbox => Joiner user status: 'true' vs 'false'
+    const handleJoinerCheckIn = (checked: boolean, joinerId: string) => {
+        console.log('handle', checked, joinerId);
+        // update DB Event.joiners.id/checked,
+        checkJoiner({
+            eventId: props.eventId,
+            joinerId, checked: !checked
+        }).catch(()=> console.log('check error'))
     }
     return (
         <Card >
@@ -24,7 +37,7 @@ const Attendees = (props: Props) => {
                             <ListItem.Content>
                                 <ListItem.Title>{joiner.displayName}</ListItem.Title>
                             </ListItem.Content>
-                            <ListItem.CheckBox onPress={() => console.log('Hello')} />
+                            <ListItem.CheckBox checked={!!joiner.checked} onPress={() => handleJoinerCheckIn(!!joiner.checked, joiner.id)} />
                         </ListItem>
                     )
                 })}

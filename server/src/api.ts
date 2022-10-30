@@ -7,7 +7,7 @@ import StatusCodes from 'http-status-codes';
 import express, { NextFunction, Request, Response, Router } from 'express';
 import cors from 'cors';
 
-import 'express-async-errors';
+// import 'express-async-errors';
 
 import BaseRouter from './routes/api';
 import Healthcheck from './routes/system'

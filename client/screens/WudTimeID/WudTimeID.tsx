@@ -44,6 +44,7 @@ console.log("WudtimeID Data", data)
         return joined
     }
 
+    console.log('data', data)
     return (
         <LayoutScreen >
             {isLoading ? <Text>Loading...</Text> :
