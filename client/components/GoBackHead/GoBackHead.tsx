@@ -6,7 +6,6 @@ type Props = {}
 
 
 const GoBackHead = ({ onPress }: any) => {
-
     return (
         <TouchableOpacity style={{
             marginRight: 10

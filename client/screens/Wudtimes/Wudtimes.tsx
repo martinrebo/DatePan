@@ -1,7 +1,7 @@
 import { View, TouchableOpacity, StyleSheet, ScrollView, FlatList } from 'react-native'
 import React, { useLayoutEffect } from 'react'
 import { useGetWudTimesQuery } from '../../api/api'
-import { Button, Card, Avatar, Text, Divider, ListItem } from 'react-native-elements'
+import { Button, Card, Avatar, Text, Divider, ListItem, Icon } from 'react-native-elements'
 import { auth } from '../../firebase'
 import { useJoinWudTimeMutation } from '../../api/api'
 import { addActivityEmoji, addCategoryEmoji } from '../../helpers/addEmoji'
@@ -19,10 +19,11 @@ type Props = {
 
 function Wudtimes({ }: Props) {
   const { data, error, isLoading, isSuccess } = useGetWudTimesQuery("Barcelona")
-
+  // TODO: ADD FILTER EVENTS
   return (
     <>
       <LayoutScreen>
+        
         <Text>{isLoading ? "...Loading" : null}</Text>
         {isSuccess ?
           data?.documents?.map((wud: any, i) =>

@@ -63,7 +63,8 @@ const translations = {
       },
       myWuds: {
         title: "My Wuds",
-        joinersCheckList: "Joiners Check List"
+        joinersCheckList: "Joiners Check List",
+        editMyWuds: "Edit My Event",
       },
       myJoinedWuds: {
         title: "My Joined Wuds",
@@ -137,7 +138,8 @@ const translations = {
       },
       myWuds: {
         title: "Mis Wuds",
-        joinersCheckList: "Lista de Participantes"
+        joinersCheckList: "Lista de Participantes",
+        editMyWuds: "Editar evento"
       },
       myJoinedWuds: {
         title: "Wuds a los que estoy UNIDO",
