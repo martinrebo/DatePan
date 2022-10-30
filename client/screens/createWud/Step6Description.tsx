@@ -7,7 +7,6 @@ import { useNavigation } from '@react-navigation/native'
 import { RootState } from '../../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
 import { addNotes, addUserData } from '../../redux/wudSlice'
-// import { Wudtime } from '../../interfaces/wudtime'
 import { useCreateWudTimeQuery } from '../../api/api';
 import { auth } from '../../firebase'
 import LayoutScreen from '../../components/Layout/LayoutScreen'
@@ -31,7 +30,6 @@ const Step3Activity = ({ route }: any) => {
   const { data, error, isLoading } = useCreateWudTimeQuery(createWudState, { skip })
 
   const handleSubmit = () => {
-    console.log("send to API", createWudState)
     setSkip(false)
   }
 
@@ -67,9 +65,13 @@ const Step3Activity = ({ route }: any) => {
             <Input
               label="Description"
               placeholder="Describe your activity"
-              maxLength={144}
+              maxLength={250}
               multiline={true}
-              onChangeText={value => handleChange(value)} />
+              onChangeText={value => handleChange(value)}
+              inputStyle={{height: 200, width: 250}}
+              errorStyle={{color: 'grey'}}
+              errorMessage={`Char Left = ${250 - value.length}`}
+               />
           </Card>
 
         </View>

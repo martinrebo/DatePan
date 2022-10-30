@@ -4,7 +4,7 @@ import * as Linking from 'expo-linking'
 import { useNavigation } from '@react-navigation/native'
 import { useGetWudTimebyIdQuery, useJoinWudTimeMutation, } from '../../api/api'
 import Wud from '../../components/Wud/Wud'
-import { Button, Card } from 'react-native-elements'
+import { Button, Card, Divider } from 'react-native-elements'
 import LayoutScreen from '../../components/Layout/LayoutScreen'
 import { auth } from '../../firebase'
 import { checkJoined } from '../../helpers'
@@ -50,6 +50,7 @@ const WudTimeID = ({ route }: any) => {
 
                     <Card>
                         <Wud data={data?.documents[0].data} joiners={data.documents[0].joiners} />
+                        <Divider width={5}/>
                         <Button title={checkJoined(data?.documents[0]?.joiners, userId) ? "Joined" : "Join"}
                             disabled={handleJoined(data?.documents[0]?.joiners)}
                             onPress={() => handleJoin(data?.documents[0]?._id)}

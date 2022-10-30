@@ -100,10 +100,10 @@ export default function App() {
                       name="Step4Joiners" component={Step4Joiners} />
 
                     <Stack.Screen
-                      options={{ headerShown: false }}
+                      options={{ title: t("createWudStep5.title") }}
                       name="Step5TimeAndPlace" component={Step5TimeAndPlace} />
                     <Stack.Screen
-                      options={{ headerShown: false }}
+                      options={{  title: t("createWudStep6.title")}}
                       name="Step6Description" component={Step6Description} />
 
 

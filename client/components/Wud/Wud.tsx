@@ -13,7 +13,7 @@ type Props = {
 }
 
 const Wud = ({ data, joiners, hideHostedBy }: Props) => {
-    // console.log(data)
+    console.log(data)
     return (
 
         <>
@@ -45,7 +45,7 @@ const Wud = ({ data, joiners, hideHostedBy }: Props) => {
                 <Text>{data.notes}</Text>
             </Card>
             <Card>
-
+                <Text> joiners: {joiners?.length ? joiners?.length : 0} </Text>
             </Card>
 
         </>

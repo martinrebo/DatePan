@@ -1,8 +1,7 @@
-import { View, TouchableOpacity } from 'react-native'
 import { useIsFocused } from '@react-navigation/core'
 import React, { useEffect, useLayoutEffect } from 'react'
 import { auth } from '../../firebase'
-import { Button, Image, Avatar, Card, Text, Icon, ListItem } from 'react-native-elements'
+import { Button, Image, Card, Text, Icon, ListItem } from 'react-native-elements'
 import LayoutScreen from '../../components/Layout/LayoutScreen'
 
 type Props = {}
@@ -58,7 +57,7 @@ const ProfileView = ({ navigation }: any) => {
                     title="Logout"
                     icon={{ name: 'logout' }}
                     type="outline"
-                    onPress={() => auth.signOut()}
+                    onPress={handleSignOut}
                 />
             </Card>
         </LayoutScreen>

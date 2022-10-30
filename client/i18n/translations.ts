@@ -53,7 +53,13 @@ const translations = {
         title: "Choose Activity",
       },
       createWudStep4: {
+        title: "Choose Language",
+      },
+      createWudStep5: {
         title: "Choose Location",
+      },
+      createWudStep6: {
+        title: "Describe it...",
       },
       myWuds: {
         title: "My Wuds",
@@ -121,7 +127,13 @@ const translations = {
         title: "Elige Actividad",
       },
       createWudStep4: {
-        title: "Selecciona Lugar",
+        title: "Selecciona Idiomas",
+      },
+      createWudStep5: {
+        title: "Elige Localización",
+      },
+      createWudStep6: {
+        title: "Descripción",
       },
       myWuds: {
         title: "Mis Wuds",
