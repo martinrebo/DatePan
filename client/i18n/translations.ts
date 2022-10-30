@@ -57,6 +57,7 @@ const translations = {
       },
       myWuds: {
         title: "My Wuds",
+        joinersCheckList: "Joiners Check List"
       },
       myJoinedWuds: {
         title: "My Joined Wuds",
@@ -124,6 +125,7 @@ const translations = {
       },
       myWuds: {
         title: "Mis Wuds",
+        joinersCheckList: "Lista de Participantes"
       },
       myJoinedWuds: {
         title: "Wuds a los que estoy UNIDO",

@@ -23,7 +23,6 @@ const WudTimeID = ({ route }: any) => {
     let userName = auth.currentUser?.displayName!
     let userPhotoURL = auth.currentUser?.photoURL!
 
-console.log("WudtimeID Data", data)
     const handleJoin = (wudID: string) => {
         joinWudTime({
             id: wudID,
@@ -33,7 +32,7 @@ console.log("WudtimeID Data", data)
                 photoURL: userPhotoURL
             }
         }).then(() => {
-            navigation.navigate("MyWuds")
+            navigation.navigate("MyJoinedWuds")
         }).catch((e) => {
             console.log("error", e)
         })
@@ -43,8 +42,7 @@ console.log("WudtimeID Data", data)
         let joined = checkJoined(joiners, userId)
         return joined
     }
-
-    console.log('data', data)
+    
     return (
         <LayoutScreen >
             {isLoading ? <Text>Loading...</Text> :

@@ -12,12 +12,11 @@ const Attendees = (props: Props) => {
     const toggleOverlay = ()=> {
         setIsVisible(!isVisible)
     }
-    // const [joiner, setJoiner] = useState()
+
     const [checkJoiner, result] = useCheckJoinerMutation()
 
     // When AdminUser Click on Checkbox => Joiner user status: 'true' vs 'false'
     const handleJoinerCheckIn = (checked: boolean, joinerId: string) => {
-        console.log('handle', checked, joinerId);
         // update DB Event.joiners.id/checked,
         checkJoiner({
             eventId: props.eventId,

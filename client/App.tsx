@@ -7,6 +7,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Provider } from 'react-redux';
 import * as Linking from 'expo-linking';
+import { useTranslation } from 'react-i18next';
+
 import { store } from './redux/store'
 import "./i18n/i18n"
 
@@ -30,9 +32,10 @@ import ProfileView from './screens/profile/ProfileView';
 import ProfileEdit from './screens/profile/ProfileEdit';
 import MyJoinedWuds from './screens/myJoinedWuds/MyJoinedWuds';
 import Chat from './screens/chat/Chat';
+import JoinersCheckList from './screens/myWuds/JoinersCheckList'
+
 import AvatarHead from './components/AvatarHead/AvatarHead';
 import GoBackHead from './components/GoBackHead/GoBackHead';
-import { useTranslation } from 'react-i18next';
 import GoHomeHead from './components/GoHomeHead/GoHomeHead';
 
 export default function App() {
@@ -139,10 +142,14 @@ export default function App() {
                     <Stack.Screen
                       options={{ title: t('myWuds.title') }}
                       name="MyWuds" component={MyWuds} />
-                    
-                    <Stack.Screen
+
+                    {/* <Stack.Screen
                       options={{ title: t('myWuds.listOfAttendees') }}
-                      name="Attendees" component={Attendees} />
+                      name="Attendees" component={Attendees} /> */}
+
+                    <Stack.Screen
+                      options={{ title: t('myWuds.joinersCheckList') }}
+                      name="JoinersCheckList" component={JoinersCheckList} />
 
                     <Stack.Screen options={{ title: t('wudTimes.title') }} name="Home" component={HomeScreen} />
 

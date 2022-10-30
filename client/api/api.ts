@@ -48,7 +48,6 @@ export const api = createApi({
     }),
     joinWudTime: builder.mutation<any, any>({
       query: (data) => {
-        console.log('query', data)
         return {
           url: "/wud/join",
           method: "POST",

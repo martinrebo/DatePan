@@ -1,4 +1,5 @@
-import { NextFunction, Request, Response, Router } from "express";
+import crypto from 'crypto';
+import {Request, Response, Router } from "express";
 import logger from "jet-logger";
 import axios from "axios";
 import ash from 'express-async-handler';
@@ -136,15 +137,37 @@ router.post("/wud/join", (req: Request, res: Response) => {
 
 router.post("/wud/join/:id", ash(async (req: Request, res: Response) => {
   logger.imp("POST - UPDATE joiner checked status /wud/:id ");
+  console.log(req.body.data);
+  // if joinerID is empy, push user to
+  const noUserId = crypto.randomBytes(8).toString("hex");
+  const userId = req.body.data.joinerId;
+  let filter
+  let update
+  if (userId === 'notUser') {
+    filter = {
+      _id: { $oid: req.params.id }
+    }
+    update = {
+      $push: { joiners: {
+        id: noUserId,
+        photoURL: '',
+        displayName: req.body.data.participant.name,
+        contact: req.body.data.participant.contact,
+        checked: req.body.data.checked
+      }}
+    }
+  } else {
+    filter = {
+      _id: { $oid: req.params.id },
+      'joiners.id': req.body.data.joinerId
+    }
+    update = {
+      $set: { "joiners.$.checked": req.body.data.checked }
+    }
+  }
   const dataUpdate = {
     ...config.data,
-    filter: {
-      _id: { $oid: req.params.id},
-      'joiners.id': req.body.data.joinerId
-    },
-    update: {
-      $set: {"joiners.$.checked": req.body.data.checked}
-    }
+    filter, update
   }
 
   const wudConfig = {
@@ -163,16 +186,6 @@ router.post("/wud/join/:id", ash(async (req: Request, res: Response) => {
     res.status(400).send(error).end()
   }
 
-
-  // axios(wudConfig)
-  //   .then(function (response) {
-  //     logger.info('OK - Update joiner checked status /wud/join/:id')
-  //     res.status(200).send({ status: 200, response }).end();
-  //   })
-  //   .catch(function (error) {
-  //     logger.err(error)
-  //     res.status(400).send({ status: 400, message: error }).end();
-  //   });
 }));
 
 
