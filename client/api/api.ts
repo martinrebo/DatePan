@@ -1,6 +1,6 @@
 //
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import type { IWudtime } from "../interfaces/wudtime";
+import type { IWudtime, IWudtimeResponse } from "../interfaces/wudtime";
 import {auth} from '../firebase'
 let userId = auth.currentUser?.uid ? auth.currentUser?.uid : ''
 interface documents {
@@ -42,7 +42,7 @@ export const api = createApi({
     getWudTimes: builder.query<WudtimeList, string>({
       query: (city) => `/wuds/${city}`,
     }),
-    getWudTimebyId: builder.query<WudtimeList, string>({
+    getWudTimebyId: builder.query<IWudtimeResponse, string>({
       query: (id) => `/wud/${id}`,
       providesTags: (result, error, id) => [{ type: 'wud', id }]
     }),

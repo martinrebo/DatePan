@@ -41,7 +41,7 @@ export default function JoinersCheckList({ route }: Props) {
         <View>
             <Button title="Add Participant"
                 onPress={toggleOverlay} />
-            {data?.documents[0]?.joiners?.map((joiner: any, i: number) => {
+            {data?.joiners?.map((joiner: any, i: number) => {
                 return (
                     <ListItem key={i}
                         bottomDivider>

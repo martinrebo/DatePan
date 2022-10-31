@@ -49,11 +49,11 @@ const WudTimeID = ({ route }: any) => {
                 isSuccess ?
 
                     <Card>
-                        <Wud data={data?.documents[0].data} joiners={data.documents[0].joiners} />
+                        <Wud data={data?.event.data} joiners={data.event.joiners} />
                         <Divider width={5}/>
-                        <Button title={checkJoined(data?.documents[0]?.joiners, userId) ? "Joined" : "Join"}
-                            disabled={handleJoined(data?.documents[0]?.joiners)}
-                            onPress={() => handleJoin(data?.documents[0]?._id)}
+                        <Button title={checkJoined(data?.event.joiners, userId) ? "Joined" : "Join"}
+                            disabled={handleJoined(data?.event.joiners)}
+                            onPress={() => handleJoin(data?.event._id)}
                         />
                     </Card>
 

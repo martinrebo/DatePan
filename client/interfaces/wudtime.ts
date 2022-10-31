@@ -28,7 +28,9 @@ export interface IGooglePlace {
 }
 
 export interface IWudtimeResponse {
-  _id: string;
-  data: IWudtime;
-  joiners?: Array<{}>;
+  event: {
+    _id: string;
+    data: IWudtime;
+    joiners?: Array<{}>;
+  }
 }

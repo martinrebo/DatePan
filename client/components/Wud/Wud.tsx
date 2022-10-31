@@ -17,7 +17,7 @@ const Wud = ({ data, joiners, hideHostedBy }: Props) => {
     // TODO: ADD Validation and Date and Time 
     return (
         <>
-            <Text> Friday 2 June </Text>
+            <Text> TODO: Friday 2 June </Text>
             <Text h1>
                 {addActivityEmoji[data.activity as keyof typeof addActivityEmoji]?.emoji ?
                     addActivityEmoji[data.activity as keyof typeof addActivityEmoji]?.emoji : "error"}

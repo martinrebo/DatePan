@@ -1,25 +1,37 @@
-import { View, Text } from 'react-native'
 import React from 'react'
+import { Button, Divider, Icon, Text, Card } from 'react-native-elements'
 import { useGetWudTimebyIdQuery } from '../../api/api'
+import LayoutScreen from '../../components/Layout/LayoutScreen'
+import EditWud from '../../components/Wud/EditWud'
 
 type Props = {
     route: any
 }
 
-const EditMyWuds = ({route}: Props) => {
+
+const EditMyWuds = ({ route }: Props) => {
     const { wudId } = route.params
     const { data, isLoading, error, isSuccess } = useGetWudTimebyIdQuery(wudId)
-    // TODO: Liz can add key values to the event
 
-  return (
-    <View>
-      <Text>EditMyWuds</Text>
-      <Text> Change Time </Text>
-      <Text> Change Description</Text>
-      <Text> Add Key Values for the event </Text>
-      <Text> Delete</Text>
-    </View>
-  )
+    const handleEdit = (field:string) => {
+        console.log("Clcick", field)
+        // Api post request update mywuds 
+    }
+
+    // TODO: Liz can add key values to the event
+    console.log('EditMyWuds', data)
+
+    return (
+        <LayoutScreen>
+            <Text h2>EditMyWuds</Text>
+            {isLoading ? "Loading" : 
+            <EditWud data={data?.event.data} handleEdit={(field:string)=>handleEdit(field)}/>
+            }
+  
+            <Divider width={5} />
+            <Button title="Delete" />
+        </LayoutScreen>
+    )
 }
 
 export default EditMyWuds

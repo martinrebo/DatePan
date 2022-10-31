@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import {Request, Response, Router } from "express";
+import { Request, Response, Router } from "express";
 import logger from "jet-logger";
 import axios from "axios";
 import ash from 'express-async-handler';
@@ -93,7 +93,7 @@ router.get("/wud/:id", (req: Request, res: Response) => {
     .then(function (response) {
       res
         .status(200)
-        .send({ status: 200, documents: response.data.documents })
+        .send({ status: 200, event: response.data.documents[0] })
         .end();
     })
     .catch(function (error) {
@@ -114,7 +114,6 @@ router.post("/wud/join", (req: Request, res: Response) => {
       },
     },
   };
-  // console.log(data);
   const wudJoinConfig = {
     ...config,
     url: config.url + "updateOne",
@@ -137,8 +136,6 @@ router.post("/wud/join", (req: Request, res: Response) => {
 
 router.post("/wud/join/:id", ash(async (req: Request, res: Response) => {
   logger.imp("POST - UPDATE joiner checked status /wud/:id ");
-  console.log(req.body.data);
-  // if joinerID is empy, push user to
   const noUserId = crypto.randomBytes(8).toString("hex");
   const userId = req.body.data.joinerId;
   let filter
@@ -148,13 +145,15 @@ router.post("/wud/join/:id", ash(async (req: Request, res: Response) => {
       _id: { $oid: req.params.id }
     }
     update = {
-      $push: { joiners: {
-        id: noUserId,
-        photoURL: '',
-        displayName: req.body.data.participant.name,
-        contact: req.body.data.participant.contact,
-        checked: req.body.data.checked
-      }}
+      $push: {
+        joiners: {
+          id: noUserId,
+          photoURL: '',
+          displayName: req.body.data.participant.name,
+          contact: req.body.data.participant.contact,
+          checked: req.body.data.checked
+        }
+      }
     }
   } else {
     filter = {
@@ -214,6 +213,11 @@ router.get("/mywuds/:userId", (req: Request, res: Response) => {
       res.status(400).send({ status: 400, message: error }).end();
     });
 });
+
+router.put("/mywuds/:userId", (req: Request, res: Response) => {
+  logger.imp("ENDPOINT ACTIVATED: /mywuds/:userId")
+  res.status(200).send("OK").end()
+})
 
 router.get("/myjoinedwuds/:userId", (req: Request, res: Response) => {
   logger.info("GET  /api/wuds/myjoinedwuds");
