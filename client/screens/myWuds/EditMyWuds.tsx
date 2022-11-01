@@ -3,6 +3,7 @@ import { Button, Divider, Icon, Text, Card } from 'react-native-elements'
 import { useGetWudTimebyIdQuery } from '../../api/api'
 import LayoutScreen from '../../components/Layout/LayoutScreen'
 import EditWud from '../../components/Wud/EditWud'
+import Location from '../../components/Location/Location'
 
 type Props = {
     route: any
@@ -24,12 +25,15 @@ const EditMyWuds = ({ route }: Props) => {
     return (
         <LayoutScreen>
             <Text h2>EditMyWuds</Text>
-            {isLoading ? "Loading" : 
+            {isLoading ? <Text>Loading</Text> : 
             <EditWud data={data?.event.data} handleEdit={(field:string)=>handleEdit(field)}/>
             }
   
             <Divider width={5} />
             <Button title="Delete" />
+            <Card>
+                <Location />
+            </Card>
         </LayoutScreen>
     )
 }
