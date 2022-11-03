@@ -79,6 +79,9 @@ const HomeScreen = () => {
   const handleWudTimes = () => {
     navigation.navigate("WudTimes")
   }
+  const handleGroups = () => {
+    navigation.navigate('Groups')
+  }
 
   if (auth.currentUser?.displayName === null || auth.currentUser?.photoURL === null) {
     navigation.navigate("ProfileEdit")
@@ -112,6 +115,11 @@ const HomeScreen = () => {
           <Card>
             <Button title={t('home.createdWuds')}
               onPress={handleMyWuds} type="outline" />
+          </Card>
+          <Card>
+            <Button title={'Groups'} 
+            onPress={handleGroups}
+            />
           </Card>
 
         </View>

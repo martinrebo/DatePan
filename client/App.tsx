@@ -33,6 +33,8 @@ import ProfileEdit from './screens/profile/ProfileEdit';
 import MyJoinedWuds from './screens/myJoinedWuds/MyJoinedWuds';
 import Chat from './screens/chat/Chat';
 import JoinersCheckList from './screens/myWuds/JoinersCheckList'
+import Groups from './screens/Groups/Groups'
+import CreateGroup from './screens/Groups/CreateGroup'
 
 import AvatarHead from './components/AvatarHead/AvatarHead';
 import GoBackHead from './components/GoBackHead/GoBackHead';
@@ -152,6 +154,8 @@ export default function App() {
                       name="JoinersCheckList" component={JoinersCheckList} />
 
                     <Stack.Screen options={{ title: t('wudTimes.title') }} name="Home" component={HomeScreen} />
+                    <Stack.Screen options={{ title: 'Groups'}} name="Groups" component={Groups} />
+                    <Stack.Screen options={{ title: 'Create Group'}} name="CreateGroup" component={CreateGroup} />
 
                   </Stack.Group>
 
