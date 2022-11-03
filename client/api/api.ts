@@ -2,7 +2,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import type { IWudtime, IWudtimeResponse } from "../interfaces/wudtime";
 import {auth} from '../firebase'
-let userId = auth.currentUser?.uid ? auth.currentUser?.uid : ''
+// let userId = auth.currentUser?.uid ? auth.currentUser?.uid : 'no Current user'
 interface documents {
   documents: [{ data: IWudtime; id: string; joiners: Array<{}> }];
 }
@@ -25,6 +25,7 @@ export const api = createApi({
 
     createWudTime: builder.query<IWudtime, IWudtime>({
       query: (data) => {
+        let userId = auth.currentUser?.uid
         return {
           url: "/wud",
           method: "POST",
@@ -35,10 +36,6 @@ export const api = createApi({
     myWuds: builder.query<WudtimeList, string>({
       query: (userId) => `/mywuds/${userId}`,
     }),
-    myJoinedWuds: builder.query<WudtimeList, string>({
-      query: (userId) => `/myjoinedwuds/${userId}`,
-    }),
-
     getWudTimes: builder.query<WudtimeList, string>({
       query: (city) => `/wuds/${city}`,
     }),
@@ -48,31 +45,36 @@ export const api = createApi({
     }),
     joinWudTime: builder.mutation<any, any>({
       query: (data) => {
+        let userId = auth.currentUser?.uid
         return {
-          url: "/wud/join",
+          url: "/join",
           method: "POST",
-          body: { data },
+          body: { data, userId },
         };
       },
     }),
     checkJoiner: builder.mutation<any, any>({
       // When event Admin checkin attendees
       query: (data) => {
+        let userId = auth.currentUser?.uid
         return {
-          url: `/wud/join/${data.eventId}`,
+          url: `/join/${data.eventId}`,
           method: 'POST',
-          body: {data}
+          body: {data, userId }
         }
       },
       invalidatesTags: (result, error, { id }) => [{ type: 'wud', id }],
     }),
+    myJoinedWuds: builder.query<WudtimeList, string>({
+      query: (userId) => `/join/myjoinedwuds/${userId}`,
+    }),
     createGroup: builder.mutation<any, any>({
       query: (data)=>{
-        console.log(data);
+        let userId = auth.currentUser?.uid
         return {
           url: 'groups/createGroup',
           method: 'POST',
-          body: {data}
+          body: {data, userId}
         }
       }
     })

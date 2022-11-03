@@ -7,7 +7,7 @@ import config from '../util/mongoApi'
 const router = Router();
 
 router.post("/", (req: Request, res: Response) => {
-    logger.info("POST /wud/join");
+    logger.info("POST /wuds/join");
     const dataUpdate = {
       ...config.data,
       filter: {
@@ -40,7 +40,7 @@ router.post("/", (req: Request, res: Response) => {
   });
   
   router.post("/:id", ash(async (req: Request, res: Response) => {
-    logger.imp("POST - UPDATE joiner checked status /wud/:id ");
+    logger.imp("POST - UPDATE joiner checked status /wuds/join/:id ");
     const noUserId = crypto.randomBytes(8).toString("hex");
     const userId = req.body.data.joinerId;
     let filter
@@ -82,7 +82,7 @@ router.post("/", (req: Request, res: Response) => {
   
     try {
       const response = await axios(wudConfig)
-      logger.info('OK - Update joiner checked status /wud/join/:id')
+      logger.info('OK - Update joiner checked status /wuds/join/:id')
       res.status(200).send(response.data).end()
     }
     catch (error) {

@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react'
+import React, { useState, useEffect} from 'react'
 import { useNavigation } from '@react-navigation/core'
 import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { Button, Avatar, Tile, Card, Image } from 'react-native-elements'
@@ -12,50 +12,6 @@ import * as Linking from 'expo-linking'
 const HomeScreen = () => {
   const navigation: any = useNavigation()
   const { t } = useTranslation()
-
-  // const handleSignOut = () => {
-  //   auth
-  //     .signOut()
-  //     .then(() => {
-  //       navigation.replace("Login")
-  //     })
-  //     .catch(error => alert(error.message))
-  // }
-
-  // useLayoutEffect(() => {
-  //   navigation.setOptions({
-  //     headerLeft: () => (
-  //       <View style={{ marginLeft: 20 }} >
-  //         <Avatar
-  //           rounded
-  //           source={{
-  //             uri: auth?.currentUser?.photoURL!,
-  //           }}
-  //           onPress={() => navigation.navigate('ProfileView')}
-  //         />
-  //       </View>
-  //     ),
-  //     headerRight: () => (
-  //       <TouchableOpacity style={{
-  //         marginRight: 10
-  //       }}
-  //         onPress={handleSignOut}
-  //       >
-  //         <Text>Sign Out</Text>
-  //       </TouchableOpacity>
-  //     )
-  //   })
-  // }, [navigation])
-
-  // Linking.addEventListener('url', (event) => {
-  //   console.log("event listener", event.url);
-  //   let url = event.url;
-  //   if (url.includes("wud")) {
-  //     let id = url.split("/")[4];
-  //     console.log("id", id);
-  //     navigation.navigate("WudTimeID", { id: id })
-  //   }
-  // });
 
   Linking.getInitialURL().then((url) => {
     // console.log("initial url", url);
@@ -86,6 +42,15 @@ const HomeScreen = () => {
   if (auth.currentUser?.displayName === null || auth.currentUser?.photoURL === null) {
     navigation.navigate("ProfileEdit")
   }
+
+  console.log('USER', auth.currentUser?.displayName)
+
+  const [userAuth, setUserAuth] = useState<string>('')
+
+  useEffect(() => {
+    setUserAuth(auth.currentUser?.displayName as string)
+  }, [auth])
+  
 
   return (
 
@@ -126,6 +91,7 @@ const HomeScreen = () => {
       </View>
       <View >
         <LanguageButton />
+        <View><Text>{userAuth}</Text></View>
         <Healtcheck />
         <View><Text> v.0.4</Text></View>
       </View>

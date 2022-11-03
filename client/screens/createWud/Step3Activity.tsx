@@ -23,7 +23,8 @@ const Step3Activity = ({ route }: any) => {
     dispatch(addActivity(activity))
     navigation.navigate('Step4Joiners', { category, wudType, activity })
   }
-  console.log(wudType)
+  // console.log(wudType)
+  
 
   const listOfWuds = WUDS.filter(wud => wud.category === category)
   const listOfSubtypes = listOfWuds.flatMap(wud => wud.wudTypes)
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    flexFlow: 'row',
+    // flexFlow: 'row', not valid Native
     flexDirection: 'row',
     flexWrap: 'wrap',
     marginTop: 10,

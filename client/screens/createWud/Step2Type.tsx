@@ -14,7 +14,6 @@ import { addCategoryEmoji } from '../../helpers/addEmoji'
 import LayoutScreen from '../../components/Layout/LayoutScreen'
 
 
-
 const Step2Type = ({ route }: any) => {
   const navigation: any = useNavigation()
   const { t } = useTranslation()
@@ -91,7 +90,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    flexFlow: 'row',
+    // flexFlow: 'row', Not Valid Native
     flexDirection: 'row',
     flexWrap: 'wrap',
     marginTop: 10,

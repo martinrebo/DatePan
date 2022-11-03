@@ -3,13 +3,14 @@ import { Input, Text, Card, Button } from 'react-native-elements'
 import { useTranslation } from 'react-i18next'
 import { useNavigation } from '@react-navigation/core'
 import { useCreateGroupMutation } from '../../api/api'
+import { auth } from '../../firebase'
 
 type Props = {}
 
 export default function CreateGroup({ }: Props) {
-    const navigation = useNavigation()
+    const navigation: any = useNavigation()
     const { t } = useTranslation()
-    const [createGroup, { isLoading: isUpdating } ] = useCreateGroupMutation()
+    const [createGroup, { isLoading: isUpdating }] = useCreateGroupMutation()
 
     const [groupData, setGroupData] = useState({
         groupName: '',
@@ -20,18 +21,19 @@ export default function CreateGroup({ }: Props) {
     })
 
     const handleInput = (value: string, field: string) => {
-        setGroupData( { ...groupData, [field]: value})
-
+        setGroupData({ ...groupData, [field]: value })
+        // console.log(auth.currentUser)
     }
 
     const handleSend = async () => {
         try {
             createGroup(groupData)
+            navigation.navigate('Groups')
         }
         catch (err) {
             console.log(err)
         }
-        
+
     }
     return (
         <>
@@ -46,10 +48,10 @@ export default function CreateGroup({ }: Props) {
                 <Text> Image </Text>
             </Card>
             <Card>
-                <Input label={'KPI1'} onChangeText={(value) => handleInput(value, 'kpi')}/>
+                <Input label={'KPI1'} onChangeText={(value) => handleInput(value, 'kpi')} />
             </Card>
             <Card>
-                <Button title={'Create'} onPress={handleSend}/>
+                <Button title={'Create'} onPress={handleSend} />
             </Card>
 
         </>

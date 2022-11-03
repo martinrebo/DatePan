@@ -14,25 +14,27 @@ const EditMyWuds = ({ route }: Props) => {
     const { wudId } = route.params
     const { data, isLoading, error, isSuccess } = useGetWudTimebyIdQuery(wudId)
 
-    const handleEdit = (field:string) => {
-        console.log("Clcick", field)
+    const handleEdit = (field: string) => {
+        // console.log("Clcick", field)
         // Api post request update mywuds 
     }
 
     // TODO: Liz can add key values to the event
-    console.log('EditMyWuds', data)
+    // console.log('EditMyWuds', data)
 
     return (
         <LayoutScreen>
-            <Text h2>EditMyWuds</Text>
-            {isLoading ? <Text>Loading</Text> : 
-            <EditWud data={data?.event.data} handleEdit={(field:string)=>handleEdit(field)}/>
-            }
-  
-            <Divider width={5} />
-            <Button title="Delete" />
             <Card>
-                <Location />
+                <Text h2>EditMyWuds</Text>
+                {isLoading ? <Text>Loading</Text> :
+                    <EditWud data={data?.event.data} handleEdit={(field: string) => handleEdit(field)} />
+                }
+
+                <Divider width={5} />
+                <Button title="Delete" />
+                <Card>
+                    <Location />
+                </Card>
             </Card>
         </LayoutScreen>
     )

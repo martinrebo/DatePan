@@ -7,7 +7,7 @@ import config from '../util/mongoApi'
 
 const router = Router();
 
-router.get("/mywuds/:userId", (req: Request, res: Response) => {
+router.get("/:userId", (req: Request, res: Response) => {
   logger.info("GET  /api/wuds/mywuds");
   const myWudsConfig = {
     ...config,
@@ -28,11 +28,12 @@ router.get("/mywuds/:userId", (req: Request, res: Response) => {
         .end();
     })
     .catch(function (error) {
+      logger.err("GET  /api/wuds/mywuds");
       res.status(400).send({ status: 400, message: error }).end();
     });
 });
 
-router.put("/mywuds/:userId", (req: Request, res: Response) => {
+router.put("/:userId", (req: Request, res: Response) => {
   logger.imp("ENDPOINT ACTIVATED: /mywuds/:userId")
   res.status(200).send("OK").end()
 })

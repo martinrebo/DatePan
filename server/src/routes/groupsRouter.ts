@@ -11,12 +11,12 @@ router.get("/", (req: Request, res: Response) => {
 });
 
 router.post("/createGroup", ash( async (req: Request, res: Response) => {
-  logger.info("POST WTF /wud")
+  logger.info(" POST /wuds/createGroup")
   const dataUpdate =  {
         collection: 'groups',
         database: "wudtimeDB",
         dataSource: "clusterWudTime0",
-        document: req.body.data
+        document: {groupData: req.body.data, uid: req.body.userId }
     }
   const APIconfig = {
     ...config,
