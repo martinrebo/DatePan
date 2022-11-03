@@ -65,6 +65,16 @@ export const api = createApi({
         }
       },
       invalidatesTags: (result, error, { id }) => [{ type: 'wud', id }],
+    }),
+    createGroup: builder.mutation<any, any>({
+      query: (data)=>{
+        console.log(data);
+        return {
+          url: 'groups/createGroup',
+          method: 'POST',
+          body: {data}
+        }
+      }
     })
   }),
 });
@@ -79,5 +89,6 @@ export const {
   useJoinWudTimeMutation,
   useMyJoinedWudsQuery,
   useGetWudTimebyIdQuery,
-  useCheckJoinerMutation
+  useCheckJoinerMutation,
+  useCreateGroupMutation,
 } = api;

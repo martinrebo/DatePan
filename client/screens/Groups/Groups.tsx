@@ -11,7 +11,7 @@ const Groups = (props: Props) => {
     const { t } = useTranslation()
 
     const handleCreateGroups = () => {
-      navigation.navigate('createGroup')
+      navigation.navigate('CreateGroup')
     }
 
   return (
