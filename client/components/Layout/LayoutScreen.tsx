@@ -9,7 +9,7 @@ type Props = {
 const LayoutScreen = ({ children }: Props) => {
     return (
         <SafeAreaView style={styles.container}>
-            <ScrollView style={styles.scroll}>      
+            <ScrollView style={styles.scroll} keyboardShouldPersistTaps={'handled'}>      
                 <View>
                     {children}
                 </View>

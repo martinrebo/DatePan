@@ -23,6 +23,7 @@ export default function TimePicker() {
     new Date(),
   );
 
+  // TODO: Same Redux dispatches for Web and Mobile. Standard Time Manipulation
   const handleDay = (newValue: Date | null) => {
     setDay(newValue);
     dispatch(addDate(newValue))

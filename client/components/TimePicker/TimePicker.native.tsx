@@ -1,20 +1,25 @@
 import React, { useState } from 'react'
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { Text, Button, Platform, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { Card } from 'react-native-elements'
+import { addEndTime, addDate, addStartTime } from '../../redux/wudSlice';
+import { useDispatch } from 'react-redux'
 
 type Props = {}
 
 export default function TimePicker({ }: Props) {
-
-  const [date, setDate] = useState(new Date(1598051730000));
+  const dispatch = useDispatch()
+  const [date, setDate] = useState(new Date(Date.now()));
   const [mode, setMode] = useState<any>('date');
   const [show, setShow] = useState(false);
+
+  // TODO: Same Redux dispatches for Web and Mobile. Standard Time Manipulation
 
   const onChange = (event: any, selectedDate: any) => {
     const currentDate = selectedDate;
     setShow(false);
     setDate(currentDate);
+    dispatch(addDate(currentDate))
   };
 
   const showMode = (currentMode: any) => {
@@ -24,15 +29,19 @@ export default function TimePicker({ }: Props) {
 
   return (
     <View>
-      <Text>selected: {date.toLocaleString()}</Text>
       <Card>
         <TouchableOpacity onPress={() => showMode('date')}>
-          <Text> Select Day: </Text>
+          <Text> Select Day: {date.toLocaleDateString()} </Text>
         </TouchableOpacity>
       </Card>
       <Card>
         <TouchableOpacity onPress={() => showMode('time')}>
-          <Text> Select Start Hour: dddd</Text>
+          <Text> Select Start Hour: { date.toLocaleTimeString()}</Text>
+        </TouchableOpacity>
+      </Card>
+      <Card>
+        <TouchableOpacity>
+          <Text> TODO: EVENT DURATION </Text>
         </TouchableOpacity>
       </Card>
 { show ? <DateTimePicker

@@ -1,7 +1,7 @@
 
 import { useState } from 'react'
-import { StyleSheet, View } from 'react-native'
-import { Button, Card, Text, Input, CheckBox } from 'react-native-elements'
+import { StyleSheet, View, FlatList } from 'react-native'
+import { Button, Card, Text, Input, CheckBox, Divider } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch } from 'react-redux'
 import { addLocationData } from '../../redux/wudSlice'
@@ -9,7 +9,7 @@ import { addActivityEmoji } from '../../helpers/addEmoji'
 import LayoutScreen from '../../components/Layout/LayoutScreen'
 import TimePicker from '../../components/TimePicker/TimePicker'
 import React from 'react'
-import PlaceWeb from '../../components/Place/PlaceWeb'
+import Place from '../../components/Place/Place'
 
 const Step4Joiners = ({ route }: any) => {
   const navigation: any = useNavigation()
@@ -22,20 +22,21 @@ const Step4Joiners = ({ route }: any) => {
   }
 
   return (
-    <LayoutScreen >
+    <View>
       <Text h2> {addActivityEmoji[activity as keyof typeof addActivityEmoji].emoji}</Text>
       <Text > {addActivityEmoji[activity as keyof typeof addActivityEmoji].name}</Text>
       <Card>
         <TimePicker />
       </Card>
-      <Card>
-        {/* <PlaceWeb /> */}
-      </Card>
-      <Card>
-        <Button title="Next"
+      <View>
+      <Place />
+      </View>
+
+      <View style={styles.nextButton}>
+        <Button title="Next" style={styles.nextButton}
           onPress={handleNext} />
-      </Card>
-    </LayoutScreen>
+      </View>
+    </View>
 
   )
 }
@@ -54,7 +55,7 @@ const styles = StyleSheet.create({
     maxWidth: 500,
     textAlign: 'center',
   },
-  button: {
-    marginTop: 10
+  nextButton: {
+    marginTop: 100,
   }
 })

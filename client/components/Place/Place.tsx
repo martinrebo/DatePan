@@ -1,35 +1,60 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import React, { useEffect } from 'react'
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete'
+import { addLocationData } from '../../redux/wudSlice'
+import { IGooglePlace } from '../../interfaces/wudtime'
+import { useDispatch } from 'react-redux'
+
+type Props = {}
+
+//https://tintef.github.io/react-google-places-autocomplete/docs/props
 
 
-const Place = (): JSX.Element => {
+const PlaceWeb = (props: Props) => {
+    const dispatch = useDispatch()
+
+    const [value, setValue] = React.useState<IGooglePlace>();
+
+    const handleChange = (value: any) => {
+        console.log(value)
+        setValue(value)
+
+    }
+
+    useEffect(() => {
+        dispatch(addLocationData({
+            label: value?.label!,
+            value: {
+                description: value?.value.description!,
+                place_id: value?.value.place_id!,
+            }
+
+        }))
+
+    }, [value])
+
+
     return (
-        <>
-            <Text>Google MAaps aoutsearch</Text>
+        <View>
             <GooglePlacesAutocomplete
-                placeholder='Search'
-                onPress={(data, details = null) => {
-                    // 'details' is provided when fetchDetails = true
-                    console.log(data, details);
+                apiKey="AIzaSyCVxqE2hJCikZ2iSmGyhuHxZjQ9r-so85c"
+                selectProps={{
+                    value,
+                    onChange: handleChange,
                 }}
-                query={{
-                    key: 'AIzaSyCVxqE2hJCikZ2iSmGyhuHxZjQ9r-so85c',
-                    language: 'en',
-                }}
-                requestUrl={{
-                    useOnPlatform: 'web', // or "all"
-                    url:
-                        'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api', // or any proxy server that hits https://maps.googleapis.com/maps/api
-                    headers: {
-                        Authorization: `an auth token`, // if required for your proxy
+                apiOptions={{ language: 'en', region: 'es' }}
+                autocompletionRequest={{
+                    componentRestrictions: {
+                        country: 'es',
                     },
+
                 }}
             />
-        </>
+        </View>
     )
 }
 
-export default Place
+export default PlaceWeb
 
 const styles = StyleSheet.create({})
+
