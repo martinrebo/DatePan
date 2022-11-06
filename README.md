@@ -9,11 +9,12 @@ start app:
 TODO: STRUCTURE
 
 TODO: Deploy the app
-1) Build client for Web
+1) Build office for Web
 2) Move build-web to the server
 3) build server
 4) deploy gcp
 
+TODO: Depley Firebase client folder
 
 
 

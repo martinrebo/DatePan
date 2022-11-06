@@ -93,7 +93,7 @@ const HomeScreen = () => {
         <LanguageButton />
         <View><Text>{userAuth}</Text></View>
         <Healtcheck />
-        <View><Text> v.0.4</Text></View>
+        <View><Text> v.0.5</Text></View>
       </View>
 
     </LayoutScreen>

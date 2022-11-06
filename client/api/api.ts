@@ -16,7 +16,7 @@ interface WudtimeList {
 // baseUrl: "http://localhost:3001/api/wuds
 export const api = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3001/api/wuds" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "https://api-dot-datepan-app.ew.r.appspot.com//api/wuds" }),
   tagTypes: ['wud'],
   endpoints: (builder) => ({
     ping: builder.query<IWudtime, string>({
