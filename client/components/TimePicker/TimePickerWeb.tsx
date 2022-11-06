@@ -11,12 +11,15 @@ import DateTimePicker from '@mui/lab/DateTimePicker';
 // import MobileDatePicker from '@mui/lab/MobileDatePicker';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
-import { Button, Text } from 'react-native-elements';
+import { Button, Text} from 'react-native-elements';
+import { Platform } from 'react-native'
 import { addEndTime, addDate, addStartTime } from '../../redux/wudSlice';
 import { useDispatch } from 'react-redux'
 
 
 export default function TimePickerWeb() {
+  console.log('This shouldnt be on Native console')
+  if (Platform.OS === 'android') return <></>
   const dispatch = useDispatch()
 
   const [day, setDay] = React.useState<Date | null>(
@@ -46,6 +49,8 @@ export default function TimePickerWeb() {
     setFinish(newValue);
     dispatch(addEndTime(newValue));
   };
+
+
 
   return (
     <>

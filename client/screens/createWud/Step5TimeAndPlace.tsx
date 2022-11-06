@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux'
 import { addLocationData } from '../../redux/wudSlice'
 import { addActivityEmoji } from '../../helpers/addEmoji'
 import LayoutScreen from '../../components/Layout/LayoutScreen'
-import TimePickerWeb from '../../components/TimePicker/TimePickerWeb'
+import TimePicker from '../../components/TimePicker/'
 import React from 'react'
 import PlaceWeb from '../../components/Place/PlaceWeb'
 
@@ -27,10 +27,10 @@ const Step4Joiners = ({ route }: any) => {
       <Text h2> {addActivityEmoji[activity as keyof typeof addActivityEmoji].emoji}</Text>
       <Text > {addActivityEmoji[activity as keyof typeof addActivityEmoji].name}</Text>
       <Card>
-        {/* <TimePickerWeb /> */}
+        <TimePicker />
       </Card>
       <Card>
-        <PlaceWeb />
+        {/* <PlaceWeb /> */}
       </Card>
       <Card>
         <Button title="Next"

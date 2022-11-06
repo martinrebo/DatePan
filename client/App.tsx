@@ -1,7 +1,7 @@
 
 import React, { createContext } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Platform } from 'react-native';
 import { ThemeProvider } from 'react-native-elements';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -46,7 +46,7 @@ export default function App() {
   const Stack = createNativeStackNavigator();
   const ContextStore = createContext({ language: "es" })
   const { t } = useTranslation()
-
+  console.log('Platform', Platform.OS)
 
   const theme = {
     colors: {
@@ -105,7 +105,7 @@ export default function App() {
                       options={{ title: t("createWudStep5.title") }}
                       name="Step5TimeAndPlace" component={Step5TimeAndPlace} />
                     <Stack.Screen
-                      options={{  title: t("createWudStep6.title")}}
+                      options={{ title: t("createWudStep6.title") }}
                       name="Step6Description" component={Step6Description} />
 
 
@@ -154,8 +154,8 @@ export default function App() {
                       name="JoinersCheckList" component={JoinersCheckList} />
 
                     <Stack.Screen options={{ title: t('wudTimes.title') }} name="Home" component={HomeScreen} />
-                    <Stack.Screen options={{ title: 'Groups'}} name="Groups" component={Groups} />
-                    <Stack.Screen options={{ title: 'Create Group'}} name="CreateGroup" component={CreateGroup} />
+                    <Stack.Screen options={{ title: 'Groups' }} name="Groups" component={Groups} />
+                    <Stack.Screen options={{ title: 'Create Group' }} name="CreateGroup" component={CreateGroup} />
 
                   </Stack.Group>
 
