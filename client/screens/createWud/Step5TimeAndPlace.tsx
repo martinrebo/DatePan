@@ -7,10 +7,9 @@ import { useDispatch } from 'react-redux'
 import { addLocationData } from '../../redux/wudSlice'
 import { addActivityEmoji } from '../../helpers/addEmoji'
 import LayoutScreen from '../../components/Layout/LayoutScreen'
-import TimePicker from '../../components/TimePicker/'
+import TimePicker from '../../components/TimePicker/TimePicker'
 import React from 'react'
 import PlaceWeb from '../../components/Place/PlaceWeb'
-
 
 const Step4Joiners = ({ route }: any) => {
   const navigation: any = useNavigation()

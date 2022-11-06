@@ -46,7 +46,7 @@ export default function App() {
   const Stack = createNativeStackNavigator();
   const ContextStore = createContext({ language: "es" })
   const { t } = useTranslation()
-  console.log('Platform', Platform.OS)
+  console.log('App.tsx - Platform', Platform.OS)
 
   const theme = {
     colors: {

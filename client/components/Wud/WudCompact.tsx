@@ -16,8 +16,6 @@ type Props = {
 
 const WudCompact = ({ data, id }: Props) => {
     const navigation: any = useNavigation()
-    console.log(data)
-
     const goToWud = () => {
         navigation.navigate("WudTimeID", { id })
     }

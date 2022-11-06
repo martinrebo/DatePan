@@ -22,12 +22,9 @@ export default function TimePicker({ }: Props) {
     setMode(currentMode);
   };
 
-  console.log('DateTimePicker NAtive')
-
   return (
     <View>
       <Text>selected: {date.toLocaleString()}</Text>
-
       <Card>
         <TouchableOpacity onPress={() => showMode('date')}>
           <Text> Select Day: </Text>
@@ -38,14 +35,14 @@ export default function TimePicker({ }: Props) {
           <Text> Select Start Hour: dddd</Text>
         </TouchableOpacity>
       </Card>
-
-      <DateTimePicker
+{ show ? <DateTimePicker
         testID="dateTimePicker"
         value={date}
         mode={mode}
         is24Hour={true}
         onChange={onChange}
-      />
+      /> : null}
+      
     </View>
   )
 }
