@@ -15,10 +15,7 @@ export function Landing(props: LandingProps) {
     const { t } = useTranslation();
     return (
         <LayoutScreen>
-
-
             <View style={styles.container}>
-
                 <View style={styles.item}>
                     <Image source={require('../assets/images/wudLogo.png')} containerStyle={styles.image} />
                 </View>
@@ -53,7 +50,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         margin: 10,
-        marginVertical: 100,
+        // marginVertical: 100,
         alignContent: "center",
         alignItems: 'center'
     },
@@ -61,8 +58,8 @@ const styles = StyleSheet.create({
         alignContent: 'center',
     },
     image: {
-        width: 100,
-        height: 100,
+        width: 200,
+        height: 200,
         alignContent: 'center',
 
     },

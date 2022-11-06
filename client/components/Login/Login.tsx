@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { KeyboardAvoidingView, StyleSheet, TextInput } from 'react-native'
 import { auth, createUser, signIn } from '../../firebase'
 import { Button, useTheme } from 'react-native-elements'
+import LayoutScreen from '../Layout/LayoutScreen'
 
 
 export default function LoginScreen() {
@@ -85,7 +86,7 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    maxWidth: 500
+    maxWidth: 500,
   },
   inputContainer: {
     width: '100%'

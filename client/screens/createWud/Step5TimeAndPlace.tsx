@@ -27,7 +27,7 @@ const Step4Joiners = ({ route }: any) => {
       <Text h2> {addActivityEmoji[activity as keyof typeof addActivityEmoji].emoji}</Text>
       <Text > {addActivityEmoji[activity as keyof typeof addActivityEmoji].name}</Text>
       <Card>
-        <TimePickerWeb />
+        {/* <TimePickerWeb /> */}
       </Card>
       <Card>
         <PlaceWeb />
