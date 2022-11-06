@@ -9,7 +9,7 @@ import { addActivityEmoji } from '../../helpers/addEmoji'
 import LayoutScreen from '../../components/Layout/LayoutScreen'
 import TimePicker from '../../components/TimePicker/TimePicker'
 import React from 'react'
-import Place from '../../components/Place/Place'
+import Place from "../../components/Place/Place"
 
 const Step4Joiners = ({ route }: any) => {
   const navigation: any = useNavigation()

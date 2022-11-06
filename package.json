@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/martinrebo/DatePan.git"
+    "url": "git+https://github.com/warteamx/DatePan.git"
   },
   "keywords": [
     "react",
@@ -23,7 +23,7 @@
   "author": "martin reboredo",
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/martinrebo/DatePan/issues"
+    "url": "https://github.com/warteamx/DatePan/issues"
   },
-  "homepage": "https://github.com/martinrebo/DatePan#readme"
+  "homepage": "https://github.com/warteamx/DatePan#readme"
 }

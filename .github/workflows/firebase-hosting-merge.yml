@@ -11,9 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run:  npm run build
+      - run:  npm run build:web
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
+          entrypoint: ./client
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_DATEPAN_APP }}'
           channelId: live
