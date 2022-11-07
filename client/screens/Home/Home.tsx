@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react'
 import { useNavigation } from '@react-navigation/core'
-import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { Button, Avatar, Tile, Card, Image } from 'react-native-elements'
+import { ActivityIndicator, StyleSheet, TouchableOpacity, View } from 'react-native'
+import { Button, Avatar, Tile, Card, Image, Text } from 'react-native-elements'
 import Healtcheck from '../../components/Healthcheck/Healtcheck'
 import LanguageButton from '../../components/LanguageButton/LanguageButton'
 import { auth } from '../../firebase'
@@ -89,11 +89,12 @@ const HomeScreen = () => {
 
         </View>
       </View>
-        <LanguageButton />
-        <View><Text>{userAuth}</Text></View>
+      <Card>
+      <LanguageButton />
+        <Text>{userAuth}</Text>
         <Healtcheck />
-        <View><Text> v.0.0.5</Text></View>
-
+        <Text> v.0.0.5</Text>
+      </Card>
     </LayoutScreen>
 
   )

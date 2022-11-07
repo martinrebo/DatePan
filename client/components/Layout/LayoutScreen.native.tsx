@@ -23,11 +23,9 @@ export default LayoutScreen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
     },
     scroll: {
         backgroundColor: '#edf',
         textAlign: 'center',
-        maxWidth: 500
     },
 })
