@@ -7,6 +7,7 @@ type Props = {
 }
 
 const LayoutScreen = ({ children }: Props) => {
+    console.log('ENV: ', process.env.BRAND)
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.scroll} keyboardShouldPersistTaps={'handled'}>      

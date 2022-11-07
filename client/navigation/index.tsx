@@ -1,107 +1,135 @@
-/**
- * If you are not familiar with React Navigation, refer to the "Fundamentals" guide:
- * https://reactnavigation.org/docs/getting-started
- *
- */
-// import { FontAwesome } from '@expo/vector-icons';
-// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-// import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
-// import { createNativeStackNavigator } from '@react-navigation/native-stack';
-// import * as React from 'react';
-// import { ColorSchemeName, Pressable } from 'react-native';
 
-// import Colors from '../constants/Colors';
-// import useColorScheme from '../hooks/useColorScheme';
-// import ModalScreen from '../screens/ModalScreen';
-// import NotFoundScreen from '../screens/NotFoundScreen';
-// import TabOneScreen from '../screens/TabOneScreen';
-// import TabTwoScreen from '../screens/TabTwoScreen';
-// import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
-// import LinkingConfiguration from './LinkingConfiguration';
+import { View, Text } from 'react-native'
+import React from 'react'
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import * as Linking from 'expo-linking';
+import { useTranslation } from 'react-i18next';
 
-// export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
-//   return (
-//     <NavigationContainer
-//       linking={LinkingConfiguration}
-//       theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-//       <RootNavigator />
-//     </NavigationContainer>
-//   );
-// }
+import { Landing } from '../screens/Landing';
+import HomeScreen from '../screens/Home/Home'
+import Step1Category from '../screens/createWud/Step1Category';
+import Step2Type from '../screens/createWud/Step2Type';
+import Step3Activity from '../screens/createWud/Step3Activity';
+import Step4Joiners from '../screens/createWud/Step4Joiners';
+import Step5TimeAndPlace from '../screens/createWud/Step5TimeAndPlace';
+import Step6Description from '../screens/createWud/Step6Description';
+import MyWuds from '../screens/myWuds/MyWuds';
+import EditMyWuds from '../screens/myWuds/EditMyWuds';
+import Wudtimes from '../screens/Wudtimes/Wudtimes';
+import WudTimeID from '../screens/WudTimeID/WudTimeID';
+import ProfileView from '../screens/profile/ProfileView';
+import ProfileEdit from '../screens/profile/ProfileEdit';
+import MyJoinedWuds from '../screens/myJoinedWuds/MyJoinedWuds';
+import Chat from '../screens/chat/Chat';
+import JoinersCheckList from '../screens/myWuds/JoinersCheckList'
+import Groups from '../screens/Groups/Groups'
+import CreateGroup from '../screens/Groups/CreateGroup'
 
-// /**
-//  * A root stack navigator is often used for displaying modals on top of all other content.
-//  * https://reactnavigation.org/docs/modal
-//  */
-// const Stack = createNativeStackNavigator<RootStackParamList>();
+import AvatarHead from '../components/AvatarHead/AvatarHead';
+import GoBackHead from '../components/GoBackHead/GoBackHead';
+import GoHomeHead from '../components/GoHomeHead/GoHomeHead';
 
-// function RootNavigator() {
-//   return (
-//     <Stack.Navigator>
-//       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
-//       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-//       <Stack.Group screenOptions={{ presentation: 'modal' }}>
-//         <Stack.Screen name="Modal" component={ModalScreen} />
-//       </Stack.Group>
-//     </Stack.Navigator>
-//   );
-// }
+type Props = {}
 
-// /**
-//  * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
-//  * https://reactnavigation.org/docs/bottom-tab-navigator
-//  */
-// const BottomTab = createBottomTabNavigator<RootTabParamList>();
+const index = (props: Props) => {
+    const Stack = createNativeStackNavigator();
+    const { t } = useTranslation()
 
-// function BottomTabNavigator() {
-//   const colorScheme = useColorScheme();
+    const prefix = Linking.createURL('/');
 
-//   return (
-//     <BottomTab.Navigator
-//       initialRouteName="TabOne"
-//       screenOptions={{
-//         tabBarActiveTintColor: Colors[colorScheme].tint,
-//       }}>
-//       <BottomTab.Screen
-//         name="TabOne"
-//         component={TabOneScreen}
-//         options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-//           title: 'Login',
-//           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-//           headerRight: () => (
-//             <Pressable
-//               onPress={() => navigation.navigate('Modal')}
-//               style={({ pressed }) => ({
-//                 opacity: pressed ? 0.5 : 1,
-//               })}>
-//               <FontAwesome
-//                 name="info-circle"
-//                 size={25}
-//                 color={Colors[colorScheme].text}
-//                 style={{ marginRight: 15 }}
-//               />
-//             </Pressable>
-//           ),
-//         })}
-//       />
-//       <BottomTab.Screen
-//         name="TabTwo"
-//         component={TabTwoScreen}
-//         options={{
-//           title: 'Register',
-//           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-//         }}
-//       />
-//     </BottomTab.Navigator>
-//   );
-// }
+    const linking = {
+        prefixes: [prefix],
+    };
 
-// /**
-//  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-//  */
-// function TabBarIcon(props: {
-//   name: React.ComponentProps<typeof FontAwesome>['name'];
-//   color: string;
-// }) {
-//   return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
-// }
+    return (
+        <NavigationContainer linking={linking} fallback={Landing}>
+            <Stack.Navigator>
+                <Stack.Screen options={{ headerShown: false }} name="Login" component={Landing} />
+
+                <Stack.Group
+                    screenOptions={({ navigation }) => ({
+                        headerLeft: () => (<AvatarHead />),
+                        headerRight: () => <GoBackHead onPress={navigation.goBack} />,
+                    })}
+                >
+                    <Stack.Screen options={{ title: t("createWudStep1.title") }}
+                        name="Step1Category" component={Step1Category} />
+                    <Stack.Screen
+                        options={{
+                            title: t("createWudStep2.title")
+                        }} name="Step2Type" component={Step2Type} />
+                    <Stack.Screen
+                        options={{
+                            title: t("createWudStep3.title")
+                        }} name="Step3Activity" component={Step3Activity} />
+                    <Stack.Screen
+                        options={{
+                            title: t("createWudStep4.title")
+                        }}
+                        name="Step4Joiners" component={Step4Joiners} />
+
+                    <Stack.Screen
+                        options={{ title: t("createWudStep5.title") }}
+                        name="Step5TimeAndPlace" component={Step5TimeAndPlace} />
+                    <Stack.Screen
+                        options={{ title: t("createWudStep6.title") }}
+                        name="Step6Description" component={Step6Description} />
+
+
+                    <Stack.Screen
+                        options={{
+                            title: t('wudTimes.title')
+                        }}
+                        name="WudTimes" component={Wudtimes} />
+
+                    <Stack.Screen
+                        options={{ title: t('profileView.title') }}
+                        name="ProfileView" component={ProfileView} />
+                    <Stack.Screen
+                        options={{ title: t('profileEdit.title') }}
+                        name="ProfileEdit" component={ProfileEdit} />
+                    <Stack.Screen
+                        options={{ title: t('myJoinedWuds.title') }}
+                        name="MyJoinedWuds" component={MyJoinedWuds} />
+
+                    <Stack.Screen options={{ title: t('chat.title') }} name="Chat" component={Chat} />
+                </Stack.Group>
+                <Stack.Group
+                    screenOptions={({ navigation }) => ({
+                        headerLeft: () => (<AvatarHead />),
+                        headerRight: () => <GoHomeHead onPress={() => navigation.navigate("Home")} />,
+                    })}
+
+                >
+
+                    <Stack.Screen
+                        options={{
+                            title: t('wudTimes.title')
+                        }}
+                        name="WudTimeID" component={WudTimeID} />
+
+                    <Stack.Screen
+                        options={{ title: t('myWuds.title') }}
+                        name="MyWuds" component={MyWuds} />
+
+                    <Stack.Screen
+                        options={{ title: t('myWuds.editMyWuds') }}
+                        name="EditMyWuds" component={EditMyWuds} />
+
+                    <Stack.Screen
+                        options={{ title: t('myWuds.joinersCheckList') }}
+                        name="JoinersCheckList" component={JoinersCheckList} />
+
+                    <Stack.Screen options={{ title: t('wudTimes.title') }} name="Home" component={HomeScreen} />
+                    <Stack.Screen options={{ title: 'Groups' }} name="Groups" component={Groups} />
+                    <Stack.Screen options={{ title: 'Create Group' }} name="CreateGroup" component={CreateGroup} />
+
+                </Stack.Group>
+
+            </Stack.Navigator>
+        </NavigationContainer>
+    )
+}
+
+export default index
