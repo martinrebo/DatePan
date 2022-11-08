@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { View, StyleSheet } from 'react-native'
-import { Text } from '../Themed'
+import { Text } from 'react-native-elements'
 
 type Props = {}
 

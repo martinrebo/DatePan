@@ -1,8 +1,7 @@
 import React, {useState} from 'react'
 import { View } from 'react-native'
-import { ListItem, Image, Icon, Button, Overlay, Input } from 'react-native-elements'
+import { ListItem, Image, Icon, Button, Overlay, Input, Text } from 'react-native-elements'
 import { useCheckJoinerMutation, useGetWudTimebyIdQuery } from '../../api/api'
-import { Text } from '../../components/Themed'
 
 type Props = {
     route: any
