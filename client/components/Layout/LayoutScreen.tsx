@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView } from 'react-native'
+import { StyleSheet, View, ScrollView, ProgressViewIOSBase } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     scroll: {
-        backgroundColor: '#edf',
+        backgroundColor: process.env.BRAND === 'CBI' ? 'transparent' : '#edf',
         textAlign: 'center',
         maxWidth: 500
     },

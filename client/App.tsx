@@ -15,7 +15,7 @@ export default function App() {
 
   const theme = {
     colors: {
-      primary: '#8139DC',
+      primary: process.env.BRAND === 'CBI' ? '#000' : '#8139DC',
       secondary: '#12EDFF'
     }
   }
