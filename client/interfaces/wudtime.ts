@@ -16,7 +16,7 @@ export interface IWudtime {
   place: IGooglePlace | null;
   notes: string | ""; // 'Description of the event here'
   userId: string | "" | null; // User firebase ID
-  photoURL: ImageSourcePropType | null; // User photo URL
+  photoURL: ImageSourcePropType | null | string; // User photo URL
   displayName: string | ""; // User display name
 }
 

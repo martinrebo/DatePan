@@ -1,4 +1,4 @@
-import { Button, StyleSheet, View } from 'react-native'
+import { StyleSheet } from 'react-native'
 import React from 'react'
 
 import { Card, Divider, ListItem, Avatar, Text } from 'react-native-elements'
@@ -13,7 +13,7 @@ type Props = {
 }
 
 const Wud = ({ data, joiners, hideHostedBy }: Props) => {
-// console.log('wudtiame,data', data.date)
+// console.log('wudtiame,data', data)
     // TODO: ADD Validation and Date and Time 
     //toLocaleDateString('en-us', { weekday: "long", year: "numeric", month: "short", day: "numeric" }
     let date = new Date(data?.date!).toLocaleDateString('en-us', { weekday: "long", year: "numeric", month: "short", day: "numeric" })
@@ -37,8 +37,11 @@ const Wud = ({ data, joiners, hideHostedBy }: Props) => {
                     <Text> Hosted By: </Text>
                     <ListItem>
                         <Avatar
+                            rounded
                             size="medium"
-                            source={data.photoURL!} />
+                            source={{
+                                uri: data?.photoURL!,
+                            }} />
                         <ListItem.Content>
                             <Text> {data.displayName}</Text>
                         </ListItem.Content>

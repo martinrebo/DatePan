@@ -42,6 +42,9 @@ const WudTimeID = ({ route }: any) => {
         let joined = checkJoined(joiners, userId)
         return joined
     }
+
+    console.log('DAta joiners', data)
+    console.log('DAta joiners', userId)
     
     return (
         <LayoutScreen >
