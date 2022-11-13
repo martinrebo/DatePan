@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux'
 import { addActivityEmoji } from '../../helpers/addEmoji'
 import LayoutScreen from '../../components/Layout/LayoutScreen'
 import TimePicker from '../../components/TimePicker/TimePicker'
+import Place from '../../components/Place/Place'
 import React from 'react'
 
 const Step4Joiners = ({ route }: any) => {
@@ -28,11 +29,11 @@ const Step4Joiners = ({ route }: any) => {
         <Card>
           <TimePicker />
         </Card>
-        {/* <Card>
+        <Card>
 
           <Place />
 
-        </Card> */}
+        </Card>
         <Card>
           <Button title="Next" style={styles.nextButton}
             onPress={handleNext} />

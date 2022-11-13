@@ -1,5 +1,6 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
+import * as Linking from 'expo-linking';
 
 import { Card, Divider, ListItem, Avatar, Text } from 'react-native-elements'
 import { addActivityEmoji } from '../../helpers/addEmoji'
@@ -10,14 +11,21 @@ type Props = {
     data: IWudtime,
     joiners: any,
     hideHostedBy?: boolean
+    Linking: any
 }
 
-const Wud = ({ data, joiners, hideHostedBy }: Props) => {
+const Wud = ({ data, joiners, hideHostedBy, Linking }: Props) => {
 // console.log('wudtiame,data', data)
     // TODO: ADD Validation and Date and Time 
     //toLocaleDateString('en-us', { weekday: "long", year: "numeric", month: "short", day: "numeric" }
     let date = new Date(data?.date!).toLocaleDateString('en-us', { weekday: "long", year: "numeric", month: "short", day: "numeric" })
     let startTime = new Date(data?.startTime!).toLocaleTimeString('en-us', { hour: "2-digit", minute: "2-digit" })
+
+    const handleGoToMaps = (placeId: string, placeDescription: string) => {
+        console.log(placeId, placeDescription)
+        Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${placeDescription}&query_place_id=${placeId}`);
+    }
+
     return (
         <>
             <Text> {date} </Text>
@@ -29,8 +37,9 @@ const Wud = ({ data, joiners, hideHostedBy }: Props) => {
             <Text> Start: {startTime}</Text>
             <Text> Duration: {data.duration} hours </Text>
             <Divider style={{ padding: 5 }} />
-
-            <Text> {data.place?.value.description}</Text>
+            <TouchableOpacity onPress={()=>handleGoToMaps(data.place?.value.place_id, data.place?.value.description)}>
+                <Text> {data.place?.value.description}</Text>
+            </TouchableOpacity>
             <Divider style={{ padding: 5 }} />
             { !hideHostedBy ?
                 <Card >

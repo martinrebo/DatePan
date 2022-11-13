@@ -1,19 +1,42 @@
 import { StyleSheet, Text, View, ScrollView, FlatList } from 'react-native'
 import { Card } from 'react-native-elements'
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-
+import { useDispatch } from 'react-redux'
+import { IGooglePlace } from '../../interfaces/wudtime'
+import { addLocationData } from '../../redux/wudSlice'
 
 const Place = (): JSX.Element => {
     console.log('GooglePlaces Autocomplete')
+
+    const dispatch = useDispatch()
+
+    const [value, setValue] = React.useState<any>();
+
+    const handleChange = (value: any) => {
+        console.log(value)
+        setValue(value)
+
+    }
+
+    useEffect(() => {
+        dispatch(addLocationData({
+            label: value?.description!,
+            value: {
+                description: value?.description!,
+                place_id: value?.place_id!,
+            }
+
+        }))
+
+    }, [value])
+
+
     return (
             <GooglePlacesAutocomplete
                 placeholder='Search Location'
-                onPress={(data, details) => {
-                    // 'details' is provided when fetchDetails = true
-                    console.log(data, details);
-                }}
-                fetchDetails={true}
+                onPress={(value) => handleChange(value)}
+                // fetchDetails={true}
                 // currentLocation={true}
                 onNotFound={() => console.log('no results')}
                 // minLength={3}
