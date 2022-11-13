@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, Platform, ImageSourcePropType } from 'react-native'
-import { Button, Card, Input, Slider } from 'react-native-elements'
+import { StyleSheet, View, ImageSourcePropType } from 'react-native'
+import { Button, Card, Input } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
 
 import { RootState } from '../../redux/store'
@@ -12,7 +12,7 @@ import { auth } from '../../firebase'
 import LayoutScreen from '../../components/Layout/LayoutScreen'
 
 
-const Step3Activity = ({ route }: any) => {
+const Step6Description = ({ route }: any) => {
   const navigation: any = useNavigation()
   const { category, wudType, activity } = route.params;
   const dispatch = useDispatch()
@@ -55,12 +55,6 @@ const Step3Activity = ({ route }: any) => {
     <LayoutScreen>
       <View style={styles.container}>
         <View style={styles.screen}>
-
-          <Card>
-            <Text> type {JSON.stringify(category)}</Text>
-            <Text> wudType {JSON.stringify(wudType)}</Text>
-            <Text> activity {JSON.stringify(activity)}</Text>
-          </Card>
           <Card>
             <Input
               label="Description"
@@ -85,7 +79,7 @@ const Step3Activity = ({ route }: any) => {
   )
 }
 
-export default Step3Activity
+export default Step6Description
 
 const styles = StyleSheet.create({
   container: {
@@ -96,7 +90,10 @@ const styles = StyleSheet.create({
     marginTop: 100,
   },
   screen: {
-    maxWidth: 500
+    maxWidth: 500,
+    minWidth: 300,
+    borderWidth: 3,
+    borderColor: 'red',
   },
   button: {
     marginTop: 10

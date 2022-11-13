@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, FlatList } from 'react-native'
 import { Card } from 'react-native-elements'
 import React from 'react'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
@@ -9,13 +9,15 @@ const Place = (): JSX.Element => {
     return (
             <GooglePlacesAutocomplete
                 placeholder='Search Location'
-                onPress={(data, details = null) => {
+                onPress={(data, details) => {
                     // 'details' is provided when fetchDetails = true
                     console.log(data, details);
                 }}
+                fetchDetails={true}
                 // currentLocation={true}
-                minLength={3}
-                onFail={(err)=>console.log(err)}
+                onNotFound={() => console.log('no results')}
+                // minLength={3}
+                onFail={(err)=>console.log('Google ERROR => ', err)}
                 query={{
                     key: 'AIzaSyCVxqE2hJCikZ2iSmGyhuHxZjQ9r-so85c',
                     language: 'en',
@@ -28,6 +30,7 @@ const Place = (): JSX.Element => {
                 //         Authorization: `an auth token`, // if required for your proxy
                 //     },
                 // }}
+                disableScroll={true}
             />
     )
 }

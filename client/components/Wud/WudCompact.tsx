@@ -31,7 +31,7 @@ const WudCompact = ({ data, id }: Props) => {
                     addActivityEmoji[data.activity as keyof typeof addActivityEmoji]?.emoji : "error"}
             </Text>
             <Text h4>{capitalize(data.activity)}</Text>
-            <Text> {startTime} - {endTime} </Text>
+            <Text> Duration: {data.duration} hours </Text>
             <Divider style={{ padding: 5 }} />
             <Text> {data.place?.value.description}</Text>
             <Divider style={{ padding: 5 }} />

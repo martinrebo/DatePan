@@ -12,12 +12,12 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
 import { Button, Text, Card, Input } from 'react-native-elements';
-import { addEndTime, addDate, addStartTime } from '../../redux/wudSlice';
+import { addEndTime, addDate, addStartTime, addDuration } from '../../redux/wudSlice';
 import { useDispatch } from 'react-redux'
 
 
 export default function TimePicker() {
-  if (Platform.OS === ('android' || 'ios')) return <></>
+  // if (Platform.OS === ('android' || 'ios')) return <></>
   const dispatch = useDispatch()
   const [day, setDay] = React.useState<Date | null>(
     new Date(),
@@ -43,10 +43,16 @@ export default function TimePicker() {
     new Date(),
   );
 
-  const handleFinish = (newValue: Date | null) => {
-    setFinish(newValue);
-    dispatch(addEndTime(newValue));
-  };
+  // const handleFinish = (newValue: Date | null) => {
+  //   setFinish(newValue);
+  //   dispatch(addEndTime(newValue));
+  // };
+
+  const handleDuration = (duration: string) => {
+    dispatch(addDuration(duration))
+  }
+
+
 
   return (
     <>
@@ -69,7 +75,7 @@ export default function TimePicker() {
             onAccept={() => addStartTime(start)}
           />
         </Card>
-        <Card>
+        {/* <Card>
           <MobileTimePicker
             label="Finish"
             value={finish}
@@ -77,7 +83,13 @@ export default function TimePicker() {
             renderInput={(params) => <TextField {...params} />}
             onAccept={() => addEndTime(finish)}
           />
-        </Card>
+        </Card> */}
+      <Card>
+        <Input 
+        placeholder='Duration Hours'
+        keyboardType='numeric'
+         onChangeText={(value: string) => handleDuration(value)}/>
+      </Card>
       </LocalizationProvider>
     </>
   );

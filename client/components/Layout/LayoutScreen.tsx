@@ -1,18 +1,18 @@
-import { StyleSheet, View, ScrollView, ProgressViewIOSBase } from 'react-native'
+import { StyleSheet, View, ScrollView } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 type Props = {
     children: React.ReactNode
+    type?: 'virtuallList'
 }
 
 const LayoutScreen = ({ children }: Props) => {
-    console.log('ENV: ', process.env.BRAND)
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.scroll} keyboardShouldPersistTaps={'handled'}>      
                 <View>
-                    {children}
+                    <>{children}</>
                 </View>
             </ScrollView>
         </SafeAreaView>

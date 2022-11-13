@@ -1,17 +1,27 @@
-import { StyleSheet, Text, View, ScrollView } from 'react-native'
+import { StyleSheet, View, Text, ScrollView, KeyboardAvoidingView, Platform } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 type Props = {
     children: React.ReactNode
+    type?: 'virtualList'
 }
 
-const LayoutScreen = ({ children }: Props) => {
+const LayoutScreen = ({ children, type }: Props) => {
+    if (type === 'virtualList') return (
+
+
+                <SafeAreaView style={styles.container}>
+                        <>{children}</>
+                </SafeAreaView>
+           
+
+    )
     return (
         <SafeAreaView style={styles.container}>
-            <ScrollView style={styles.scroll} keyboardShouldPersistTaps={'handled'}>      
+            <ScrollView style={styles.scroll} keyboardShouldPersistTaps={'handled'}>
                 <View>
-                    {children}
+                    <>{children}</>
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -25,7 +35,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     scroll: {
-        backgroundColor: '#edf',
+        backgroundColor: process.env.BRAND === 'CBI' ? 'transparent' : '#edf',
         textAlign: 'center',
     },
 })

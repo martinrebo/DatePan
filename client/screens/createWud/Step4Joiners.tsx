@@ -1,4 +1,5 @@
 
+import React from 'react'
 import { useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Button, Card, Text, Input, CheckBox } from 'react-native-elements'
@@ -8,6 +9,7 @@ import { addLocationData } from '../../redux/wudSlice'
 import { addActivityEmoji } from '../../helpers/addEmoji'
 import LayoutScreen from '../../components/Layout/LayoutScreen'
 
+// TODO: ACTIVATE COMPONENT
 
 const Step4Joiners = ({ route }: any) => {
   const navigation: any = useNavigation()

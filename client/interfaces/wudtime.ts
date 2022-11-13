@@ -11,6 +11,7 @@ export interface IWudtime {
   date: Date | null;
   startTime: Date | null;
   endTime: Date | null;
+  duration: string; 
   city: "Barcelona";
   place: IGooglePlace | null;
   notes: string | ""; // 'Description of the event here'

@@ -13,17 +13,21 @@ type Props = {
 }
 
 const Wud = ({ data, joiners, hideHostedBy }: Props) => {
-
+// console.log('wudtiame,data', data.date)
     // TODO: ADD Validation and Date and Time 
+    //toLocaleDateString('en-us', { weekday: "long", year: "numeric", month: "short", day: "numeric" }
+    let date = new Date(data?.date!).toLocaleDateString('en-us', { weekday: "long", year: "numeric", month: "short", day: "numeric" })
+    let startTime = new Date(data?.startTime!).toLocaleTimeString('en-us', { hour: "2-digit", minute: "2-digit" })
     return (
         <>
-            <Text> TODO: Friday 2 June </Text>
+            <Text> {date} </Text>
             <Text h1>
                 {addActivityEmoji[data.activity as keyof typeof addActivityEmoji]?.emoji ?
                     addActivityEmoji[data.activity as keyof typeof addActivityEmoji]?.emoji : "error"}
             </Text>
             <Text h4>{capitalize(data.activity)}</Text>
-            <Text> TODO: From 10: 00  to 11: 00 </Text>
+            <Text> Start: {startTime}</Text>
+            <Text> Duration: {data.duration} hours </Text>
             <Divider style={{ padding: 5 }} />
 
             <Text> {data.place?.value.description}</Text>

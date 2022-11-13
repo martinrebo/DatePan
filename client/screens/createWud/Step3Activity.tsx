@@ -21,7 +21,7 @@ const Step3Activity = ({ route }: any) => {
   const handleClick = (activity: any) => {
 
     dispatch(addActivity(activity))
-    navigation.navigate('Step4Joiners', { category, wudType, activity })
+    navigation.navigate('Step5TimeAndPlace', { category, wudType, activity })
   }
   // console.log(wudType)
   

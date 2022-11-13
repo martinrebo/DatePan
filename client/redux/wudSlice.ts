@@ -16,6 +16,7 @@ interface IlocationData {
 }
 
 const initialState: IWudtime = {
+  _id: "",
   category: "",
   wudType: {
     name: "",
@@ -25,6 +26,7 @@ const initialState: IWudtime = {
   date: null,
   startTime: null,
   endTime: null,
+  duration: "",
   city: "Barcelona",
   place: {
     label: "Barceloneta",
@@ -74,6 +76,9 @@ export const wudSlice = createSlice({
     ) => {
       state.startTime = action.payload;
     },
+    addDuration: (state: IWudtime, action: PayloadAction<IWudtime["duration"]>) => {
+      state.duration = action.payload;
+    },
     addNotes: (state: IWudtime, action: PayloadAction<IWudtime["notes"]>) => {
       state.notes = action.payload;
     },
@@ -98,6 +103,7 @@ export const {
   addDate,
   addStartTime,
   addEndTime,
+  addDuration,
   addLocationData,
   addNotes,
   addUserData,
