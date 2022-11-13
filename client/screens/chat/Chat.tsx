@@ -43,6 +43,8 @@ const Chat = ({ navigation, route }: any) => {
             messages={messages}
             showAvatarForEveryMessage={true}
             onSend={messages => onSend(messages)}
+            isTyping={true}
+            renderUsernameOnMessage={true}
             user={{
                 _id: auth?.currentUser?.email!,
                 name: auth?.currentUser?.displayName!,
