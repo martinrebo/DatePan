@@ -15,7 +15,7 @@ type Props = {
 }
 
 const Wud = ({ data, joiners, hideHostedBy, Linking }: Props) => {
-// console.log('wudtiame,data', data)
+    // console.log('wudtiame,data', data)
     // TODO: ADD Validation and Date and Time 
     //toLocaleDateString('en-us', { weekday: "long", year: "numeric", month: "short", day: "numeric" }
     let date = new Date(data?.date!).toLocaleDateString('en-us', { weekday: "long", year: "numeric", month: "short", day: "numeric" })
@@ -28,20 +28,22 @@ const Wud = ({ data, joiners, hideHostedBy, Linking }: Props) => {
 
     return (
         <>
-            <Text> {date} </Text>
-            <Text h1>
-                {addActivityEmoji[data.activity as keyof typeof addActivityEmoji]?.emoji ?
-                    addActivityEmoji[data.activity as keyof typeof addActivityEmoji]?.emoji : "error"}
-            </Text>
-            <Text h4>{capitalize(data.activity)}</Text>
-            <Text> Start: {startTime}</Text>
-            <Text> Duration: {data.duration} hours </Text>
+            <Card>
+                <Text> 📅 {date} </Text>
+                <Text h1>
+                    {addActivityEmoji[data.activity as keyof typeof addActivityEmoji]?.emoji ?
+                        addActivityEmoji[data.activity as keyof typeof addActivityEmoji]?.emoji : "error"}
+                </Text>
+                <Text h4>{capitalize(data.activity)}</Text>
+                <Text> ⏱️ Start: {startTime}</Text>
+                <Text>⏳ Duration: {data.duration} hours </Text>
+                <Divider style={{ padding: 5 }} />
+                <TouchableOpacity onPress={() => handleGoToMaps(data.place?.value.place_id, data.place?.value.description)}>
+                    <Text> 📌 {data.place?.value.description}</Text>
+                </TouchableOpacity>
+            </Card>
             <Divider style={{ padding: 5 }} />
-            <TouchableOpacity onPress={()=>handleGoToMaps(data.place?.value.place_id, data.place?.value.description)}>
-                <Text> {data.place?.value.description}</Text>
-            </TouchableOpacity>
-            <Divider style={{ padding: 5 }} />
-            { !hideHostedBy ?
+            {!hideHostedBy ?
                 <Card >
                     <Text> Hosted By: </Text>
                     <ListItem>
@@ -56,7 +58,7 @@ const Wud = ({ data, joiners, hideHostedBy, Linking }: Props) => {
                         </ListItem.Content>
                     </ListItem>
                 </Card>
-            : null }
+                : null}
             <Card>
                 <Text>{data.notes}</Text>
             </Card>

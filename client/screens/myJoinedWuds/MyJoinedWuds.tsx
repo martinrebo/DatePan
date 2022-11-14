@@ -31,9 +31,10 @@ export default function MyJoinedWuds({ }: Props) {
           <View key={i}>
             <Card >
               <Wud data={wud.data} joiners={wud.joiners} />
-              <Text>Joiners: {wud.joiners.length ? wud.joiners.length : 0}</Text>
+              <Card>
               <Button title="Group Chat"
                 onPress={() => navigation.navigate('Chat', { wudId: wud._id })} />
+              </Card>
             </Card>
           </View>
 

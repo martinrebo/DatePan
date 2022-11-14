@@ -56,6 +56,6 @@ const styles = StyleSheet.create({
   },
   nextButton: {
     zIndex: 1,
-    marginTop: 100,
+    marginTop: 10,
   }
 })

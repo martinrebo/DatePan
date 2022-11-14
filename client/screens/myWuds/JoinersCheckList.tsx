@@ -1,6 +1,6 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { View } from 'react-native'
-import { ListItem, Image, Icon, Button, Overlay, Input, Text } from 'react-native-elements'
+import { ListItem, Image, Icon, Button, Overlay, Input, Text, Card } from 'react-native-elements'
 import { useCheckJoinerMutation, useGetWudTimebyIdQuery } from '../../api/api'
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 
 export default function JoinersCheckList({ route }: Props) {
     const [isVisible, setIsVisible] = useState(false)
-    const toggleOverlay = ()=> {
+    const toggleOverlay = () => {
         setIsVisible(!isVisible)
     }
     const { wudId } = route.params
@@ -25,7 +25,7 @@ export default function JoinersCheckList({ route }: Props) {
             joinerId, checked: !checked
         }).catch(() => console.log('check error'))
     }
-    const [ participant, setParticipant] = useState({id:'notUser', name:'', contact: ''})
+    const [participant, setParticipant] = useState({ id: 'notUser', name: '', contact: '' })
     const handleSave = () => {
         checkJoiner({
             eventId: wudId,
@@ -34,32 +34,37 @@ export default function JoinersCheckList({ route }: Props) {
             checked: true
         }).catch(() => console.log('check error'))
         setIsVisible(!isVisible)
-        setParticipant({id:'notUser', name:'', contact: ''})
+        setParticipant({ id: 'notUser', name: '', contact: '' })
     }
+
     return (
         <View>
-            <Button title="Add Participant"
-                onPress={toggleOverlay} />
-            {data?.joiners?.map((joiner: any, i: number) => {
-                return (
-                    <ListItem key={i}
-                        bottomDivider>
-                        <Image source={{ uri: joiner.photoURL }}
-                            style={{ width: 25, height: 25 }} />
-                        <ListItem.Content>
-                            <ListItem.Title>{joiner.displayName}</ListItem.Title>
-                        </ListItem.Content>
-                        {isUpdating ? <Icon name="refresh" type="material" tvParallaxProperties={undefined} /> : null}
-                        <ListItem.CheckBox checked={!!joiner.checked} onPress={() => handleJoinerCheckIn(!!joiner.checked, joiner.id)} />
-                    </ListItem>
-                )
-            })}
-             <Overlay onBackdropPress={toggleOverlay} isVisible={isVisible}>
+            <Card>
+                <Button title="Add New Participant"
+                    onPress={toggleOverlay} />
+            </Card>
+            <Card>
+                {data?.event.joiners?.map((joiner: any, i: number) => {
+                    return (
+                        <ListItem key={i}
+                            bottomDivider>
+                            <Image source={{ uri: joiner.photoURL }}
+                                style={{ width: 25, height: 25 }} />
+                            <ListItem.Content>
+                                <ListItem.Title>{joiner.displayName}</ListItem.Title>
+                            </ListItem.Content>
+                            {isUpdating ? <Icon name="refresh" type="material" tvParallaxProperties={undefined} /> : null}
+                            <ListItem.CheckBox checked={!!joiner.checked} onPress={() => handleJoinerCheckIn(!!joiner.checked, joiner.id)} />
+                        </ListItem>
+                    )
+                })}
+            </Card>
+            <Overlay onBackdropPress={toggleOverlay} isVisible={isVisible}>
                 <Text> Add participant </Text>
-                <Input placeholder="name" onChangeText={value => setParticipant({...participant, name: value})}/>
-                <Input placeholder="contact"  onChangeText={value => setParticipant({...participant, contact: value})} /> 
+                <Input placeholder="name" onChangeText={value => setParticipant({ ...participant, name: value })} />
+                <Input placeholder="contact" onChangeText={value => setParticipant({ ...participant, contact: value })} />
                 <Button title="Save" onPress={handleSave} />
-             </Overlay>
+            </Overlay>
         </ View>
     )
 }

@@ -30,16 +30,16 @@ const WudCompact = ({ data, id }: Props) => {
     return (
 
         <>
-            <Text> {date} </Text>
+            <Text> 📅 {date} </Text>
             <Text h1>
                 {addActivityEmoji[data.activity as keyof typeof addActivityEmoji]?.emoji ?
                     addActivityEmoji[data.activity as keyof typeof addActivityEmoji]?.emoji : "error"}
             </Text>
             <Text h4>{capitalize(data.activity)}</Text>
-            <Text> Duration: {data.duration} hours </Text>
+            <Text> ⏳ Duration: {data.duration} hours </Text>
             <Divider style={{ padding: 5 }} />
             <TouchableOpacity onPress={()=>handleGoToMaps(data.place?.value.place_id, data.place?.value.description)}>
-                <Text> {data.place?.value.description}</Text>
+                <Text> 📌 {data.place?.value.description}</Text>
             </TouchableOpacity>
             
             <Divider style={{ padding: 5 }} />
