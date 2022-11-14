@@ -1,9 +1,10 @@
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, ScrollView } from 'react-native'
 import React, { useEffect } from 'react'
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete'
 import { addLocationData } from '../../redux/wudSlice'
 import { IGooglePlace } from '../../interfaces/wudtime'
 import { useDispatch } from 'react-redux'
+import zIndex from '@mui/material/styles/zIndex'
 
 type Props = {}
 
@@ -32,12 +33,13 @@ const PlaceWeb = (props: Props) => {
 
 
     return (
-        <View>
+        <>
             <GooglePlacesAutocomplete
                 apiKey="AIzaSyCVxqE2hJCikZ2iSmGyhuHxZjQ9r-so85c"
                 selectProps={{
                     value,
                     onChange: handleChange,
+                    styles: {zIndex: 9999}
                 }}
                 apiOptions={{ language: 'en', region: 'es' }}
                 autocompletionRequest={{
@@ -46,12 +48,12 @@ const PlaceWeb = (props: Props) => {
                     },
 
                 }}
+                
             />
-        </View>
+        </>
     )
 }
 
 export default PlaceWeb
 
-const styles = StyleSheet.create({})
 

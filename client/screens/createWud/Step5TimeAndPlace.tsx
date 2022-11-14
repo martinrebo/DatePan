@@ -1,6 +1,6 @@
 
 import { useState } from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { Button, Card, Text } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch } from 'react-redux'
@@ -21,24 +21,21 @@ const Step4Joiners = ({ route }: any) => {
   }
 
   return (
-    <LayoutScreen> 
+    <LayoutScreen >
+      <Card containerStyle={styles.places}>
+        <Place />
+      </Card>
+      <Card>
+        <TimePicker />
+      </Card>
+      <View style={styles.nextButton}>
         <Card>
-          <Text h2> {addActivityEmoji[activity as keyof typeof addActivityEmoji].emoji}</Text>
-          <Text > {addActivityEmoji[activity as keyof typeof addActivityEmoji].name}</Text>
-        </Card>
-        <Card>
-          <TimePicker />
-        </Card>
-        <Card>
-
-          <Place />
-
-        </Card>
-        <Card>
-          <Button title="Next" style={styles.nextButton}
+          <Button title="Next"
             onPress={handleNext} />
         </Card>
-        </LayoutScreen>
+
+      </View>
+    </LayoutScreen>
 
   )
 }
@@ -49,15 +46,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    borderColor: 'red',
-    borderWidth: 10
-
+  },
+  places: {
+    marginBottom: 50
   },
   screen: {
     maxWidth: 500,
     textAlign: 'center',
   },
   nextButton: {
+    zIndex: 1,
     marginTop: 100,
   }
 })

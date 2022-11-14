@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 
 type Props = {
     children: React.ReactNode
-    type?: 'virtuallList'
+    type?: 'virtualList'
 }
 
 const LayoutScreen = ({ children }: Props) => {

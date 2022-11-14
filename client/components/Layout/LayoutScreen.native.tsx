@@ -9,13 +9,9 @@ type Props = {
 
 const LayoutScreen = ({ children, type }: Props) => {
     if (type === 'virtualList') return (
-
-
         <SafeAreaView style={styles.container}>
             <>{children}</>
         </SafeAreaView>
-
-
     )
     return (
         <SafeAreaView style={styles.container}>

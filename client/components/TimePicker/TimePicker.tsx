@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform, View } from 'react-native'
+import { Platform, View , StyleSheet } from 'react-native'
 import TextField from '@mui/material/TextField';
 // import AdapterDateFns from '@mui/lab/AdapterDateFns';
 // import LocalizationProvider from '@mui/lab/LocalizationProvider';
@@ -86,7 +86,7 @@ export default function TimePicker() {
         </Card> */}
       <Card>
         <Input 
-        placeholder='Duration Hours'
+        placeholder='⏳ Duration Hours'
         keyboardType='numeric'
          onChangeText={(value: string) => handleDuration(value)}/>
       </Card>
@@ -94,3 +94,5 @@ export default function TimePicker() {
     </>
   );
 }
+
+

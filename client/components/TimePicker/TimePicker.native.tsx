@@ -41,17 +41,17 @@ export default function TimePicker({ }: Props) {
     <View>
       <Card>
         <TouchableOpacity onPress={() => showMode('date')}>
-          <Text> Day: {date.toLocaleDateString('en-us', { weekday: "long", year: "numeric", month: "short", day: "numeric" })} </Text>
+          <Text> 📅 Day: {date.toLocaleDateString('en-us', { weekday: "long", year: "numeric", month: "short", day: "numeric" })} </Text>
         </TouchableOpacity>
       </Card>
       <Card>
         <TouchableOpacity onPress={() => showMode('time')}>
-          <Text> Start: { startTime.toLocaleTimeString('en-us', { hour: "2-digit", minute: "2-digit" }) }</Text>
+          <Text> ⏱️ Start: { startTime.toLocaleTimeString('en-us', { hour: "2-digit", minute: "2-digit" }) }</Text>
         </TouchableOpacity>
       </Card>
       <Card>
         <Input 
-        placeholder='Duration Hours'
+        placeholder='⏳ Duration Hours'
         keyboardType='numeric'
          onChangeText={(value: string) => handleDuration(value)}/>
       </Card>

@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { ScrollView, StyleSheet } from 'react-native'
 import React, {useState, useEffect} from 'react'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { useDispatch } from 'react-redux'
@@ -25,8 +25,9 @@ const Place = (): JSX.Element => {
     }, [value])
 
     return (
+        <ScrollView horizontal={true}> 
             <GooglePlacesAutocomplete
-                placeholder='Search Location'
+                placeholder='📌 Add Location'
                 onPress={(value) => handleChange(value)}
                 // fetchDetails={true}
                 // currentLocation={true}
@@ -47,6 +48,7 @@ const Place = (): JSX.Element => {
                 // }}
                 disableScroll={true}
             />
+        </ScrollView>
     )
 }
 
