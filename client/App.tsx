@@ -1,3 +1,4 @@
+import React from 'react';
 import { createContext } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ThemeProvider } from 'react-native-elements';
@@ -6,9 +7,8 @@ import { Provider } from 'react-redux';
 
 import { store } from './redux/store'
 import "./i18n/i18n"
-
 import useCachedResources from './hooks/useCachedResources';
-import React from 'react';
+
 
 export default function App() {
   const isLoadingComplete = useCachedResources();

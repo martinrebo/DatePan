@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, ScrollView, KeyboardAvoidingView, Platform } from 'react-native'
+import { StyleSheet, View,ScrollView } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
@@ -11,10 +11,10 @@ const LayoutScreen = ({ children, type }: Props) => {
     if (type === 'virtualList') return (
 
 
-                <SafeAreaView style={styles.container}>
-                        <>{children}</>
-                </SafeAreaView>
-           
+        <SafeAreaView style={styles.container}>
+            <>{children}</>
+        </SafeAreaView>
+
 
     )
     return (

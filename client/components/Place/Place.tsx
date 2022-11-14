@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import React, { useEffect } from 'react'
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete'
 import { addLocationData } from '../../redux/wudSlice'
@@ -7,8 +7,7 @@ import { useDispatch } from 'react-redux'
 
 type Props = {}
 
-//https://tintef.github.io/react-google-places-autocomplete/docs/props
-
+// *DOCS: https://tintef.github.io/react-google-places-autocomplete/docs/props
 
 const PlaceWeb = (props: Props) => {
     const dispatch = useDispatch()
@@ -16,9 +15,7 @@ const PlaceWeb = (props: Props) => {
     const [value, setValue] = React.useState<IGooglePlace>();
 
     const handleChange = (value: any) => {
-        console.log(value)
         setValue(value)
-
     }
 
     useEffect(() => {

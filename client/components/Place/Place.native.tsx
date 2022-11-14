@@ -1,22 +1,15 @@
-import { StyleSheet, Text, View, ScrollView, FlatList } from 'react-native'
-import { Card } from 'react-native-elements'
+import { StyleSheet } from 'react-native'
 import React, {useState, useEffect} from 'react'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { useDispatch } from 'react-redux'
-import { IGooglePlace } from '../../interfaces/wudtime'
 import { addLocationData } from '../../redux/wudSlice'
 
 const Place = (): JSX.Element => {
-    console.log('GooglePlaces Autocomplete')
-
     const dispatch = useDispatch()
-
-    const [value, setValue] = React.useState<any>();
+    const [value, setValue] = useState<any>();
 
     const handleChange = (value: any) => {
-        console.log(value)
         setValue(value)
-
     }
 
     useEffect(() => {
@@ -30,7 +23,6 @@ const Place = (): JSX.Element => {
         }))
 
     }, [value])
-
 
     return (
             <GooglePlacesAutocomplete

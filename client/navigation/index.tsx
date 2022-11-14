@@ -50,7 +50,7 @@ const index = (props: Props) => {
                 <Stack.Group
                     screenOptions={({ navigation }) => ({
                         headerLeft: () => (<AvatarHead />),
-                        headerRight: () => <GoBackHead onPress={navigation.goBack} />,
+                        headerRight: () => <GoHomeHead onPress={() => navigation.navigate("Home")} />,
                     })}
                 >
                     <Stack.Screen options={{ title: t("createWudStep1.title") }}
