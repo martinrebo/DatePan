@@ -16,7 +16,6 @@ interface IlocationData {
 }
 
 const initialState: IWudtime = {
-  _id: "",
   category: "",
   wudType: {
     name: "",

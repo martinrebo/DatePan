@@ -1,7 +1,6 @@
 import { ImageSourcePropType } from "react-native";
 
 export interface IWudtime {
-  _id: string;
   category: "fun" | "skills" | "purpose" | "";
   wudType: {
     name: string;
