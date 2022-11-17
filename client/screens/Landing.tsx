@@ -1,6 +1,6 @@
 
 import { StyleSheet, View } from 'react-native';
-import { Text, useTheme, Button, Image } from 'react-native-elements';
+import { Text, useTheme, Image } from 'react-native-elements';
 
 import LoginScreen from '../components/Login/Login';
 import { useTranslation } from 'react-i18next';
@@ -11,13 +11,13 @@ export interface LandingProps {
 }
 
 export function Landing(props: LandingProps) {
-    const { theme } = useTheme();
-    const { t } = useTranslation();
+    const { theme } = useTheme()
+    const { t } = useTranslation()
     return (
         <LayoutScreen>
             <View style={styles.container}>
                 <View style={styles.item}>
-                    <Image source={require('../assets/images/wudLogo.png')} containerStyle={styles.image} />
+                    <Image source={require(`../assets/images/logos/${process.env.BRAND}-Logo.png`)} containerStyle={styles.image} />
                 </View>
                 <View style={styles.item}>
                     <Text
@@ -25,7 +25,7 @@ export function Landing(props: LandingProps) {
                         h1
                         h1Style={{ color: theme?.colors?.primary }}
                     >
-                        WudTime
+                        {t('brandName')}
                     </Text>
                     <Text
                         style={styles.text}

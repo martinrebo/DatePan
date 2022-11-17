@@ -1,6 +1,9 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import translation from "./translations";
+import WUDtranslation from "./WUDtranslations";
+import CBItranstlaton from './CBItranslations'
+
+const translation = process.env.BRAND === 'CBI' ? CBItranstlaton : WUDtranslation
 
 const resources = {
   es: translation.es,
