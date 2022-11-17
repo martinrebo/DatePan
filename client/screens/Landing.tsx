@@ -1,10 +1,11 @@
-
+import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text, useTheme, Image } from 'react-native-elements';
 
 import LoginScreen from '../components/Login/Login';
 import { useTranslation } from 'react-i18next';
 import LayoutScreen from '../components/Layout/LayoutScreen';
+
 
 
 export interface LandingProps {
@@ -22,7 +23,7 @@ export function Landing(props: LandingProps) {
                 <View style={styles.item}>
                     <Text
                         style={styles.title}
-                        h1
+                        h3
                         h1Style={{ color: theme?.colors?.primary }}
                     >
                         {t('brandName')}
@@ -58,8 +59,8 @@ const styles = StyleSheet.create({
         alignContent: 'center',
     },
     image: {
-        width: 200,
-        height: 200,
+        width: 100,
+        height: 100,
         alignContent: 'center',
 
     },

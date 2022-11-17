@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react'
 import { useNavigation } from '@react-navigation/core'
 import { ActivityIndicator, StyleSheet, TouchableOpacity, View } from 'react-native'
-import { Button, Card, Image, Text } from 'react-native-elements'
+import { Button, Avatar, Tile, Card, Image, Text } from 'react-native-elements'
 import Healtcheck from '../../components/Healthcheck/Healtcheck'
 import LanguageButton from '../../components/LanguageButton/LanguageButton'
 import { auth } from '../../firebase'
@@ -47,7 +47,6 @@ const HomeScreen = () => {
     setUserAuth(auth.currentUser?.displayName as string)
   }, [auth])
   
-console.log('REdux', auth.currentUser?.displayName )
 
   return (
 
@@ -88,7 +87,7 @@ console.log('REdux', auth.currentUser?.displayName )
       </View>
       <Card>
       <LanguageButton />
-        <Text>userAuth: {auth.currentUser?.displayName}</Text>
+        <Text>{userAuth}</Text>
         <Healtcheck />
         <Text> v.0.0.5</Text>
       </Card>

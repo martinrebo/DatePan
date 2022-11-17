@@ -52,4 +52,5 @@ export {
   signIn,
   createUser,
   updateProfile,
+  onAuthStateChanged
 };
