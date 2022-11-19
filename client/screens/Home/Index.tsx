@@ -3,7 +3,6 @@ import { useNavigation } from '@react-navigation/core'
 import { auth } from '../../firebase'
 import { useTranslation } from 'react-i18next'
 import * as Linking from 'expo-linking'
-import Home from './Home'
 import RestrictedHome from './RestrictedHome'
 
 const HomeScreen = () => {
@@ -17,17 +16,11 @@ const HomeScreen = () => {
     }
   });
 
-
   if (auth.currentUser?.displayName === null || auth.currentUser?.photoURL === null) {
     navigation.navigate("ProfileEdit")
   }
 
-
-if (process.env.BRAND === 'WUD') return <Home/>
-// if user is CBI and admin return <Home>
-
-// if user is CBI and not admin return <RestrictedHome>
-return <RestrictedHome />
+  if (process.env.BRAND === 'WUD') return 
 }
 
 export default HomeScreen

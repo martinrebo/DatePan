@@ -63,26 +63,9 @@ const HomeScreen = () => {
       <View style={styles.container}>
         <View style={styles.item}>
           <Card>
-            <Button title={t('home.newWud')}
-              onPress={handleOnPress} type="outline" />
-          </Card>
-
-        </View>
-        <View style={styles.item}>
-          <Card>
             <Button title={t('home.joinedWuds')}
               onPress={handleMyJoinedWuds} type="outline" />
           </Card>
-          <Card>
-            <Button title={t('home.createdWuds')}
-              onPress={handleMyWuds} type="outline" />
-          </Card>
-          <Card>
-            <Button title={'Groups'} 
-            onPress={handleGroups}
-            />
-          </Card>
-
         </View>
       </View>
       <Card>

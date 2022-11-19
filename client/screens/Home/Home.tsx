@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react'
 import { useNavigation } from '@react-navigation/core'
 import { ActivityIndicator, StyleSheet, TouchableOpacity, View } from 'react-native'
-import { Button, Card, Image, Text } from 'react-native-elements'
+import { Button, Avatar, Tile, Card, Image, Text } from 'react-native-elements'
 import Healtcheck from '../../components/Healthcheck/Healtcheck'
 import LanguageButton from '../../components/LanguageButton/LanguageButton'
 import { auth } from '../../firebase'
@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next'
 import LayoutScreen from '../../components/Layout/LayoutScreen'
 import * as Linking from 'expo-linking'
 
-const HomeScreen = () => {
+const Home = () => {
   const navigation: any = useNavigation()
   const { t } = useTranslation()
 
@@ -47,7 +47,6 @@ const HomeScreen = () => {
     setUserAuth(auth.currentUser?.displayName as string)
   }, [auth])
   
-console.log('REdux', auth.currentUser?.displayName )
 
   return (
 
@@ -88,7 +87,7 @@ console.log('REdux', auth.currentUser?.displayName )
       </View>
       <Card>
       <LanguageButton />
-        <Text>userAuth: {auth.currentUser?.displayName}</Text>
+        <Text>{userAuth}</Text>
         <Healtcheck />
         <Text> v.0.0.5</Text>
       </Card>
@@ -97,7 +96,7 @@ console.log('REdux', auth.currentUser?.displayName )
   )
 }
 
-export default HomeScreen
+export default Home
 
 const styles = StyleSheet.create({
   container: {

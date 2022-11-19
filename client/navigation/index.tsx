@@ -6,7 +6,7 @@ import * as Linking from 'expo-linking';
 import { useTranslation } from 'react-i18next';
 
 import { Landing } from '../screens/Landing';
-import HomeScreen from '../screens/Home/Home'
+import HomeScreen from '../screens/Home/Index'
 import Step1Category from '../screens/createWud/Step1Category';
 import Step2Type from '../screens/createWud/Step2Type';
 import Step3Activity from '../screens/createWud/Step3Activity';
