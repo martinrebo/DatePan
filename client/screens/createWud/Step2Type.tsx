@@ -20,9 +20,10 @@ const Step2Type = ({ route }: any) => {
 
   const { category } = route.params as { category: IWudtime['category'] };
   const dispatch = useDispatch()
-  const types = useSelector((state: RootState) => state.createWud.category)
+  // const types = useSelector((state: RootState) => state.createWud.category)
 
   const handleClick = (wudType: any) => {
+    console.log(wudType)
     dispatch(addType(wudType))
     navigation.navigate('Step3Activity', { category, wudType })
 

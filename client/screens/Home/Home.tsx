@@ -1,17 +1,22 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
+import * as Linking from 'expo-linking'
 import { useNavigation } from '@react-navigation/core'
 import { ActivityIndicator, StyleSheet, TouchableOpacity, View } from 'react-native'
 import { Button, Avatar, Tile, Card, Image, Text } from 'react-native-elements'
+import { useTranslation } from 'react-i18next'
+
 import Healtcheck from '../../components/Healthcheck/Healtcheck'
 import LanguageButton from '../../components/LanguageButton/LanguageButton'
 import { auth } from '../../firebase'
-import { useTranslation } from 'react-i18next'
+
 import LayoutScreen from '../../components/Layout/LayoutScreen'
-import * as Linking from 'expo-linking'
+import { addCategory, addType, addActivity } from '../../redux/wudSlice'
+import { useSelector, useDispatch } from 'react-redux'
 
 const Home = () => {
   const navigation: any = useNavigation()
   const { t } = useTranslation()
+  const dispatch = useDispatch()
 
   Linking.getInitialURL().then((url) => {
     if (url?.includes("wud")) {
@@ -36,6 +41,15 @@ const Home = () => {
   const handleGroups = () => {
     navigation.navigate('Groups')
   }
+  const handleTemplate = () => {
+    // TODO: Template event DB
+    console.log('click')
+    dispatch(addCategory('purpose'))
+    dispatch(addType('environment'))
+    dispatch(addActivity('ngoVolunteering'))
+    navigation.navigate('Step5TimeAndPlace', { category: 'purpose', wudType: 'environment', activity: 'ngoVolunteering' })
+
+  }
 
   if (auth.currentUser?.displayName === null || auth.currentUser?.photoURL === null) {
     navigation.navigate("ProfileEdit")
@@ -46,7 +60,7 @@ const Home = () => {
   useEffect(() => {
     setUserAuth(auth.currentUser?.displayName as string)
   }, [auth])
-  
+
 
   return (
 
@@ -62,11 +76,18 @@ const Home = () => {
 
       <View style={styles.container}>
         <View style={styles.item}>
+        {
+            auth.currentUser?.uid == 'Pc9aXKgqm5d10uqSvNRzQ24u0cW2' ?
+              <Card>
+                <Button title={'Create CBI event'}
+                  onPress={handleTemplate} />
+              </Card>
+              : null
+          }
           <Card>
             <Button title={t('home.newWud')}
               onPress={handleOnPress} type="outline" />
           </Card>
-
         </View>
         <View style={styles.item}>
           <Card>
@@ -78,15 +99,15 @@ const Home = () => {
               onPress={handleMyWuds} type="outline" />
           </Card>
           <Card>
-            <Button title={'Groups'} 
-            onPress={handleGroups}
+            <Button title={'Groups'}
+              onPress={handleGroups} type='outline'
             />
           </Card>
 
         </View>
       </View>
       <Card>
-      <LanguageButton />
+        <LanguageButton />
         <Text>{userAuth}</Text>
         <Healtcheck />
         <Text> v.0.0.5</Text>

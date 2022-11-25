@@ -18,7 +18,7 @@ const CreateWud = () => {
 
   const navigation: any = useNavigation()
   const dispatch = useDispatch()
-  const types = useSelector((state: RootState) => state.createWud.category)
+  // const types = useSelector((state: RootState) => state.createWud.category)
 
   const handleClick = (category: IWudtime['category']) => {
     dispatch(addCategory(category))

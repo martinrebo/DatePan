@@ -19,7 +19,7 @@ const Step3Activity = ({ route }: any) => {
   const dispatch = useDispatch()
 
   const handleClick = (activity: any) => {
-
+    console.log(activity)
     dispatch(addActivity(activity))
     navigation.navigate('Step5TimeAndPlace', { category, wudType, activity })
   }

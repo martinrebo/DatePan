@@ -23,6 +23,13 @@ const WudTimeID = ({ route }: any) => {
     let userName = auth.currentUser?.displayName!
     let userPhotoURL = auth.currentUser?.photoURL!
 
+    // TODO: If user is not auth => Redirect to Login with event ID
+    console.log("auth', " , auth.currentUser)
+
+    if (!auth.currentUser) {
+        console.log('navigate to login Event id ', id)
+    }
+
     const handleJoin = (wudID: string) => {
         joinWudTime({
             id: wudID,
