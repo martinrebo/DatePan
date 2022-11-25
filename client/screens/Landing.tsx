@@ -9,9 +9,10 @@ import LayoutScreen from '../components/Layout/LayoutScreen';
 
 
 export interface LandingProps {
+    route: any;
 }
 
-export function Landing(props: LandingProps) {
+export function Landing({route}: LandingProps) {
     const { theme } = useTheme()
     const { t } = useTranslation()
     return (
@@ -40,7 +41,7 @@ export function Landing(props: LandingProps) {
                     </Text>
                 </View>
                 <View style={styles.more}>
-                    <LoginScreen />
+                    <LoginScreen route={route} />
                 </View>
             </View>
         </LayoutScreen>

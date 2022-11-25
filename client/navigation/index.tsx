@@ -43,99 +43,97 @@ const index = (props: Props) => {
         prefixes: [prefix],
     };
 
-    console.log(auth.currentUser)
-
     const isSignedIn = auth.currentUser
+// http://localhost:19006/WudTimeID?id=6371f2f6c3e850e377ba3607
 
+console.log()
     return (
         <NavigationContainer linking={linking} fallback={Landing}>
-            <Stack.Navigator>
-                { !isSignedIn
-                 ? <Stack.Screen options={{ headerShown: false }} name="Login" component={Landing} /> 
-                 : 
-                 <>
-                 <Stack.Group
-                 screenOptions={({ navigation }) => ({
-                     headerLeft: () => (<AvatarHead />),
-                     headerRight: () => <GoHomeHead onPress={() => navigation.navigate("Home")} />,
-                 })}
-             >
-                 <Stack.Screen options={{ title: t("createWudStep1.title") }}
-                     name="Step1Category" component={Step1Category} />
-                 <Stack.Screen
-                     options={{
-                         title: t("createWudStep2.title")
-                     }} name="Step2Type" component={Step2Type} />
-                 <Stack.Screen
-                     options={{
-                         title: t("createWudStep3.title")
-                     }} name="Step3Activity" component={Step3Activity} />
-                 <Stack.Screen
-                     options={{
-                         title: t("createWudStep4.title")
-                     }}
-                     name="Step4Joiners" component={Step4Joiners} />
-
-                 <Stack.Screen
-                     options={{ title: t("createWudStep5.title") }}
-                     name="Step5TimeAndPlace" component={Step5TimeAndPlace} />
-                 <Stack.Screen
-                     options={{ title: t("createWudStep6.title") }}
-                     name="Step6Description" component={Step6Description} />
-
-
-                 <Stack.Screen
-                     options={{
-                         title: t('wudTimes.title')
-                     }}
-                     name="WudTimes" component={Wudtimes} />
-
-                 <Stack.Screen
-                     options={{ title: t('profileView.title') }}
-                     name="ProfileView" component={ProfileView} />
-                 <Stack.Screen
-                     options={{ title: t('profileEdit.title') }}
-                     name="ProfileEdit" component={ProfileEdit} />
-                 <Stack.Screen
-                     options={{ title: t('myJoinedWuds.title') }}
-                     name="MyJoinedWuds" component={MyJoinedWuds} />
-
-                 <Stack.Screen options={{ title: t('chat.title') }} name="Chat" component={Chat} />
-             </Stack.Group>
-             <Stack.Group
-                 screenOptions={({ navigation }) => ({
-                     headerLeft: () => (<AvatarHead />),
-                     headerRight: () => <GoHomeHead onPress={() => navigation.navigate("Home")} />,
-                 })}
-
-             >
-
-                 <Stack.Screen
-                     options={{
-                         title: t('wudTimes.title')
-                     }}
-                     name="WudTimeID" component={WudTimeID} />
-
-                 <Stack.Screen
-                     options={{ title: t('myWuds.title') }}
-                     name="MyWuds" component={MyWuds} />
-
-                 <Stack.Screen
-                     options={{ title: t('myWuds.editMyWuds') }}
-                     name="EditMyWuds" component={EditMyWuds} />
-
-                 <Stack.Screen
-                     options={{ title: t('myWuds.joinersCheckList') }}
-                     name="JoinersCheckList" component={JoinersCheckList} />
-
-                 <Stack.Screen options={{ title: t('wudTimes.title') }} name="Home" component={HomeScreen} />
-                 <Stack.Screen options={{ title: 'Groups' }} name="Groups" component={Groups} />
-                 <Stack.Screen options={{ title: 'Create Group' }} name="CreateGroup" component={CreateGroup} />
-
-             </Stack.Group>
-             </>
-                }
+            {!isSignedIn ? <>
+                <Stack.Navigator>
+                        <Stack.Screen options={{ headerShown: false }} name="Login" component={Landing} />
+                        <Stack.Screen name="WudTimeID" component={WudTimeID} />
             </Stack.Navigator>
+             </> : <>
+             <Stack.Navigator>
+                        <Stack.Group
+                            screenOptions={({ navigation }) => ({
+                                headerLeft: () => (<AvatarHead />),
+                                headerRight: () => <GoHomeHead onPress={() => navigation.navigate("Home")} />,
+                            })}
+                        >
+                            <Stack.Screen options={{ title: t('wudTimes.title') }} name="Home" component={HomeScreen} />
+                             <Stack.Screen name="WudTimeID" component={WudTimeID} />
+                            
+                            <Stack.Screen options={{ title: t("createWudStep1.title") }}
+                                name="Step1Category" component={Step1Category} />
+                            <Stack.Screen
+                                options={{
+                                    title: t("createWudStep2.title")
+                                }} name="Step2Type" component={Step2Type} />
+                            <Stack.Screen
+                                options={{
+                                    title: t("createWudStep3.title")
+                                }} name="Step3Activity" component={Step3Activity} />
+                            <Stack.Screen
+                                options={{
+                                    title: t("createWudStep4.title")
+                                }}
+                                name="Step4Joiners" component={Step4Joiners} />
+
+                            <Stack.Screen
+                                options={{ title: t("createWudStep5.title") }}
+                                name="Step5TimeAndPlace" component={Step5TimeAndPlace} />
+                            <Stack.Screen
+                                options={{ title: t("createWudStep6.title") }}
+                                name="Step6Description" component={Step6Description} />
+
+
+                            <Stack.Screen
+                                options={{
+                                    title: t('wudTimes.title')
+                                }}
+                                name="WudTimes" component={Wudtimes} />
+
+                            <Stack.Screen
+                                options={{ title: t('profileView.title') }}
+                                name="ProfileView" component={ProfileView} />
+                            <Stack.Screen
+                                options={{ title: t('profileEdit.title') }}
+                                name="ProfileEdit" component={ProfileEdit} />
+                            <Stack.Screen
+                                options={{ title: t('myJoinedWuds.title') }}
+                                name="MyJoinedWuds" component={MyJoinedWuds} />
+
+                            <Stack.Screen options={{ title: t('chat.title') }} name="Chat" component={Chat} />
+                        </Stack.Group>
+                        <Stack.Group
+                            screenOptions={({ navigation }) => ({
+                                headerLeft: () => (<AvatarHead />),
+                                headerRight: () => <GoHomeHead onPress={() => navigation.navigate("Home")} />,
+                            })}
+
+                        >
+
+                            <Stack.Screen
+                                options={{ title: t('myWuds.title') }}
+                                name="MyWuds" component={MyWuds} />
+
+                            <Stack.Screen
+                                options={{ title: t('myWuds.editMyWuds') }}
+                                name="EditMyWuds" component={EditMyWuds} />
+
+                            <Stack.Screen
+                                options={{ title: t('myWuds.joinersCheckList') }}
+                                name="JoinersCheckList" component={JoinersCheckList} />
+
+                            {/* <Stack.Screen options={{ title: t('wudTimes.title') }} name="Home" component={HomeScreen} /> */}
+                            <Stack.Screen options={{ title: 'Groups' }} name="Groups" component={Groups} />
+                            <Stack.Screen options={{ title: 'Create Group' }} name="CreateGroup" component={CreateGroup} />
+
+                        </Stack.Group>
+            </Stack.Navigator>
+             </> }  
         </NavigationContainer>
     )
 }

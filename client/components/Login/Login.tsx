@@ -6,22 +6,32 @@ import { Button, useTheme } from 'react-native-elements'
 import LayoutScreen from '../Layout/LayoutScreen'
 
 
-export default function LoginScreen() {
+export default function Login({ route }: any) {
   const theme = useTheme()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const navigation: any = useNavigation()
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user: any) => {
-      if (user) {
-        navigation.replace("Home")
-      }
-    })
+  console.log( 'Login route', route, 'Auth', auth.currentUser)
 
-    return unsubscribe
-  }, [])
+
+  // useEffect(() => {
+  //   const unsubscribe = auth.onAuthStateChanged((user: any) => {
+  //     if (user & route?.params?.id) {
+  //       console.log('Loginid', route.params.id)
+  //       navigation.navigate('WudtimeID', {id: route.params.id})
+  //     } else if (user) {
+  //       navigation.navigate('Home')
+  //     }
+
+  //   })
+  //   return unsubscribe
+  // }, [])
+
+  if ( auth.currentUser && route.params.id) {
+    navigation.navigate('WudtimeID', {id: route.params.id})
+  }
 
   const handleSignUp = () => {
     createUser(auth, email, password)
@@ -36,7 +46,6 @@ export default function LoginScreen() {
     signIn(auth, email, password)
       .then((userCredentials: { user: any }) => {
         const user = userCredentials.user;
-        console.log('Logged in with:', user.email);
       })
       .catch((error: { message: any }) => alert(error.message))
   }
