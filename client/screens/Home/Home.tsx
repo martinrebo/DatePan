@@ -43,7 +43,6 @@ const Home = () => {
   }
   const handleTemplate = () => {
     // TODO: Template event DB
-    console.log('click')
     dispatch(addCategory('purpose'))
     dispatch(addType('environment'))
     dispatch(addActivity('ngoVolunteering'))
