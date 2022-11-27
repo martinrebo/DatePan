@@ -1,43 +1,16 @@
-import { useNavigation } from '@react-navigation/core'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { KeyboardAvoidingView, StyleSheet, TextInput } from 'react-native'
 import { auth, createUser, signIn } from '../../firebase'
-import { Button, useTheme } from 'react-native-elements'
-import LayoutScreen from '../Layout/LayoutScreen'
+import { Button} from 'react-native-elements'
 
-
-export default function Login({ route }: any) {
-  const theme = useTheme()
+export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
-  const navigation: any = useNavigation()
-
-  console.log( 'Login route', route, 'Auth', auth.currentUser)
-
-
-  // useEffect(() => {
-  //   const unsubscribe = auth.onAuthStateChanged((user: any) => {
-  //     if (user & route?.params?.id) {
-  //       console.log('Loginid', route.params.id)
-  //       navigation.navigate('WudtimeID', {id: route.params.id})
-  //     } else if (user) {
-  //       navigation.navigate('Home')
-  //     }
-
-  //   })
-  //   return unsubscribe
-  // }, [])
-
-  if ( auth.currentUser && route.params.id) {
-    navigation.navigate('WudtimeID', {id: route.params.id})
-  }
 
   const handleSignUp = () => {
     createUser(auth, email, password)
       .then((userCredentials: { user: any }) => {
         const user = userCredentials.user;
-        console.log('Registered with:', user.email);
       })
       .catch((error: { message: any }) => alert(error.message))
   }

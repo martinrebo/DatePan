@@ -16,25 +16,12 @@ const WudTimeID = ({ route }: any) => {
   const { id } = route.params
   const navigation: any = useNavigation()
 
-
-  console.log(auth.currentUser)
-  //      useEffect(() => {
-  //         if (!auth.currentUser) {
-  //             console.log('Effect WUDTIEM ID navigate to login Event id ', id)
-  //             navigation.replace('Login', {id})
-  //         }
-  //   }, [auth])
-
   const { data, isLoading, error, isSuccess } = useGetWudTimebyIdQuery(id)
-
   const [joinWudTime] = useJoinWudTimeMutation()
-
 
   let userId = auth.currentUser?.uid!
   let userName = auth.currentUser?.displayName!
   let userPhotoURL = auth.currentUser?.photoURL!
-
-  // TODO: If user is not auth => Redirect to Login with event ID
 
   const handleJoin = (wudID: string) => {
     joinWudTime({
@@ -75,8 +62,7 @@ const WudTimeID = ({ route }: any) => {
               </Card>
             </> : null}
           </Card>
-
-
+          
           :
           <Text> ... Error </Text>
       }

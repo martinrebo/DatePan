@@ -9,7 +9,6 @@ type Props = {}
 
 const AvatarHead = () => {
     const navigation: any = useNavigation()
-
     return (
         <View style={{ marginLeft: 20 }} >
             <Avatar
