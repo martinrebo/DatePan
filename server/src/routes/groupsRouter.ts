@@ -3,11 +3,11 @@ import { Request, Response, Router } from "express";
 import logger from "jet-logger";
 import axios from "axios";
 import ash from 'express-async-handler';
-import config from '../util/mongoApi'
+import { db as config }from '../util/mongoApi'
 const router = Router();
 
 router.get("/", (req: Request, res: Response) => {
-  logger.info("GET /wuds/:city");
+  logger.info("GET /wuds/groups");
 });
 
 router.post("/createGroup", ash( async (req: Request, res: Response) => {
@@ -26,7 +26,7 @@ router.post("/createGroup", ash( async (req: Request, res: Response) => {
 
   try {
     const response = await axios(APIconfig)
-    logger.info('OK - Update joiner checked status /wud/join/:id')
+    logger.info('OK - Update joiner checked status /wuds/join/:id')
     res.status(200).send(response.data).end()
   }
   catch (error) {
@@ -37,9 +37,9 @@ router.post("/createGroup", ash( async (req: Request, res: Response) => {
 
 }));
 
-router.get("/wud/:id", (req: Request, res: Response) => {
-  logger.info("GET /wud/:id");
-
+router.get("/:id", (req: Request, res: Response) => {
+  logger.info("GET /wuds/groups/:id");
+  // User get info about the group: Name / members / logo. 
 });
 
 

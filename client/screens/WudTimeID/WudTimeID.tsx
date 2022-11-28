@@ -68,11 +68,11 @@ const WudTimeID = ({ route }: any) => {
             <Wud data={data?.event.data} joiners={data.event.joiners} />
             <Card>
               {checkJoined(data?.event?.joiners, userId) ?
-                <Button title={'Unjoin'} 
+                <Button title={'Unjoin'} // TODO: AfterClick Change title button > useState vs useEffect vs Mutation Render
                 disabled={!auth.currentUser}
                 onPress={() => handleUnJoin(data?.event._id)} />
                 :
-                <Button title={"Join"}
+                <Button title={"Join"} // TODO: Fix Join and Unjoin Buttons: Disable for owner of event
                   disabled={ !auth.currentUser}
                   onPress={() => handleJoin(data?.event._id)}
                 />}

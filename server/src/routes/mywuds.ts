@@ -3,7 +3,7 @@ import { Request, Response, Router } from "express";
 import logger from "jet-logger";
 import axios from "axios";
 import ash from 'express-async-handler';
-import config from '../util/mongoApi'
+import { db as config }from '../util/mongoApi'
 
 const router = Router();
 
