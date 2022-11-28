@@ -12,7 +12,7 @@ import 'express-async-errors';
 
 import BaseRouter from './routes/api';
 import logger from 'jet-logger';
-import { cookieProps } from '@routes/auth-router';
+// import { cookieProps } from '@routes/auth-router';
 import { CustomError } from '@shared/errors';
 
 const app = express();

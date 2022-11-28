@@ -25,18 +25,13 @@ router.post("/", (req: Request, res: Response) => {
       data: JSON.stringify(dataUpdate),
     };
   
-    // console.log(wudJoinConfig);
-  
     axios(wudJoinConfig)
       .then(function (response) {
-        // console.log(response.data);
         res.status(200).send({ status: 200, data: response.data }).end();
       })
       .catch(function (error) {
-        // console.log(error);
         res.status(400).send({ status: 400, message: error }).end();
       });
-    // res.status(200);
   });
   
   router.post("/:id", ash(async (req: Request, res: Response) => {

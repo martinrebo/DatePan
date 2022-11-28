@@ -13,10 +13,10 @@ interface WudtimeList {
 
 // Define a service using a base URL and expected endpoints
 // https://api-dot-datepan-app.ew.r.appspot.com//api/wuds
-// baseUrl: "http://localhost:3001/api/wuds
+// baseUrl: "http://localhost:3001/api/wuds"
 export const api = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: "https://api-dot-datepan-app.ew.r.appspot.com//api/wuds" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3001/api/wuds" }),
   tagTypes: ['wud'],
   endpoints: (builder) => ({
     ping: builder.query<IWudtime, string>({

@@ -12,7 +12,7 @@ import cors from 'cors';
 import BaseRouter from './routes/api';
 import Healthcheck from './routes/system'
 import logger from 'jet-logger';
-import { cookieProps } from '@routes/auth-router';
+// import { cookieProps } from '@routes/auth-router';
 import { CustomError } from '@shared/errors';
 
 const router = Router();
@@ -27,7 +27,7 @@ const app = express();
 app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(cookieParser(cookieProps.secret));
+// app.use(cookieParser(cookieProps.secret));
 
 // Show routes called in console during development
 if (process.env.NODE_ENV === 'development') {
