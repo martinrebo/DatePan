@@ -22,8 +22,6 @@ const HomeScreen = () => {
   }
 
   if (process.env.BRAND === 'WUD' || auth.currentUser?.uid == 'Pc9aXKgqm5d10uqSvNRzQ24u0cW2') return <Home />
-  // if user is user id is Pc9aXKgqm5d10uqSvNRzQ24u0cW2 return <home>
-  // if user 
   return <RestrictedHome />
 }
 

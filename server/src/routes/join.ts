@@ -33,6 +33,35 @@ router.post("/", (req: Request, res: Response) => {
         res.status(400).send({ status: 400, message: error }).end();
       });
   });
+
+  router.delete("/", (req: Request, res: Response) => {
+    logger.info("DELETE /wuds/join");
+    const dataUpdate = {
+      ...config.data,
+      filter: {
+        _id: { $oid: req.body.data.id },
+      },
+      update: {
+        $pull: {
+          joiners: req.body.data.user,
+        },
+      },
+    };
+    const wudJoinConfig = {
+      ...config,
+      url: config.url + "updateOne",
+      data: JSON.stringify(dataUpdate),
+    };
+  
+    axios(wudJoinConfig)
+      .then(function (response) {
+        res.status(200).send({ status: 200, data: response.data }).end();
+      })
+      .catch(function (error) {
+        res.status(400).send({ status: 400, message: error }).end();
+      });
+  });
+
   
   router.post("/:id", ash(async (req: Request, res: Response) => {
     logger.imp("POST - UPDATE joiner checked status /wuds/join/:id ");

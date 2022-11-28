@@ -2,7 +2,7 @@ import { View, Text } from 'react-native'
 import React, { useEffect } from 'react'
 import * as Linking from 'expo-linking'
 import { NavigationHelpersContext, useNavigation } from '@react-navigation/native'
-import { useGetWudTimebyIdQuery, useJoinWudTimeMutation, } from '../../api/api'
+import { useGetWudTimebyIdQuery, useJoinWudTimeMutation, useUnJoinWudTimeMutation } from '../../api/api'
 import Wud from '../../components/Wud/Wud'
 import { Button, Card, Divider } from 'react-native-elements'
 import LayoutScreen from '../../components/Layout/LayoutScreen'
@@ -18,6 +18,7 @@ const WudTimeID = ({ route }: any) => {
 
   const { data, isLoading, error, isSuccess } = useGetWudTimebyIdQuery(id)
   const [joinWudTime] = useJoinWudTimeMutation()
+  const [unJoinWudTime] = useUnJoinWudTimeMutation()
 
   let userId = auth.currentUser?.uid!
   let userName = auth.currentUser?.displayName!
@@ -43,6 +44,21 @@ const WudTimeID = ({ route }: any) => {
     return joined
   }
 
+  const handleUnJoin = (wudID: string) => {
+    unJoinWudTime({
+      id: wudID,
+      user: {
+        id: userId,
+        displayName: userName,
+        photoURL: userPhotoURL
+      }
+    }).then(() => {
+      navigation.navigate("Home")
+    }).catch((e) => {
+      console.log("error", e)
+    })
+  }
+
   return (
     <LayoutScreen >
       {isLoading ? <Text>Loading...</Text> :
@@ -51,10 +67,15 @@ const WudTimeID = ({ route }: any) => {
           <Card>
             <Wud data={data?.event.data} joiners={data.event.joiners} />
             <Card>
-              <Button title={checkJoined(data?.event.joiners, userId) ? "Joined" : "Join"}
-                disabled={handleJoined(data?.event.joiners) || !auth.currentUser}
-                onPress={() => handleJoin(data?.event._id)}
-              />
+              {checkJoined(data?.event?.joiners, userId) ?
+                <Button title={'Unjoin'} 
+                disabled={!auth.currentUser}
+                onPress={() => handleUnJoin(data?.event._id)} />
+                :
+                <Button title={"Join"}
+                  disabled={ !auth.currentUser}
+                  onPress={() => handleJoin(data?.event._id)}
+                />}
             </Card>
             {!auth.currentUser ? <>
               <Card>
@@ -62,7 +83,7 @@ const WudTimeID = ({ route }: any) => {
               </Card>
             </> : null}
           </Card>
-          
+
           :
           <Text> ... Error </Text>
       }

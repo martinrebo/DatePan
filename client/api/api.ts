@@ -53,6 +53,16 @@ export const api = createApi({
         };
       },
     }),
+    unJoinWudTime: builder.mutation<any, any>({
+      query: (data) => {
+        let userId = auth.currentUser?.uid
+        return {
+          url: "/join",
+          method: "DELETE",
+          body: { data, userId },
+        };
+      },
+    }),
     checkJoiner: builder.mutation<any, any>({
       // When event Admin checkin attendees
       query: (data) => {
@@ -89,6 +99,7 @@ export const {
   useMyWudsQuery,
   useGetWudTimesQuery,
   useJoinWudTimeMutation,
+  useUnJoinWudTimeMutation,
   useMyJoinedWudsQuery,
   useGetWudTimebyIdQuery,
   useCheckJoinerMutation,
