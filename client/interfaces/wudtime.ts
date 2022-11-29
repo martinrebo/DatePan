@@ -11,9 +11,14 @@ export interface IWudtime {
   startTime: Date | null;
   endTime: Date | null;
   duration: string; 
-  city: "Barcelona";
+  city: "Barcelona"; // TODO: fix city filters
   place: IGooglePlace | null;
   notes: string | ""; // 'Description of the event here'
+  privateEvent: boolean; 
+  group: {
+    id: string,
+    name: string,
+  }
   userId: string | "" | null; // User firebase ID
   photoURL: ImageSourcePropType | null | string; // User photo URL
   displayName: string | ""; // User display name

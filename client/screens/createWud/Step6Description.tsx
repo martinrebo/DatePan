@@ -1,12 +1,12 @@
 
 import { useState, useEffect } from 'react'
 import { StyleSheet, View, ImageSourcePropType } from 'react-native'
-import { Button, Card, Input } from 'react-native-elements'
+import { Button, Card, Input, CheckBox } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
 
 import { RootState } from '../../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
-import { addNotes, addUserData } from '../../redux/wudSlice'
+import { addNotes, addUserData, addPrivateEvent, addGroup } from '../../redux/wudSlice'
 import { useCreateWudTimeQuery } from '../../api/api';
 import { auth } from '../../firebase'
 import LayoutScreen from '../../components/Layout/LayoutScreen'
@@ -14,9 +14,10 @@ import LayoutScreen from '../../components/Layout/LayoutScreen'
 
 const Step6Description = ({ route }: any) => {
   const navigation: any = useNavigation()
-  const { category, wudType, activity } = route.params;
+  // const { category, wudType, activity } = route.params;
   const dispatch = useDispatch()
   const [skip, setSkip] = useState(true)
+  const [privateCheck, setPrivateCheck] = useState(false)
 
   dispatch(addUserData({
     userId: auth.currentUser?.uid!,
@@ -50,6 +51,15 @@ const Step6Description = ({ route }: any) => {
     setValue(value)
   }
 
+  const handlePrivacy = (value: boolean) => {
+    dispatch(addPrivateEvent(value))
+    setPrivateCheck(value)
+  }
+
+  // TODO: FIX : REFACTOR
+  if(auth.currentUser?.uid == 'Pc9aXKgqm5d10uqSvNRzQ24u0cW2') {
+    dispatch(addGroup({id: 'Pc9aXKgqm5d10uqSvNRzQ24u0cW2', name: 'cbi'}))
+  }
 
   return (
     <LayoutScreen>
@@ -66,6 +76,12 @@ const Step6Description = ({ route }: any) => {
               errorStyle={{color: 'grey'}}
               errorMessage={`Char Left = ${250 - value.length}`}
                />
+          </Card>
+          <Card>
+            <CheckBox title='Private Event - only people with link can access'
+            onPress={()=> handlePrivacy(!privateCheck)}
+            checked={privateCheck}
+            />
           </Card>
 
         </View>

@@ -106,17 +106,22 @@ router.post("/:id", ash(async (req: Request, res: Response) => {
     data: JSON.stringify(dataUpdate),
   };
 
+  /* 
+  TODO: After user check-in - we add it to the group/member Database. 
+  * we need to save events related to group Id: 
+  * save userId, name, mail, photoUrl
+  */
   const groupConfig = {...dbConfigFunction('groups'), 
   url: config.url + "updateOne",
   data: 'groupID, memberInfo, dataUpdate { }'
 
 }
 
-
+  console.log(groupConfig)
   try {
     const response = await axios(wudConfig)
     logger.info('OK - Update joiner checked status /wuds/join/:id')
-
+    
     res.status(200).send(response.data).end()
   }
   catch (error) {

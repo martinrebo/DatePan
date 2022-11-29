@@ -1,4 +1,5 @@
 // DOCS: https://www.mongodb.com/docs/atlas/api/data-api-resources/#std-label-data-api-resources
+// https://data.mongodb-api.com/app/data-ftset/endpoint/data/v1
 export const db = {
     method: "post",
     url: "https://data.mongodb-api.com/app/data-ftset/endpoint/data/beta/action/",

@@ -20,7 +20,7 @@ const HomeScreen = () => {
   if (auth.currentUser?.displayName === null || auth.currentUser?.photoURL === null) {
     navigation.navigate("ProfileEdit")
   }
-  // TODO: fix refresh page, user undefined >
+  // TODO: fix refresh page, user undefined > why?? useEffect vs useState. ?
   if (process.env.BRAND === 'WUD' || auth.currentUser?.uid == 'Pc9aXKgqm5d10uqSvNRzQ24u0cW2') return <Home />
   return <RestrictedHome />
 }

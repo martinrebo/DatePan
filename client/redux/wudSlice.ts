@@ -35,6 +35,11 @@ const initialState: IWudtime = {
     },
   },
   notes: "",
+  privateEvent: false,
+  group: {
+    id: "",
+    name: "",
+  },
   userId: "",
   photoURL: null,
   displayName: "",
@@ -89,6 +94,12 @@ export const wudSlice = createSlice({
     addLocationData: (state: IWudtime, action: PayloadAction<IGooglePlace>) => {
       state.place = action.payload;
     },
+    addPrivateEvent: (state: IWudtime, action: PayloadAction<IWudtime['privateEvent']>) => {
+      state.privateEvent = action.payload;
+    },
+    addGroup: (state: IWudtime, action: PayloadAction<IWudtime['group']> ) => {
+      state.group = action.payload
+    },
     reset: (state: IWudtime) => {
       state = initialState;
     },
@@ -105,6 +116,8 @@ export const {
   addDuration,
   addLocationData,
   addNotes,
+  addPrivateEvent,
+  addGroup,
   addUserData,
   reset,
 } = wudSlice.actions;
