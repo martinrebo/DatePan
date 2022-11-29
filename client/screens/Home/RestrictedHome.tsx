@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next'
 import LayoutScreen from '../../components/Layout/LayoutScreen'
 import * as Linking from 'expo-linking'
 
-const HomeScreen = () => {
+const RestrictedHomeScreen = () => {
   const navigation: any = useNavigation()
   const { t } = useTranslation()
 
@@ -19,22 +19,11 @@ const HomeScreen = () => {
       navigation.navigate("WudTimeID", { id })
     }
   });
-
-
-  const handleOnPress = () => {
-    navigation.navigate("Step1Category")
-  }
-  const handleMyWuds = () => {
-    navigation.navigate("MyWuds")
-  }
   const handleMyJoinedWuds = () => {
     navigation.navigate("MyJoinedWuds")
   }
   const handleWudTimes = () => {
     navigation.navigate("WudTimes")
-  }
-  const handleGroups = () => {
-    navigation.navigate('Groups')
   }
 
   if (auth.currentUser?.displayName === null || auth.currentUser?.photoURL === null) {
@@ -47,7 +36,7 @@ const HomeScreen = () => {
     setUserAuth(auth.currentUser?.displayName as string)
   }, [auth])
   
-
+  console.log('Restricted home')
   return (
 
     <LayoutScreen>
@@ -79,7 +68,7 @@ const HomeScreen = () => {
   )
 }
 
-export default HomeScreen
+export default RestrictedHomeScreen
 
 const styles = StyleSheet.create({
   container: {

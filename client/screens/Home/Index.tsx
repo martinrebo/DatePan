@@ -17,10 +17,19 @@ const HomeScreen = () => {
     }
   });
 
+  const [isUserSignedIn, setUserSignedIn] = useState(false)
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user: any) => {
+      setUserSignedIn(user)
+    })
+    return unsubscribe
+  }, [])
+
   if (auth.currentUser?.displayName === null || auth.currentUser?.photoURL === null) {
     navigation.navigate("ProfileEdit")
   }
   // TODO: fix refresh page, user undefined > why?? useEffect vs useState. ?
+  console.log('UserCurrent', auth.currentUser?.uid)
   if (process.env.BRAND === 'WUD' || auth.currentUser?.uid == 'Pc9aXKgqm5d10uqSvNRzQ24u0cW2') return <Home />
   return <RestrictedHome />
 }

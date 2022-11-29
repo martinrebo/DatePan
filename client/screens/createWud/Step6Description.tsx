@@ -31,10 +31,13 @@ const Step6Description = ({ route }: any) => {
   const { data, error, isLoading } = useCreateWudTimeQuery(createWudState, { skip })
 
   const handleSubmit = () => {
+    if(auth.currentUser?.uid == 'Pc9aXKgqm5d10uqSvNRzQ24u0cW2' && process.env.BRAND === 'CBI') {
+      dispatch(addGroup({id: 'Pc9aXKgqm5d10uqSvNRzQ24u0cW2', name: 'cbi'}))
+    }
     setSkip(false)
   }
-
   useEffect(() => {
+
     setSkip(true)
     return () => {
       navigation.navigate('Home')
@@ -57,10 +60,8 @@ const Step6Description = ({ route }: any) => {
   }
 
   // TODO: FIX : REFACTOR
-  if(auth.currentUser?.uid == 'Pc9aXKgqm5d10uqSvNRzQ24u0cW2') {
-    dispatch(addGroup({id: 'Pc9aXKgqm5d10uqSvNRzQ24u0cW2', name: 'cbi'}))
-  }
 
+console.log('step6')
   return (
     <LayoutScreen>
       <View style={styles.container}>

@@ -41,17 +41,17 @@ const index = () => {
     prefixes: [prefix],
   };
 
-  const [isUserSignedIn, setUserSignedIn] = useState(false)
+  const [isUserSignedIn, setUserSignedIn] = useState(!!auth.currentUser)
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user: any) => {
-      setUserSignedIn(!user)
+      setUserSignedIn(!!user)
     })
     return unsubscribe
-  }, [])
+  }, [auth.currentUser])
 
   return (
     <NavigationContainer linking={linking} fallback={Landing}>
-      {isUserSignedIn ? <>
+      {!isUserSignedIn ? <>
         <Stack.Navigator>
           <Stack.Screen options={{ headerShown: false }} name="Login" component={Landing} />
           <Stack.Screen options={{ headerShown: false }} name="WudTimeID" component={WudTimeID} />

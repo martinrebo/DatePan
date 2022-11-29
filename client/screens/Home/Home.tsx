@@ -60,7 +60,7 @@ const Home = () => {
     setUserAuth(auth.currentUser?.displayName as string)
   }, [auth])
 
-
+console.log('normal home')
   return (
 
     <LayoutScreen>
