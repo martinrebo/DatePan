@@ -16,13 +16,16 @@ export default function JoinersCheckList({ route }: Props) {
     const { data, isLoading, error, isSuccess } = useGetWudTimebyIdQuery(wudId)
 
     const [checkJoiner, { isLoading: isUpdating }] = useCheckJoinerMutation()
-
+console.log('chekcouoj', data)
     // When AdminUser Click on Checkbox => Joiner user status: 'true' vs 'false'
     const handleJoinerCheckIn = (checked: boolean, joinerId: string) => {
         // update DB Event.joiners.id/checked,
         checkJoiner({
             eventId: wudId,
-            joinerId, checked: !checked
+            joinerId,
+            checked: !checked,
+            groupId: data?.event.data.group.id
+            
         }).catch(() => console.log('check error'))
     }
     const [participant, setParticipant] = useState({ id: 'notUser', name: '', contact: '' })

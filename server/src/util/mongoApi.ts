@@ -34,7 +34,7 @@ export const db = {
         },
       }
       customdb.data.collection = collection
-      let dbConfig = {...customdb}
+      const dbConfig = {...customdb}
       return dbConfig
     }else {
       return db

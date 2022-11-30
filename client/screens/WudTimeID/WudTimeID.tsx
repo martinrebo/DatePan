@@ -27,6 +27,7 @@ const WudTimeID = ({ route }: any) => {
   const handleJoin = (wudID: string) => {
     joinWudTime({
       id: wudID,
+      groupId: data?.event.data.group.id,
       user: {
         id: userId,
         displayName: userName,
@@ -58,6 +59,7 @@ const WudTimeID = ({ route }: any) => {
       console.log("error", e)
     })
   }
+console.log('Data', data)
 
   return (
     <LayoutScreen >

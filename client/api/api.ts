@@ -67,10 +67,12 @@ export const api = createApi({
       // When event Admin checkin attendees
       query: (data) => {
         let userId = auth.currentUser?.uid
+        let userName = auth.currentUser?.displayName
+        let photoURL = auth.currentUser?.photoURL
         return {
           url: `/join/${data.eventId}`,
           method: 'POST',
-          body: {data, userId }
+          body: {data, userId, userName, photoURL }
         }
       },
       invalidatesTags: (result, error, { id }) => [{ type: 'wud', id }],

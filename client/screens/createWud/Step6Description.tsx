@@ -32,7 +32,7 @@ const Step6Description = ({ route }: any) => {
 
   const handleSubmit = () => {
     if(auth.currentUser?.uid == 'Pc9aXKgqm5d10uqSvNRzQ24u0cW2' && process.env.BRAND === 'CBI') {
-      dispatch(addGroup({id: 'Pc9aXKgqm5d10uqSvNRzQ24u0cW2', name: 'cbi'}))
+      dispatch(addGroup({id: '63640d721bde57975173d131', name: 'cbi'}))
     }
     setSkip(false)
   }

@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import { Request, Response, Router } from "express";
 import logger from "jet-logger";
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import ash from 'express-async-handler';
 import { db as config, dbConfigFunction }from '../util/mongoApi'
 const router = Router();
@@ -71,6 +71,8 @@ router.post("/:id", ash(async (req: Request, res: Response) => {
   const userId = req.body.data.joinerId;
   let filter
   let update
+  let filterGroup
+  let updateGroup
   if (userId === 'notUser') {
     filter = {
       _id: { $oid: req.params.id }
@@ -94,6 +96,14 @@ router.post("/:id", ash(async (req: Request, res: Response) => {
     update = {
       $set: { "joiners.$.checked": req.body.data.checked }
     }
+    filterGroup = { _id: { $oid: req.body.data.groupId }}
+    updateGroup = {
+      $addToSet: { members : {
+        uid: req.body.userId,
+        userName: req.body.userName,
+        photoURL: req.body.photoURL
+      }}
+    }
   }
   const dataUpdate = {
     ...config.data,
@@ -111,21 +121,27 @@ router.post("/:id", ash(async (req: Request, res: Response) => {
   * we need to save events related to group Id: 
   * save userId, name, mail, photoUrl
   */
-  const groupConfig = {...dbConfigFunction('groups'), 
+ const dataMemberUpdate ={
+  ...dbConfigFunction('groups').data,
+  filter: filterGroup, update: updateGroup
+ }
+  const groupConfig = {
+  ...dbConfigFunction('groups'), 
   url: config.url + "updateOne",
-  data: 'groupID, memberInfo, dataUpdate { }'
+  data: JSON.stringify(dataMemberUpdate)
 
 }
-
-  console.log(groupConfig)
+  // console.log('wud', wudConfig)
+  // console.log('group', groupConfig)
   try {
     const response = await axios(wudConfig)
     logger.info('OK - Update joiner checked status /wuds/join/:id')
-    
+    const groupResponse = await axios(groupConfig as AxiosRequestConfig)
+    // console.log('GrouprEsponse, ', groupResponse.data)
     res.status(200).send(response.data).end()
   }
   catch (error) {
-    logger.err(error, true)
+    logger.err(error.data, true)
     res.status(400).send(error).end()
   }
 
