@@ -6,6 +6,7 @@ import { Button, Card, Text } from 'react-native-elements'
 import { useNavigation, useIsFocused } from '@react-navigation/native'
 import LayoutScreen from '../../components/Layout/LayoutScreen'
 import Wud from '../../components/Wud/Wud'
+import WudCompact from '../../components/Wud/WudCompact'
 
 type Props = {}
 
@@ -30,7 +31,7 @@ export default function MyJoinedWuds({ }: Props) {
         return (
           <View key={i}>
             <Card >
-              <Wud data={wud.data} joiners={wud.joiners} />
+              <WudCompact data={wud.data} />
               <Card>
               <Button title="Group Chat"
                 onPress={() => navigation.navigate('Chat', { wudId: wud._id })} />

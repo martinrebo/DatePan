@@ -1,10 +1,8 @@
-import { View, Text } from 'react-native'
-import React, { useEffect } from 'react'
-import * as Linking from 'expo-linking'
-import { NavigationHelpersContext, useNavigation } from '@react-navigation/native'
+import React, {useState} from 'react'
+import { useNavigation } from '@react-navigation/native'
 import { useGetWudTimebyIdQuery, useJoinWudTimeMutation, useUnJoinWudTimeMutation } from '../../api/api'
 import Wud from '../../components/Wud/Wud'
-import { Button, Card, Divider } from 'react-native-elements'
+import { Button, Card, Text} from 'react-native-elements'
 import LayoutScreen from '../../components/Layout/LayoutScreen'
 import { auth } from '../../firebase'
 import { checkJoined } from '../../helpers'
@@ -15,16 +13,20 @@ const WudTimeID = ({ route }: any) => {
 
   const { id } = route.params
   const navigation: any = useNavigation()
-
+  let userId = auth.currentUser?.uid!
+  let userName = auth.currentUser?.displayName!
+  let userPhotoURL = auth.currentUser?.photoURL!
   const { data, isLoading, error, isSuccess } = useGetWudTimebyIdQuery(id)
   const [joinWudTime] = useJoinWudTimeMutation()
   const [unJoinWudTime] = useUnJoinWudTimeMutation()
 
-  let userId = auth.currentUser?.uid!
-  let userName = auth.currentUser?.displayName!
-  let userPhotoURL = auth.currentUser?.photoURL!
+  const [ joinButtonTitle, setJoinButtonTitle] = useState('Join')
+ // When component loads check if user already join
+ if (checkJoined(data?.event?.joiners, userId))setJoinButtonTitle('Unjoin')
+
 
   const handleJoin = (wudID: string) => {
+    setJoinButtonTitle('Unjoin')
     joinWudTime({
       id: wudID,
       groupId: data?.event.data.group.id,
@@ -40,12 +42,8 @@ const WudTimeID = ({ route }: any) => {
     })
   }
 
-  const handleJoined = (joiners: any) => {
-    let joined = checkJoined(joiners, userId)
-    return joined
-  }
-
   const handleUnJoin = (wudID: string) => {
+    setJoinButtonTitle('Join')
     unJoinWudTime({
       id: wudID,
       user: {
@@ -59,7 +57,8 @@ const WudTimeID = ({ route }: any) => {
       console.log("error", e)
     })
   }
-console.log('Data', data)
+
+  let owner = (userId === data?.event.data.userId) ? true : false
 
   return (
     <LayoutScreen >
@@ -70,12 +69,12 @@ console.log('Data', data)
             <Wud data={data?.event.data} joiners={data.event.joiners} />
             <Card>
               {checkJoined(data?.event?.joiners, userId) ?
-                <Button title={'Unjoin'} // TODO: AfterClick Change title button > useState vs useEffect vs Mutation Render
-                disabled={!auth.currentUser}
+                <Button title={joinButtonTitle}
+                disabled={owner || !auth.currentUser}
                 onPress={() => handleUnJoin(data?.event._id)} />
                 :
-                <Button title={"Join"} // TODO: Fix Join and Unjoin Buttons: Disable for owner of event
-                  disabled={ !auth.currentUser}
+                <Button title={joinButtonTitle} 
+                  disabled={owner || !auth.currentUser}
                   onPress={() => handleJoin(data?.event._id)}
                 />}
             </Card>
