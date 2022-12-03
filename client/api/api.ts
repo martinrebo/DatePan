@@ -89,7 +89,17 @@ export const api = createApi({
           body: {data, userId}
         }
       }
+    }),
+    getGroups: builder.query<any,any>({
+      query: (data) => {
+        let userId = auth.currentUser?.uid
+        return {
+          url: `groups/user/${userId}`,
+          method: 'GET',
+        }
+      }
     })
+
   }),
 });
 
@@ -106,4 +116,5 @@ export const {
   useGetWudTimebyIdQuery,
   useCheckJoinerMutation,
   useCreateGroupMutation,
+  useGetGroupsQuery
 } = api;

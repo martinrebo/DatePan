@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { useGetWudTimebyIdQuery, useJoinWudTimeMutation, useUnJoinWudTimeMutation } from '../../api/api'
 import Wud from '../../components/Wud/Wud'
@@ -22,8 +22,11 @@ const WudTimeID = ({ route }: any) => {
 
   const [ joinButtonTitle, setJoinButtonTitle] = useState('Join')
  // When component loads check if user already join
- if (checkJoined(data?.event?.joiners, userId))setJoinButtonTitle('Unjoin')
+//  if (checkJoined(data?.event?.joiners, userId))setJoinButtonTitle('Unjoin')
+useEffect(() => {
+   if (checkJoined(data?.event?.joiners, userId)) setJoinButtonTitle('Unjoin')
 
+}, [data, userId])
 
   const handleJoin = (wudID: string) => {
     setJoinButtonTitle('Unjoin')
@@ -57,6 +60,7 @@ const WudTimeID = ({ route }: any) => {
       console.log("error", e)
     })
   }
+
 
   let owner = (userId === data?.event.data.userId) ? true : false
 
