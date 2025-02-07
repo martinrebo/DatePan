@@ -1,4 +1,5 @@
 // DOCS: https://www.mongodb.com/docs/atlas/api/data-api-resources/#std-label-data-api-resources
+// DEPRECATED
 const config = {
     method: "post",
     url: "https://data.mongodb-api.com/app/data-ftset/endpoint/data/beta/action/",
