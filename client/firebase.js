@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { initializeFirestore } from "firebase/firestore";
+import { getDatabase } from "firebase/database";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 // import { getAnalytics } from "firebase/analytics";
 import {
@@ -37,6 +38,7 @@ const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
 // const analytics = getAnalytics(app);
 const db = initializeFirestore(app, { experimentalForceLongPolling: true });
+const realTimedDB = getDatabase(app);
 
 const auth = getAuth();
 const signIn = signInWithEmailAndPassword;
@@ -46,6 +48,7 @@ export {
   auth,
   storage,
   db,
+  realTimedDB,
   uploadBytes,
   ref,
   getDownloadURL,
