@@ -8,13 +8,13 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  FacebookAuthProvider,
-  signInWithCredential,
+  // onAuthStateChanged,
+  // FacebookAuthProvider,
+  // signInWithCredential,
   updateProfile,
 } from "firebase/auth";
 
-import * as Facebook from "expo-facebook";
+// import * as Facebook from "expo-facebook";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries

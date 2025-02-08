@@ -3,12 +3,13 @@ import { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, Platform, ImageSourcePropType } from 'react-native'
 import { Button, Card, Input, Slider } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
+import { ref, set } from "firebase/database";
 
 import { RootState } from '../../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
 import { addNotes, addUserData } from '../../redux/wudSlice'
 import { useCreateWudTimeQuery } from '../../api/api';
-import { auth } from '../../firebase'
+import { auth, realTimedDB } from '../../firebase'
 import LayoutScreen from '../../components/Layout/LayoutScreen'
 
 
@@ -27,9 +28,14 @@ const Step3Activity = ({ route }: any) => {
 
   const createWudState = useSelector((state: RootState) => state.createWud)
 
-  const { data, error, isLoading } = useCreateWudTimeQuery(createWudState, { skip })
+  // const { data, error, isLoading } = useCreateWudTimeQuery(createWudState, { skip })
 
   const handleSubmit = () => {
+    // TODO: Create realTime DataBase 
+        // set(ref(realTimedDB, 'events/'), {
+        //   event: createWudState
+        // });
+        console.log("LOG: Create WudState," , createWudState)
     setSkip(false)
   }
 
