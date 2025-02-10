@@ -31,6 +31,7 @@ const Step3Activity = ({ route }: any) => {
   // const { data, error, isLoading } = useCreateWudTimeQuery(createWudState, { skip })
 
   const handleSubmit = () => {
+    // TODO: Fix Date storage in Firebase Realtime Database.
     // TODO: Create realTime DataBase 
         // set(ref(realTimedDB, 'events/'), {
         //   event: createWudState

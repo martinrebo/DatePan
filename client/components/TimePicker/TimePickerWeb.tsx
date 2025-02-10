@@ -16,10 +16,12 @@ import { addEndTime, addDate, addStartTime } from '../../redux/wudSlice';
 import { useDispatch } from 'react-redux'
 
 
+
 export default function TimePickerWeb() {
   const dispatch = useDispatch()
 
   const [day, setDay] = React.useState<Date | null>(
+    // TODO: Fix Date storage in Firebase Realtime Database. 
     new Date(),
   );
 
